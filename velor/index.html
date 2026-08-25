@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="theme-color" content="#0A0A0A" />
+<title>VELOR MOTORS — Fewer cars. Absolute condition.</title>
+<meta name="description" content="VELOR MOTORS. A curated few, not a lot. Inspected. Verified. Delivered." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@200;300;400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/style.css" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230A0A0A'/%3E%3Ccircle cx='16' cy='16' r='11' fill='none' stroke='%23F5F4F0' stroke-width='3'/%3E%3Ccircle cx='16' cy='16' r='3.5' fill='%23F5F4F0'/%3E%3C/svg%3E" />
+</head>
+<body class="is-loading">
+
+<!-- ============ FIXED 3D STAGE ============ -->
+<div class="stage" aria-hidden="true">
+  <canvas id="scene"></canvas>
+  <div class="stage-fallback" id="stageFallback"></div>
+</div>
+
+<!-- ============ GRAIN ============ -->
+<div class="grain" aria-hidden="true"></div>
+
+<!-- ============ CHROME NAV ============ -->
+<header class="chrome">
+  <a class="chrome__mark" href="#hero">VELOR</a>
+  <nav class="chrome__nav">
+    <a href="#selection">Selection</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<main id="page">
+
+  <!-- 1 — HERO -->
+  <section class="panel panel--hero" id="hero">
+    <div class="hero__center">
+      <h1 class="wordmark" id="wordmark">
+        <span>V</span><span>E</span><span>L</span><span>O</span><span>R</span>
+      </h1>
+      <p class="hero__sub" id="heroSub">Motors</p>
+      <p class="lede" id="heroLede">Fewer cars. Absolute condition.</p>
+    </div>
+    <div class="scroll-cue" id="scrollCue"><span class="scroll-cue__line"></span></div>
+  </section>
+
+  <!-- 2 — CRAFTSMANSHIP / EXPLODE -->
+  <section class="panel panel--craft" id="craft">
+    <div class="panel__type panel__type--left">
+      <p class="eyebrow">01 — Craftsmanship</p>
+      <h2 class="display">Nothing<br />overlooked.</h2>
+    </div>
+    <ul class="annotations" id="annotations">
+      <li class="annotation" data-part="tread"><span class="annotation__dot"></span><span class="annotation__text">Tread depth logged</span></li>
+      <li class="annotation" data-part="rim"><span class="annotation__dot"></span><span class="annotation__text">Rim trued</span></li>
+      <li class="annotation" data-part="hub"><span class="annotation__dot"></span><span class="annotation__text">Every component inspected</span></li>
+    </ul>
+  </section>
+
+  <!-- 3 — SELECTION -->
+  <section class="panel panel--selection" id="selection">
+    <div class="selection__col">
+    <div class="panel__type panel__type--right">
+      <p class="eyebrow">02 — Selection</p>
+      <h2 class="display">A curated few,<br />not a lot.</h2>
+    </div>
+
+    <ol class="inventory" id="inventory">
+      <li class="car">
+        <span class="car__idx">01</span>
+        <span class="car__plate" aria-hidden="true"></span>
+        <h3 class="car__name">Carrera 4 GTS</h3>
+        <p class="car__spec">2019 · 11,400 km · Manual</p>
+        <p class="car__price">£128,000</p>
+      </li>
+      <li class="car">
+        <span class="car__idx">02</span>
+        <span class="car__plate" aria-hidden="true"></span>
+        <h3 class="car__name">Continental GT</h3>
+        <p class="car__spec">2021 · 8,900 km · W12</p>
+        <p class="car__price">£164,500</p>
+      </li>
+      <li class="car">
+        <span class="car__idx">03</span>
+        <span class="car__plate" aria-hidden="true"></span>
+        <h3 class="car__name">Vantage Roadster</h3>
+        <p class="car__spec">2020 · 6,200 km · V8</p>
+        <p class="car__price">£112,750</p>
+      </li>
+      <li class="car">
+        <span class="car__idx">04</span>
+        <span class="car__plate" aria-hidden="true"></span>
+        <h3 class="car__name">Ghost Series II</h3>
+        <p class="car__spec">2018 · 19,050 km · V12</p>
+        <p class="car__price">£189,000</p>
+      </li>
+    </ol>
+    </div>
+  </section>
+
+  <!-- 4 — TRUST -->
+  <section class="panel panel--trust" id="process">
+    <div class="panel__type panel__type--center">
+      <p class="eyebrow">03 — Process</p>
+      <h2 class="display display--wide" id="trustLine">
+        <span>Inspected.</span> <span>Verified.</span> <span>Delivered.</span>
+      </h2>
+    </div>
+  </section>
+
+  <!-- 5 — CONTACT -->
+  <section class="panel panel--contact" id="contact">
+    <div class="panel__type panel__type--center">
+      <p class="eyebrow">04 — Enquiries</p>
+      <h2 class="display">Reserve a viewing.</h2>
+
+      <form class="reserve" id="reserve" novalidate>
+        <label class="reserve__label" for="email">Email</label>
+        <div class="reserve__row">
+          <input class="reserve__input" id="email" name="email" type="email" inputmode="email"
+                 autocomplete="email" placeholder="you@domain.com" required />
+          <button class="btn" type="submit"><span>Request</span></button>
+        </div>
+        <p class="reserve__note" id="reserveNote" role="status" aria-live="polite"></p>
+      </form>
+
+      <p class="contact__direct">
+        <a class="link" href="mailto:viewings@velormotors.com">viewings@velormotors.com</a>
+        <span class="contact__sep">·</span>
+        <a class="link" href="tel:+442071000000">+44 20 7100 0000</a>
+      </p>
+    </div>
+
+    <footer class="foot">
+      <span>VELOR MOTORS</span>
+      <span>London</span>
+      <span>© 2026</span>
+    </footer>
+  </section>
+
+</main>
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "./vendor/three/three.module.js",
+    "three/addons/": "./vendor/three/addons/"
+  }
+}
+</script>
+<script src="vendor/gsap.min.js" defer></script>
+<script src="vendor/ScrollTrigger.min.js" defer></script>
+<script src="vendor/lenis.min.js" defer></script>
+<script type="module" src="js/main.js"></script>
+</body>
+</html>
