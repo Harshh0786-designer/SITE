@@ -99,6 +99,10 @@ async function boot(){
     lenis = new window.Lenis({ lerp: 0.09, wheelMultiplier: 0.9, smoothWheel: true });
     lenis.on('scroll', ScrollTrigger.update);
     gsap.ticker.add((t) => lenis.raf(t * 1000));
+    /* lagSmoothing off is the documented pairing with Lenis: the master
+       timeline is scrubbed from scroll position, so a stall must not put
+       the animation into slow motion and desynchronise it from where the
+       page actually is. */
     gsap.ticker.lagSmoothing(0);
   }
   initAnchors(lenis);
@@ -113,8 +117,14 @@ async function boot(){
     }, { passive: true });
   }
 
+  stage.warmUp();
   stage.start();
   body.classList.remove('is-loading');
+
+  /* two settled frames after warm-up: the first frame after start still
+     carries texture uploads, and the drop is the worst place to spend
+     them */
+  await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
 
   /* ============================================================
      HERO — gravity, three decaying bounces, then rest
@@ -129,33 +139,52 @@ async function boot(){
 
   const intro = gsap.timeline({ defaults: { overwrite: 'auto' } });
 
-  function bounce(tl, height, upDur, downDur, force){
-    tl.to(root.position, { y: R + height, duration: upDur, ease: 'power2.out' })
-      .to(root.position, { y: R, duration: downDur, ease: 'power2.in' })
-      .add(() => stage.puff(force))
-      .to(state, { squash: force * 0.7, duration: 0.05, ease: 'power2.out' }, '<')
-      .to(state, { squash: 0, duration: 0.22, ease: 'elastic.out(1,0.45)' }, '>');
+  /* Gravity is symmetric: a bounce to height h takes as long going up
+     as coming down, and each arc is sqrt(h) of the drop that produced
+     it. Every beat is placed at an absolute time derived from that, not
+     appended — chaining these lets the squash release serialise after
+     the fall instead of overlapping the rise, which is what made the
+     sequence feel long and disjointed. */
+  const DROP_H = 6.2;                      // how far it falls to the floor
+  const FALL   = 0.78;                     // and how long that takes
+  const arc    = (h) => FALL * Math.sqrt(h / DROP_H);
+  let at = 0;
+
+  /* squash and release across the contact, overlapping whatever the
+     wheel does next */
+  function impact(force){
+    intro.add(() => stage.puff(force), at)
+         .to(state, { squash: force, duration: 0.05, ease: 'sine.out' }, at)
+         .to(state, { squash: 0, duration: 0.20 + force * 0.14, ease: 'back.out(1.8)' }, at + 0.05);
   }
 
-  intro
-    .to(root.position, { y: R, duration: 0.86, ease: 'power2.in' })
-    .add(() => stage.puff(1))
-    .to(state, { squash: 1, duration: 0.06, ease: 'power2.out' }, '<')
-    .to(state, { squash: 0, duration: 0.26, ease: 'elastic.out(1,0.4)' }, '>');
+  function hop(height, force){
+    impact(force);
+    const a = arc(height);
+    intro.to(root.position, { y: R + height, duration: a, ease: 'power2.out' }, at)
+         .to(root.position, { y: R, duration: a, ease: 'power2.in' }, at + a);
+    at += 2 * a;
+  }
 
-  bounce(intro, 1.45, 0.42, 0.40, 0.62);
-  bounce(intro, 0.52, 0.27, 0.26, 0.34);
-  bounce(intro, 0.16, 0.16, 0.15, 0.16);
+  intro.to(root.position, { y: R, duration: FALL, ease: 'power2.in' }, 0);
+  at = FALL;
 
+  hop(1.55, 0.62);
+  hop(0.55, 0.34);
+  hop(0.17, 0.16);
+  hop(0.05, 0.07);
+  impact(0.03);
+
+  const copyAt = at - 0.62;
   intro
-    .to(state, { idleSpeed: 0.075, duration: 1.2, ease: 'power1.out' }, '-=0.2')
+    .to(state, { idleSpeed: 0.075, duration: 1.3, ease: 'power1.out' }, at - 0.3)
     .fromTo('#wordmark span', { yPercent: 60 }, {
-      yPercent: 0, opacity: 1, duration: 1.05, stagger: 0.055, ease: 'power3.out'
-    }, '-=0.55')
-    .to('#heroSub', { opacity: 1, duration: 0.9, ease: 'power2.out' }, '-=0.7')
-    .fromTo('#heroLede', { y: 14 }, { y: 0, opacity: 1, duration: 1, ease: 'power2.out' }, '-=0.6')
-    .fromTo('#scrollCue', { scaleY: 0.2 }, { scaleY: 1, opacity: 1, duration: 0.8, ease: 'power2.out' }, '-=0.5')
-    .add(() => { state.rollCouple = 1; });
+      yPercent: 0, opacity: 1, duration: 0.9, stagger: 0.05, ease: 'power3.out'
+    }, copyAt)
+    .to('#heroSub', { opacity: 1, duration: 0.8, ease: 'power2.out' }, copyAt + 0.28)
+    .fromTo('#heroLede', { y: 14 }, { y: 0, opacity: 1, duration: 0.85, ease: 'power2.out' }, copyAt + 0.42)
+    .fromTo('#scrollCue', { scaleY: 0.2 }, { scaleY: 1, opacity: 1, duration: 0.7, ease: 'power2.out' }, copyAt + 0.66)
+    .add(() => { state.rollCouple = 1; }, at);
 
   /* ============================================================
      SCROLL — one scrubbed timeline across the whole document
@@ -193,6 +222,11 @@ async function boot(){
     const restX  = narrow ? 1.35 : 2.2;
     const flatX  = narrow ? -1.0 : -1.7;
 
+    /* the exploded column is framed to fill the viewport: its centre and
+       the camera distance that makes five parts span the full height */
+    const colY = narrow ? 2.55 : 2.90;
+    const colZ = narrow ? 6.4  : 7.9;
+
     master = gsap.timeline({
       defaults: { ease: 'none' },
       scrollTrigger: {
@@ -209,17 +243,16 @@ async function boot(){
       .to(camera.position, { x: restX * 0.52 * camPan, y: 1.55, duration: rollEnd, ease: 'power1.inOut' }, 0)
       .to(state.target, { x: restX * 0.72, y: R * 1.0, duration: rollEnd, ease: 'power1.inOut' }, 0);
 
-    /* 2 -> 3 — squares up to the camera, then opens into its parts */
+    /* 2 -> 3 — squares up, lifts to the middle of the frame, and opens
+       into a vertical column that fills the viewport */
     master
-      .to(state, { yaw: 0, duration: cs * 0.20, ease: 'power2.inOut' }, c0 + cs * 0.40)
-      .to(state, { idleSpeed: 0.03, duration: cs * 0.20 }, c0 + cs * 0.40)
-      .to(state, { explode: 1, duration: cs * 0.26, ease: 'power2.inOut' }, c0 + cs * 0.42)
-      .to(camera.position, {
-        x: restX * 0.46 * camPan, y: 1.75, z: narrow ? 9.6 : 8.6,
-        duration: cs * 0.30, ease: 'power1.inOut'
-      }, c0 + cs * 0.40)
-      .to(state.target, { x: restX * 0.76, y: R * 1.05, duration: cs * 0.30, ease: 'power1.inOut' }, c0 + cs * 0.40)
-      .to(state, { reflection: 0.04, duration: cs * 0.22, ease: 'power2.inOut' }, c0 + cs * 0.42)
+      .to(state, { yaw: 0, duration: cs * 0.20, ease: 'power2.inOut' }, c0 + cs * 0.38)
+      .to(state, { idleSpeed: 0.03, duration: cs * 0.20 }, c0 + cs * 0.38)
+      .to(root.position, { x: 0, y: colY, z: 0, duration: cs * 0.32, ease: 'power2.inOut' }, c0 + cs * 0.38)
+      .to(state, { explode: 1, duration: cs * 0.28, ease: 'power2.inOut' }, c0 + cs * 0.42)
+      .to(camera.position, { x: 0, y: colY, z: colZ, duration: cs * 0.34, ease: 'power1.inOut' }, c0 + cs * 0.38)
+      .to(state.target, { x: 0, y: colY, duration: cs * 0.34, ease: 'power1.inOut' }, c0 + cs * 0.38)
+      .to(state, { reflection: 0.02, duration: cs * 0.24, ease: 'power2.inOut' }, c0 + cs * 0.42)
       .to(annotations, {
         opacity: 1, y: 0, duration: cs * 0.12, stagger: cs * 0.035, ease: 'power2.out'
       }, c0 + cs * 0.58)
@@ -229,7 +262,7 @@ async function boot(){
     const reAt = c0 + cs * 0.86;
     const reDur = Math.max(0.04, (s0 + (s1 - s0) * 0.14) - reAt);
     master
-      .to(state, { explode: 0, reflection: 0.11, duration: reDur * 0.7, ease: 'power2.inOut' }, reAt)
+      .to(state, { explode: 0, reflection: 0.09, duration: reDur * 0.7, ease: 'power2.inOut' }, reAt)
       .to(state, { flip: -Math.PI / 2, duration: reDur, ease: 'power2.inOut' }, reAt)
       .to(root.position, { x: flatX, y: R * 0.34, z: 0.4, duration: reDur, ease: 'power2.inOut' }, reAt)
       .to(state, { idleSpeed: 1.35, shadowScale: 1.25, duration: reDur, ease: 'power2.in' }, reAt + reDur * 0.1)

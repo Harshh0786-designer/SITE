@@ -77,13 +77,13 @@ function brushedHeight(){
 
 /* --- tread: circumferential grooves, angled shoulder slots, sipes --- */
 function treadHeight(){
-  const W_ = 1024, H_ = 256;
+  const W_ = 512, H_ = 128;
   const [c, ctx] = canvas2d(W_, H_);
   ctx.fillStyle = '#909090';
   ctx.fillRect(0, 0, W_, H_);
 
   // fine rubber tooth over the whole crown
-  for(let i = 0; i < 26000; i++){
+  for(let i = 0; i < 9000; i++){
     const v = 130 + Math.random() * 46;
     ctx.fillStyle = `rgb(${v},${v},${v})`;
     ctx.fillRect(Math.random() * W_, Math.random() * H_, 2, 2);
@@ -104,7 +104,7 @@ function treadHeight(){
     ctx.fillRect(-wpx / 2, -(y1 - y0) * H_ / 2, wpx, (y1 - y0) * H_);
     ctx.restore();
   };
-  const blocks = 36;
+  const blocks = 30;
   for(let i = 0; i < blocks; i++){
     const x = (i / blocks) * W_;
     slot(x,          0.00, 0.19, 15, 0.30, '#101010');
@@ -128,12 +128,12 @@ function treadColor(){
 
 /* --- sidewall: the moulded lettering and rib bands of a real tyre --- */
 function sidewallHeight(){
-  const W_ = 2048, H_ = 256;
+  const W_ = 1024, H_ = 256;
   const [c, ctx] = canvas2d(W_, H_);
   ctx.fillStyle = '#808080';
   ctx.fillRect(0, 0, W_, H_);
 
-  for(let i = 0; i < 20000; i++){
+  for(let i = 0; i < 10000; i++){
     const v = 118 + Math.random() * 30;
     ctx.fillStyle = `rgb(${v},${v},${v})`;
     ctx.fillRect(Math.random() * W_, Math.random() * H_, 2, 2);
@@ -146,8 +146,8 @@ function sidewallHeight(){
 
   // fine radial ribs around the bead — catches a highlight when it turns
   ctx.fillStyle = '#9a9a9a';
-  for(let i = 0; i < 260; i++){
-    ctx.fillRect((i / 260) * W_, 0.12 * H_, 4, 0.12 * H_);
+  for(let i = 0; i < 130; i++){
+    ctx.fillRect((i / 130) * W_, 0.12 * H_, 4, 0.12 * H_);
   }
 
   ctx.textAlign = 'center';
@@ -157,17 +157,17 @@ function sidewallHeight(){
     ctx.font = `${weight} ${px}px "Helvetica Neue", Arial, sans-serif`;
     ctx.fillText(text, 0, 0);
   };
-  const REP = 4;
+  const REP = 2;
   for(let r = 0; r < REP; r++){
     const x0 = (r / REP) * W_;
     ctx.save(); ctx.translate(x0 + W_ / REP * 0.25, 0.44 * H_);
-    stamp('VELOR', 0, 62, '700', '#d8d8d8'); ctx.restore();
+    stamp('VELOR', 0, 48, '700', '#d8d8d8'); ctx.restore();
     ctx.save(); ctx.translate(x0 + W_ / REP * 0.25, 0.62 * H_);
-    stamp('SPORT CONTACT', 0, 26, '500', '#c4c4c4'); ctx.restore();
+    stamp('SPORT CONTACT', 0, 20, '500', '#c4c4c4'); ctx.restore();
     ctx.save(); ctx.translate(x0 + W_ / REP * 0.72, 0.50 * H_);
-    stamp('265/35 ZR21', 0, 30, '600', '#cfcfcf'); ctx.restore();
+    stamp('265/35 ZR21', 0, 23, '600', '#cfcfcf'); ctx.restore();
     ctx.save(); ctx.translate(x0 + W_ / REP * 0.72, 0.66 * H_);
-    stamp('101Y  XL', 0, 22, '500', '#bcbcbc'); ctx.restore();
+    stamp('101Y  XL', 0, 17, '500', '#bcbcbc'); ctx.restore();
   }
   return c;
 }
@@ -302,15 +302,17 @@ function buildWheel(quality){
   const treadH = treadHeight();
   const sideH  = sidewallHeight();
 
-  const rubberTread = new THREE.MeshStandardMaterial({
+  const rubberTread = new THREE.MeshPhysicalMaterial({
     color: 0xffffff, roughness: .95, metalness: 0,
+    clearcoat: .10, clearcoatRoughness: .85,
     map: tex(treadColor(), 2, 1, true),
     normalMap: tex(normalFromHeight(treadH, 3.4), 2, 1),
     normalScale: new THREE.Vector2(1.4, 1.4),
     side: THREE.DoubleSide
   });
-  const rubberWall = new THREE.MeshStandardMaterial({
+  const rubberWall = new THREE.MeshPhysicalMaterial({
     color: 0x1a1b1f, roughness: .70, metalness: .02,
+    clearcoat: .22, clearcoatRoughness: .42,
     normalMap: tex(normalFromHeight(sideH, 2.1), 1, 1),
     normalScale: new THREE.Vector2(1.55, 1.55),
     side: THREE.DoubleSide
@@ -318,15 +320,19 @@ function buildWheel(quality){
   /* forged aluminium, satin-finished — not chrome. Chrome on white
      goes to mush; a satin metal keeps its gradients. */
   const brushed = tex(normalFromHeight(brushedHeight(), 1.1), 3, 3);
-  const alloy = new THREE.MeshStandardMaterial({
-    color: 0xbcc0c7, roughness: .24, metalness: 1, side: THREE.DoubleSide,
-    normalMap: brushed, normalScale: new THREE.Vector2(.22, .22)
+  const alloy = new THREE.MeshPhysicalMaterial({
+    color: 0xbcc0c7, roughness: .26, metalness: 1, side: THREE.DoubleSide,
+    normalMap: brushed, normalScale: new THREE.Vector2(.24, .24),
+    clearcoat: .55, clearcoatRoughness: .16,
+    anisotropy: .45, anisotropyRotation: Math.PI / 2
   });
-  const alloyPolished = new THREE.MeshStandardMaterial({
-    color: 0xd2d5da, roughness: .11, metalness: 1, side: THREE.DoubleSide
+  const alloyPolished = new THREE.MeshPhysicalMaterial({
+    color: 0xd4d7dc, roughness: .09, metalness: 1, side: THREE.DoubleSide,
+    clearcoat: .8, clearcoatRoughness: .05
   });
-  const alloyDark = new THREE.MeshStandardMaterial({
-    color: 0x74777d, roughness: .38, metalness: 1, side: THREE.DoubleSide
+  const alloyDark = new THREE.MeshPhysicalMaterial({
+    color: 0x74777d, roughness: .36, metalness: 1, side: THREE.DoubleSide,
+    clearcoat: .3, clearcoatRoughness: .28
   });
   const brake = new THREE.MeshStandardMaterial({
     color: 0x303236, roughness: .58, metalness: .72, side: THREE.DoubleSide
@@ -482,14 +488,16 @@ function buildWheel(quality){
   capFace.position.z = zHub + 0.0815;
   hub.add(capFace);
 
-  /* where each part travels when the wheel opens up. Authored in the
-     picture plane: head on, an axial spread would just overlap. */
+  /* Where each part travels when the wheel opens up: a single vertical
+     column, authored in the picture plane. Head on, an axial spread just
+     overlaps; a radial one throws parts below the floor line. The small
+     hub sits at the centre, where the headline crosses it. */
   const spread = {
-    tread:     { p: [ 0.00,  1.28,  0.00], r: [ 0.05,  0.00,  0.14] },
-    wallFront: { p: [ 1.42,  0.34,  0.45], r: [ 0.00, -0.22,  0.08] },
-    wallBack:  { p: [-1.42,  0.28, -0.30], r: [ 0.00,  0.22, -0.08] },
-    rim:       { p: [ 0.86, -1.06,  0.20], r: [-0.06,  0.08, -0.12] },
-    hub:       { p: [-0.86, -1.02,  0.55], r: [ 0.16,  0.00,  0.18] }
+    tread:     { p: [ 0.00,  1.85,  0.10], r: [ 0.34, -0.10,  0.10] },
+    wallFront: { p: [ 0.00,  0.92,  0.50], r: [-0.30,  0.14,  0.06] },
+    wallBack:  { p: [ 0.00,  0.00, -0.30], r: [ 0.28, -0.16, -0.06] },
+    rim:       { p: [ 0.00, -0.92,  0.30], r: [-0.26,  0.12, -0.10] },
+    hub:       { p: [ 0.00, -1.85,  0.95], r: [ 0.40,  0.00,  0.16] }
   };
 
   /* each part owns its material instances: hovering one part has to be
@@ -528,6 +536,11 @@ export function createStage(canvas, opts = {}){
   renderer.toneMapping = THREE.NeutralToneMapping;
   renderer.toneMappingExposure = 1.0;
   renderer.setClearColor(PAPER, 1);
+  /* A cast shadow is what tells the eye an object is a solid sitting in
+     a room rather than a picture of one. The blob below is kept, but
+     only as contact darkening. */
+  renderer.shadowMap.enabled = !low;
+  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
   const scene = new THREE.Scene();
   scene.fog = new THREE.Fog(PAPER, 9, 24);
@@ -545,7 +558,19 @@ export function createStage(canvas, opts = {}){
      the direction the contact shadow falls */
   const key = new THREE.DirectionalLight(0xffffff, 2.4);
   key.position.set(-3.0, 5.6, 4.0);
+  key.castShadow = !low;
+  key.shadow.mapSize.set(1024, 1024);
+  key.shadow.camera.near = 0.5;
+  key.shadow.camera.far = 16;
+  key.shadow.camera.left = -2.6;
+  key.shadow.camera.right = 2.6;
+  key.shadow.camera.top = 3.4;
+  key.shadow.camera.bottom = -3.4;
+  key.shadow.bias = -0.0009;
+  key.shadow.normalBias = 0.022;
+  key.shadow.radius = 3;
   scene.add(key);
+  scene.add(key.target);
   const rimLight = new THREE.DirectionalLight(0xdfe6f2, 1.1);
   rimLight.position.set(4.6, 2.0, -4.4);
   scene.add(rimLight);
@@ -564,6 +589,7 @@ export function createStage(canvas, opts = {}){
   );
   floor.rotation.x = -Math.PI / 2;
   floor.renderOrder = 2;
+  floor.receiveShadow = true;
   scene.add(floor);
 
   /* ---------- wheel + reflection ---------- */
@@ -572,6 +598,7 @@ export function createStage(canvas, opts = {}){
 
   const { root, parts, spread, materials, partMaterials } = buildWheel(quality);
   root.position.set(0, R, 0);
+  root.traverse(o => { if(o.isMesh) o.castShadow = true; });
   tilt.add(root);
 
   const mirror = new THREE.Group();
@@ -588,6 +615,8 @@ export function createStage(canvas, opts = {}){
     o.material.depthWrite = false;
     o.material.side = THREE.DoubleSide;
     o.renderOrder = 1;
+    o.castShadow = false;
+    o.receiveShadow = false;
     ghostMaterials.push(o.material);
   });
   mirror.add(ghost);
@@ -602,7 +631,7 @@ export function createStage(canvas, opts = {}){
   const shadow = new THREE.Mesh(
     new THREE.PlaneGeometry(2.5, 2.5),
     new THREE.MeshBasicMaterial({
-      color: 0x4c5057, transparent: true, opacity: .40,
+      color: 0x4c5057, transparent: true, opacity: .22,
       alphaMap: radialAlpha(256, 0.005, .16), depthWrite: false
     })
   );
@@ -613,8 +642,23 @@ export function createStage(canvas, opts = {}){
 
   /* ---------- smoke ---------- */
   const smokeTex = smokeTexture(low ? 128 : 256);
+
+  /* Impact smoke is a separate, short-lived set. Reusing the ambient
+     sprites meant every bounce teleported drifting smoke across the
+     frame, which is most of what read as jitter in the drop. */
+  const IMPACTS = low ? 5 : 8;
+  const impacts = [];
+  for(let i = 0; i < IMPACTS; i++){
+    const sp = new THREE.Sprite(new THREE.SpriteMaterial({
+      map: smokeTex, transparent: true, opacity: 0,
+      color: 0x878e99, depthWrite: false, fog: false
+    }));
+    sp.renderOrder = 6;
+    scene.add(sp);
+    impacts.push({ sprite: sp, life: 0, vx: 0, vy: 0, size: 1, spin: 0 });
+  }
   const puffs = [];
-  const SMOKE = low ? 12 : 20;
+  const SMOKE = low ? 8 : 14;
   for(let i = 0; i < SMOKE; i++){
     const s = new THREE.Sprite(new THREE.SpriteMaterial({
       map: smokeTex, transparent: true, opacity: 0,
@@ -625,7 +669,7 @@ export function createStage(canvas, opts = {}){
       x: (Math.random() * 2 - 1) * 7,
       y: 0.25 + Math.random() * 2.6,
       z: -2.6 + Math.random() * 5.2,
-      size: 3.0 + Math.random() * 4.8,
+      size: 2.8 + Math.random() * 3.6,
       speed: 0.16 + Math.random() * 0.5,
       spin: (Math.random() - 0.5) * 0.16,
       weight: 0.35 + Math.random() * 0.65,
@@ -664,15 +708,24 @@ export function createStage(canvas, opts = {}){
   const scaleTarget = new THREE.Vector3();
 
   function puff(strength = 1){
-    // a wheel hitting a studio floor lifts a low, fast ring of dust
-    pulse = Math.max(pulse, strength * 1.5);
-    for(let i = 0; i < puffs.length; i++){
-      const p = puffs[i];
-      if(Math.abs(p.x - root.position.x) > 3.4) continue;
-      p.y = 0.12 + Math.random() * 0.5;
-      p.x = root.position.x + (Math.random() - 0.5) * 2.2;
-      p.size = 1.6 + Math.random() * 2.4;
-      p.sprite.scale.setScalar(p.size);
+    // a wheel hitting a studio floor pushes a low, fast ring outward
+    pulse = Math.max(pulse, strength * 0.9);
+    for(let i = 0; i < impacts.length; i++){
+      const im = impacts[i];
+      const side = i % 2 ? 1 : -1;
+      const spreadOut = 0.25 + Math.random() * 0.55;
+      im.life = 1;
+      im.vx = side * (0.9 + Math.random() * 1.5) * strength;
+      im.vy = 0.16 + Math.random() * 0.34;
+      im.size = (0.8 + Math.random() * 0.9) * (0.7 + strength * 0.6);
+      im.spin = (Math.random() - 0.5) * 0.9;
+      im.sprite.position.set(
+        root.position.x + side * spreadOut,
+        0.10 + Math.random() * 0.16,
+        root.position.z + (Math.random() - 0.5) * 0.7
+      );
+      im.sprite.scale.setScalar(im.size);
+      im.sprite.material.opacity = 0;
     }
   }
 
@@ -741,7 +794,7 @@ export function createStage(canvas, opts = {}){
     shadow.position.x = root.position.x;
     shadow.position.z = root.position.z;
     shadow.scale.setScalar((0.74 + h * 0.26) * state.shadowScale * (1 + e * 0.35));
-    shadow.material.opacity = 0.44 * tightness * state.opacity * (1 - e * 0.8);
+    shadow.material.opacity = 0.26 * tightness * state.opacity * (1 - e * 0.8);
 
     /* smoke: a resting haze that thickens with scroll and on impact */
     const density = Math.min(1, state.smoke + scrollEnergy * 0.8 + pulse * 0.6);
@@ -755,6 +808,21 @@ export function createStage(canvas, opts = {}){
       p.sprite.material.rotation += dt * p.spin;
       p.sprite.material.opacity = density * p.weight * 0.52 * state.opacity;
       p.sprite.scale.setScalar(p.size * (1 + pulse * 0.12));
+    }
+
+    /* impact smoke: pushes out low and fast, then lifts and thins */
+    for(let i = 0; i < impacts.length; i++){
+      const im = impacts[i];
+      if(im.life <= 0) continue;
+      im.life = Math.max(0, im.life - dt * 0.85);
+      im.vx *= Math.pow(0.22, dt);
+      im.sprite.position.x += im.vx * dt;
+      im.sprite.position.y += im.vy * dt;
+      im.sprite.material.rotation += im.spin * dt;
+      im.sprite.scale.setScalar(im.size * (1 + (1 - im.life) * 2.6));
+      // fade in over the first sliver of life, then out
+      const l = im.life;
+      im.sprite.material.opacity = Math.min(1, (1 - l) * 6) * l * l * 0.42 * state.opacity;
     }
 
     /* reflection follows every part, mirrored through the floor */
@@ -777,6 +845,12 @@ export function createStage(canvas, opts = {}){
       state.hovered = null;
       opts.onHover && opts.onHover(null);
     }
+
+    /* the light travels with the wheel so one tight shadow map covers
+       the whole journey instead of one huge, soft, low-resolution one */
+    key.position.set(root.position.x - 3.0, 5.6, root.position.z + 4.0);
+    key.target.position.set(root.position.x, root.position.y * 0.5, root.position.z);
+    key.target.updateMatrixWorld();
 
     camera.lookAt(state.target);
     renderer.render(scene, camera);
@@ -810,12 +884,26 @@ export function createStage(canvas, opts = {}){
   resize();
   window.addEventListener('resize', resize);
 
+  /* Compile every program and upload every texture up front. Without
+     this the first seconds of the drop are spent on shader compilation
+     and the motion stutters exactly when it is most exposed. */
+  function warmUp(){
+    const keep = { explode: state.explode, opacity: state.opacity };
+    state.explode = 1;              // touch the exploded materials too
+    renderer.compile(scene, camera);
+    renderer.render(scene, camera);
+    state.explode = keep.explode;
+    state.opacity = keep.opacity;
+    renderer.render(scene, camera);
+  }
+
   return {
     scene, camera, renderer, root, parts, state,
     start(){ if(!raf){ clock.getDelta(); loop(); } },
     stop(){ cancelAnimationFrame(raf); raf = 0; },
     renderOnce(){ frame(); },
     setPointer,
+    warmUp,
     puff,
     smokePulse,
     setScrollEnergy,

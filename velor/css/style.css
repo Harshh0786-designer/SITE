@@ -158,6 +158,31 @@ main{ position:relative; z-index:10; }
   max-width:min(46ch,52vw);
 }
 .panel__type--left{ align-items:flex-start; text-align:left; }
+
+/* The exploded column fills the viewport, so this copy is read against
+   it rather than beside it: a soft paper wash behind the block, plus a
+   halo on the glyphs, keeps it legible wherever a part lands. */
+.panel--craft .panel__type{
+  max-width:none; align-items:center; text-align:center;
+}
+.panel--craft .panel__type::before{
+  content:""; position:absolute; z-index:-1; pointer-events:none;
+  left:50%; top:50%; transform:translate(-50%,-50%);
+  width:min(1320px,99vw); height:min(330px,36vh);
+  background:radial-gradient(closest-side,
+    rgba(244,243,239,.80) 0%, rgba(244,243,239,.68) 40%,
+    rgba(244,243,239,.30) 74%, rgba(244,243,239,0) 100%);
+}
+/* the halo does the close work so the wash can stay light enough to
+   leave the component behind it visible */
+.panel--craft .display{
+  text-shadow:
+    0 0 10px var(--paper), 0 0 22px var(--paper),
+    0 0 40px var(--paper), 0 0 70px var(--paper);
+}
+.panel--craft .eyebrow{
+  text-shadow:0 0 12px var(--paper), 0 0 26px var(--paper);
+}
 .panel__type--right{ margin-left:auto; align-items:flex-start; text-align:left; }
 .panel__type--center{ max-width:none; align-items:center; text-align:center; }
 
@@ -192,9 +217,10 @@ main{ position:relative; z-index:10; }
   display:flex; flex-wrap:wrap; gap:0 .5em; justify-content:center;
 }
 .lede{
-  margin:clamp(22px,3vw,34px) 0 0;
-  font-size:clamp(.95rem,1.35vw,1.15rem);
-  font-weight:200; letter-spacing:.12em; color:var(--ink-dim);
+  margin:clamp(24px,3.2vw,38px) 0 0;
+  font-size:clamp(1.15rem,1.85vw,1.6rem);
+  font-weight:400; letter-spacing:.06em; color:var(--ink);
+  text-shadow:0 0 22px var(--paper), 0 0 44px var(--paper);
 }
 
 /* ---------- hero ---------- */
@@ -239,15 +265,16 @@ main{ position:relative; z-index:10; }
   position:absolute; display:flex; align-items:center; gap:12px;
   font-size:11px; letter-spacing:.2em; text-transform:uppercase;
   color:var(--ink-dim); white-space:nowrap;
+  text-shadow:0 0 14px var(--paper), 0 0 28px var(--paper);
   opacity:0; transform:translateY(6px);
 }
 .annotation__dot{
   width:5px; height:5px; border-radius:50%; background:var(--ink);
   box-shadow:0 0 0 6px rgba(18,19,22,.07);
 }
-.annotation[data-part="tread"]{ left:66%; top:26%; }
-.annotation[data-part="rim"]  { left:72%; top:68%; }
-.annotation[data-part="hub"]  { left:29%; top:79%; }
+.annotation[data-part="tread"]{ left:67%; top:12%; }
+.annotation[data-part="rim"]  { left:67%; top:67%; }
+.annotation[data-part="hub"]  { left:62%; top:85%; }
 .annotation.is-hot{ color:var(--paper); }
 .annotation.is-hot .annotation__dot{ background:var(--accent); box-shadow:0 0 0 6px rgba(176,33,40,.16); }
 
@@ -365,13 +392,17 @@ main{ position:relative; z-index:10; }
   .panel__type--left,.panel__type--right{
     justify-content:flex-start; padding-top:16vh; margin-left:0;
   }
+  /* the craft copy stays centred so it and its wash sit together over
+     the middle of the exploded column */
+  .panel--craft .panel__type{ justify-content:center; padding-top:0; }
+  .panel--craft .panel__type::before{ height:min(260px,30vh); }
   .selection__col{ width:100%; justify-content:flex-end; padding-bottom:9vh; }
   .car{ grid-template-columns:auto 2px 1fr auto; }
   /* on a phone the labels read as a caption stack beneath the spread */
   .annotation{ font-size:10px; letter-spacing:.16em; }
-  .annotation[data-part="tread"]{ left:var(--gut); top:70%; }
-  .annotation[data-part="rim"]  { left:var(--gut); top:75%; }
-  .annotation[data-part="hub"]  { left:var(--gut); top:80%; }
+  .annotation[data-part="tread"]{ left:var(--gut); top:86.5%; }
+  .annotation[data-part="rim"]  { left:var(--gut); top:91%; }
+  .annotation[data-part="hub"]  { left:var(--gut); top:95.5%; }
   .foot{ font-size:9px; letter-spacing:.18em; }
 }
 

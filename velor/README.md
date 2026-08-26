@@ -12,7 +12,7 @@ the content; the wheel never disappears and reappears, it only transforms.
 |---|---|---|
 | Hero | Drops under gravity, bounces three times with decaying height, a puff of smoke and a squash on each contact, settles and turns slowly in place | VELOR / *Fewer cars. Absolute condition.* |
 | 1 → 2 | Rolls diagonally to a new mark, camera travelling with it | — |
-| 2 → 3 | Squares up to the camera, opens into tread, sidewalls, rim and hub with micro-labels | *Nothing overlooked.* |
+| 2 → 3 | Squares up, lifts to the middle of the frame and opens into a vertical column that fills the viewport, with the headline in front of it | *Nothing overlooked.* |
 | 3 → 4 | Reassembles, flips onto its side, becomes a spinning wheel | *A curated few, not a lot.* + inventory |
 | 4 → 5 | Comes back upright and centres | *Inspected. Verified. Delivered.* |
 | 5 | Rolls out of frame, leaving the empty studio | *Reserve a viewing.* |
@@ -43,7 +43,9 @@ Y-spokes — a trunk from the hub to a fork, two branches to the lip, and two
 fine ribs crossing each window onto the neighbouring fork — over a polished lip
 band and a dark drum. Tread pattern, sidewall lettering and the brushed grain
 on the alloy are all procedural normal maps rather than geometry, so the scene
-stays low-poly: about 26k triangles in 69 draw calls.
+stays low-poly: about 26k triangles in 69 draw calls. The alloy is a
+physical material — clearcoat over an anisotropic brushed finish — and the
+rubber carries a faint waxy sheen over a matte carcass.
 
 `js/stage.js` exposes a single `state` object — `flip`, `roll`, `explode`,
 `squash`, `idleSpeed`, `opacity`, `reflection`, `smoke`, `target` — and
@@ -56,6 +58,19 @@ choreography, edit `buildMaster()`; to change what the object *is*, edit
 - **Reflection.** A mirrored clone of the wheel sits under the floor plane and
   copies every part's transform each frame, so the reflection follows the
   exploded view too. The floor's alpha mask keeps it to a hint.
+- **The drop is placed at absolute times derived from gravity**: a bounce
+  to height h takes as long up as down, and each arc is sqrt(h) of the drop
+  before it. Chaining these instead lets each squash release serialise after
+  the fall rather than overlapping the rise — that ran 6.3s and felt
+  disjointed; derived timing runs 2.4s and reads as one continuous fall.
+- **The scene is compiled and pre-rendered before anything animates.**
+  Otherwise the first seconds of the drop are spent on shader compilation,
+  and the stutter lands exactly where it is most exposed.
+- **Impact smoke has its own sprites.** Reusing the ambient field meant every
+  bounce teleported drifting smoke across the frame.
+- **Cast shadows**, with the key light travelling with the wheel so one tight
+  1024 shadow map covers the whole journey rather than one huge soft one. The
+  gradient plane underneath stays, but only as contact darkening.
 - **Smoke.** Two sources. Sprites in the scene thicken with how fast you are
   scrolling — rising quickly, falling away slowly, so the trail lingers behind
   the movement — and a CSS wash (`.veil`) sweeps across as one section hands
