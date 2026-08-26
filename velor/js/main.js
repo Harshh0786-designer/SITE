@@ -249,8 +249,8 @@ async function boot(){
     master
       .to(state, { flip: 0, idleSpeed: 0.09, shadowScale: 1, duration: ts * 0.72, ease: 'power2.inOut' }, t0)
       .to(root.position, { x: 0, y: R, z: 0, duration: ts * 0.72, ease: 'power2.inOut' }, t0)
-      .to(camera.position, { x: 0, y: 2.15, z: narrow ? 7.6 : 6.4, duration: ts * 0.78, ease: 'power1.inOut' }, t0)
-      .to(state.target, { x: 0, y: 1.62, duration: ts * 0.78, ease: 'power1.inOut' }, t0);
+      .to(camera.position, { x: 0, y: 2.30, z: narrow ? 7.2 : 6.1, duration: ts * 0.78, ease: 'power1.inOut' }, t0)
+      .to(state.target, { x: 0, y: 1.72, duration: ts * 0.78, ease: 'power1.inOut' }, t0);
 
     /* 5 — rolls out of frame, leaving one last chrome trace */
     master
@@ -297,6 +297,46 @@ async function boot(){
   });
 
   gsap.set('.annotation', { opacity: 0, y: 6 });
+
+  /* ---------- smoke ----------
+     Two sources: the speed you are scrolling at, which thickens the
+     ambient haze continuously, and a wash that sweeps across as one
+     section hands over to the next. */
+  const veil = document.querySelector('.veil');
+  const clouds = gsap.utils.toArray('.veil__cloud');
+  let energy = 0;
+
+  gsap.ticker.add(() => {
+    const v = master && master.scrollTrigger ? Math.abs(master.scrollTrigger.getVelocity()) : 0;
+    const want = Math.min(1, v / 1300);
+    /* rise quickly with the scroll, fall away slowly, so the trail
+       lingers behind the movement instead of snapping off */
+    energy += (want - energy) * (want > energy ? 0.22 : 0.045);
+    stage.setScrollEnergy(energy);
+  });
+
+  const handover = gsap.timeline({ paused: true })
+    .fromTo(veil, { opacity: 0 }, { opacity: 1, duration: 0.5, ease: 'power2.out' })
+    .to(veil, { opacity: 0, duration: 1.15, ease: 'power2.in' })
+    .fromTo(clouds[0],
+      { xPercent: -16, scale: 1.06, opacity: .5 },
+      { xPercent: 14, scale: 1.22, opacity: .9, duration: 1.65, ease: 'power1.out' }, 0)
+    .fromTo(clouds[1],
+      { xPercent: 14, scale: 1.14, opacity: .4 },
+      { xPercent: -12, scale: 1.3, opacity: .85, duration: 1.65, ease: 'power1.out' }, 0);
+
+  function sweep(strength){
+    stage.smokePulse(strength);
+    handover.restart();
+  }
+
+  gsap.utils.toArray('.panel:not(.panel--hero)').forEach(panel => {
+    ScrollTrigger.create({
+      trigger: panel, start: 'top 82%', end: 'bottom 18%',
+      onEnter: () => sweep(0.7),
+      onEnterBack: () => sweep(0.55)
+    });
+  });
 
   buildMaster();
 
