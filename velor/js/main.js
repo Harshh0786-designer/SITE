@@ -47,6 +47,22 @@ function initAnchors(lenis){
 
 initForm();
 
+/* ---------- footer: the page dips to black on arrival ----------
+   An observer rather than a scrubbed tween, so the band commits to
+   ink once it is genuinely in view and lets go on the way back up.
+   Runs on every path, reduced motion included. */
+function initFooter(){
+  const foot = document.getElementById('foot');
+  if(!foot) return;
+  if(!('IntersectionObserver' in window)){ foot.classList.add('is-dark'); return; }
+  new IntersectionObserver(
+    ([entry]) => foot.classList.toggle('is-dark', entry.isIntersecting),
+    { rootMargin: '0px 0px -10% 0px' }
+  ).observe(foot);
+}
+
+initFooter();
+
 /* ---------- reduced motion / no WebGL: hold a still frame ---------- */
 
 function webglAvailable(){

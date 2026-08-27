@@ -1,4 +1,4 @@
-# VELOR MOTORS — single-asset kinetic concept
+# Car Story — single-asset kinetic concept
 
 A scroll-driven landing page for a luxury car reseller, set in a white
 cyclorama studio. The whole homepage is choreographed around **one hero 3D
@@ -10,7 +10,7 @@ the content; the wheel never disappears and reappears, it only transforms.
 
 | Beat | What the tyre does | Copy |
 |---|---|---|
-| Hero | Drops under gravity, bounces three times with decaying height, a puff of smoke and a squash on each contact, settles and turns slowly in place | VELOR / *Fewer cars. Absolute condition.* |
+| Hero | Drops under gravity, bounces three times with decaying height, a puff of smoke and a squash on each contact, settles and turns slowly in place | Car Story / *Fewer cars. Absolute condition.* |
 | 1 → 2 | Rolls diagonally to a new mark, camera travelling with it | — |
 | 2 → 3 | Squares up, lifts to the middle of the frame and opens into a vertical column that fills the viewport, with the headline in front of it | *Nothing overlooked.* |
 | 3 → 4 | Reassembles, flips onto its side, becomes a spinning wheel | *A curated few, not a lot.* + inventory |

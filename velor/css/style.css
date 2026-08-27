@@ -1,5 +1,5 @@
 /* ============================================================
-   VELOR MOTORS — restraint as luxury
+   Car Story — restraint as luxury
    Palette, type, and the thin layer of chrome that sits over
    the 3D stage. Motion budget belongs to the tyre, not here.
    ============================================================ */
@@ -14,6 +14,10 @@
   --accent:     #B02128;
 
   --chrome: linear-gradient(105deg,#8d9199 0%,#e4e6ea 22%,#a6aab1 38%,#f2f3f5 55%,#8f939b 72%,#cfd2d8 100%);
+
+  /* Marcellus carries the voice, Outfit carries the information */
+  --font-head: "Marcellus", "Times New Roman", Georgia, serif;
+  --font-body: "Outfit", "Helvetica Neue", Helvetica, Arial, sans-serif;
 
   --gut: clamp(20px, 5vw, 72px);
   --ease: cubic-bezier(.22,.61,.36,1);
@@ -36,8 +40,8 @@ body{
   margin:0;
   background:var(--paper);
   color:var(--ink);
-  font-family:"Inter Tight","Helvetica Neue",Helvetica,Arial,sans-serif;
-  font-weight:300;
+  font-family:var(--font-body);
+  font-weight:400;
   -webkit-font-smoothing:antialiased;
   text-rendering:optimizeLegibility;
   overflow-x:hidden;
@@ -206,10 +210,11 @@ main{ position:relative; z-index:10; }
 }
 .display{
   margin:0;
-  font-weight:300;
+  font-family:var(--font-head);
+  font-weight:400;
   font-size:clamp(2.6rem,7.2vw,6.2rem);
-  line-height:.94;
-  letter-spacing:-.03em;
+  line-height:1;
+  letter-spacing:-.012em;
 }
 .display--wide{
   font-size:clamp(2rem,5.4vw,4.6rem);
@@ -218,6 +223,7 @@ main{ position:relative; z-index:10; }
 }
 .lede{
   margin:clamp(24px,3.2vw,38px) 0 0;
+  font-family:var(--font-head);
   font-size:clamp(1.15rem,1.85vw,1.6rem);
   font-weight:400; letter-spacing:.06em; color:var(--ink);
   text-shadow:0 0 22px var(--paper), 0 0 44px var(--paper);
@@ -229,11 +235,15 @@ main{ position:relative; z-index:10; }
 
 .wordmark{
   margin:0; display:flex; justify-content:center;
-  font-weight:300; line-height:1;
-  font-size:clamp(3rem,11.5vw,9rem);
-  letter-spacing:.16em; text-indent:.16em;
+  font-family:var(--font-head);
+  font-weight:400; line-height:1.04;
+  /* nine letters, not five: the name sets its own width budget */
+  font-size:clamp(2.4rem,8.2vw,6.6rem);
+  letter-spacing:.10em; text-indent:.10em;
+  max-width:calc(100vw - var(--gut) * 2);
 }
 .wordmark span{ display:inline-block; will-change:transform,opacity; }
+.wordmark__gap{ width:.36em; }
 .hero__sub{
   margin:clamp(6px,1vw,14px) 0 0;
   font-size:clamp(.6rem,1.05vw,.82rem);
@@ -308,6 +318,7 @@ main{ position:relative; z-index:10; }
 .car:hover .car__plate{ opacity:1; transform:scaleY(1.28); }
 .car__name{
   grid-column:3; grid-row:1; margin:0;
+  font-family:var(--font-head);
   font-size:clamp(1rem,1.5vw,1.25rem); font-weight:400; letter-spacing:-.01em;
 }
 .car__spec{
@@ -330,7 +341,7 @@ main{ position:relative; z-index:10; }
   flex:1; min-width:0;
   appearance:none; background:none; border:0; outline:0;
   color:var(--ink);
-  font:inherit; font-size:clamp(1rem,1.5vw,1.2rem); font-weight:200; letter-spacing:.04em;
+  font:inherit; font-size:clamp(1rem,1.5vw,1.2rem); font-weight:300; letter-spacing:.04em;
   padding:12px 4px 14px;
 }
 .reserve__input::placeholder{ color:rgba(18,19,22,.26); }
@@ -374,11 +385,55 @@ main{ position:relative; z-index:10; }
 }
 .link:hover::after,.link:focus-visible::after{ transform:scaleX(1); transform-origin:left; }
 
+/* ---------- footer: the one place the page goes to black ----------
+   The band carries its own ink, fading up from paper as it arrives so
+   the switch reads as a dip to black rather than a hard cut. */
 .foot{
-  position:absolute; left:var(--gut); right:var(--gut); bottom:clamp(20px,3vh,34px);
-  display:flex; justify-content:space-between;
+  position:relative; z-index:12;
+  padding:clamp(88px,16vh,180px) var(--gut) clamp(28px,5vh,48px);
+  color:var(--ink);
+  --foot-veil:0;   /* 0 = paper, 1 = black. driven by scroll */
+  transition:color .8s var(--ease);
+}
+.foot::before{
+  content:""; position:absolute; inset:-1px 0 0;
+  background:#08090B;
+  opacity:var(--foot-veil);
+  transition:opacity .9s var(--ease);
+  pointer-events:none;
+}
+.foot.is-dark{ --foot-veil:1; color:#F4F3EF; }
+.foot > *{ position:relative; z-index:1; }
+
+.foot__inner{
+  display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between;
+  gap:clamp(24px,4vw,48px);
+  padding-bottom:clamp(36px,6vh,64px);
+  border-bottom:1px solid var(--hair);
+  transition:border-color .8s var(--ease);
+}
+.foot.is-dark .foot__inner{ border-bottom-color:rgba(244,243,239,.16); }
+
+.foot__mark{
+  margin:0;
+  font-family:var(--font-head);
+  font-size:clamp(1.8rem,4.6vw,3.4rem);
+  line-height:1; letter-spacing:-.01em;
+}
+.foot__nav{ display:flex; flex-wrap:wrap; gap:clamp(16px,2.4vw,32px); }
+.foot__nav a{
+  font-size:11px; letter-spacing:.24em; text-transform:uppercase;
+  color:inherit; opacity:.58; text-decoration:none;
+  transition:opacity .4s var(--ease);
+}
+.foot__nav a:hover,.foot__nav a:focus-visible{ opacity:1; }
+.foot__line{ margin:0; font-size:12px; letter-spacing:.18em; opacity:.72; }
+
+.foot__base{
+  display:flex; flex-wrap:wrap; justify-content:space-between; gap:12px 24px;
+  padding-top:clamp(20px,3vh,32px);
   font-size:10px; letter-spacing:.26em; text-transform:uppercase;
-  color:var(--ink-faint);
+  opacity:.5;
 }
 
 :focus-visible{ outline:1px solid var(--ink-dim); outline-offset:4px; }
@@ -403,7 +458,8 @@ main{ position:relative; z-index:10; }
   .annotation[data-part="tread"]{ left:var(--gut); top:86.5%; }
   .annotation[data-part="rim"]  { left:var(--gut); top:91%; }
   .annotation[data-part="hub"]  { left:var(--gut); top:95.5%; }
-  .foot{ font-size:9px; letter-spacing:.18em; }
+  .foot__inner{ align-items:flex-start; flex-direction:column; }
+  .foot__base{ font-size:9px; letter-spacing:.18em; }
 }
 
 /* ---------- reduced motion: hold the still frame ---------- */
