@@ -5,7 +5,7 @@
    is the same object, somewhere else in its transformation.
    ============================================================ */
 
-import { initCars } from './cars.js';
+import { initForm, initAnchors, initFooter, initChrome } from './ui.js';
 
 const body   = document.body;
 const canvas = document.getElementById('scene');
@@ -15,56 +15,9 @@ const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const coarse  = window.matchMedia('(pointer: coarse)').matches;
 const narrow  = window.matchMedia('(max-width: 880px)').matches;
 
-/* ---------- always-on interface bits ---------- */
-
-function initForm(){
-  const form = document.getElementById('reserve');
-  const input = document.getElementById('email');
-  const note = document.getElementById('reserveNote');
-  if(!form) return;
-
-  form.addEventListener('submit', (ev) => {
-    ev.preventDefault();
-    const value = input.value.trim();
-    const valid = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value);
-    note.classList.toggle('is-error', !valid);
-    note.textContent = valid
-      ? 'Received. We will write within one working day.'
-      : 'A valid email, please.';
-    if(valid) form.reset();
-  });
-}
-
-function initAnchors(lenis){
-  document.querySelectorAll('a[href^="#"]').forEach(a => {
-    a.addEventListener('click', (ev) => {
-      const el = document.querySelector(a.getAttribute('href'));
-      if(!el) return;
-      ev.preventDefault();
-      if(lenis) lenis.scrollTo(el, { offset: 0 });
-      else el.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth' });
-    });
-  });
-}
-
 initForm();
-initCars();
-
-/* ---------- footer: the page dips to black on arrival ----------
-   An observer rather than a scrubbed tween, so the band commits to
-   ink once it is genuinely in view and lets go on the way back up.
-   Runs on every path, reduced motion included. */
-function initFooter(){
-  const foot = document.getElementById('foot');
-  if(!foot) return;
-  if(!('IntersectionObserver' in window)){ foot.classList.add('is-dark'); return; }
-  new IntersectionObserver(
-    ([entry]) => foot.classList.toggle('is-dark', entry.isIntersecting),
-    { rootMargin: '0px 0px -10% 0px' }
-  ).observe(foot);
-}
-
 initFooter();
+initChrome();
 
 /* ---------- reduced motion / no WebGL: hold a still frame ---------- */
 
@@ -116,6 +69,7 @@ async function boot(){
   let lenis = null;
   if(!coarse && window.Lenis){
     lenis = new window.Lenis({ lerp: 0.09, wheelMultiplier: 0.9, smoothWheel: true });
+    window.__lenis = lenis;   /* the single-file preview's router needs to reset it */
     lenis.on('scroll', ScrollTrigger.update);
     gsap.ticker.add((t) => lenis.raf(t * 1000));
     /* lagSmoothing off is the documented pairing with Lenis: the master

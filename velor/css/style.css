@@ -130,14 +130,12 @@ body.no-webgl .stage canvas{ display:none; }
 /* ---------- chrome nav ---------- */
 .chrome{
   position:fixed; z-index:50; top:0; left:0; right:0;
-  display:flex; align-items:center; justify-content:space-between;
+  display:flex; align-items:center; justify-content:flex-end;
   padding:clamp(18px,2.4vw,30px) var(--gut);
   mix-blend-mode:difference;
+  transition:opacity .55s var(--ease), transform .55s var(--ease);
 }
-.chrome__mark{
-  font-size:12px; font-weight:500; letter-spacing:.42em;
-  color:#fff; text-decoration:none;
-}
+.chrome.is-tucked{ opacity:0; transform:translateY(-10px); pointer-events:none; }
 .chrome__nav{ display:flex; gap:clamp(18px,2.4vw,34px); }
 .chrome__nav a{
   font-size:11px; letter-spacing:.24em; text-transform:uppercase;
@@ -201,6 +199,22 @@ main{ position:relative; z-index:10; }
   margin-bottom:clamp(26px,3.4vw,44px);
 }
 .panel--trust .panel__type{ justify-content:flex-start; padding-top:18vh; }
+
+/* ---------- the cars page ----------
+   Its own document: no stage behind it, so the bar sits on paper and
+   the menu runs along the top in place of the hero. */
+.page--floor{ background:var(--paper); }
+.chrome--solid{
+  mix-blend-mode:normal;
+  justify-content:center;
+  background:linear-gradient(var(--paper) 62%, rgba(244,243,239,0));
+  padding-bottom:clamp(22px,3vw,34px);
+}
+.menu--bar{ margin:0; }
+.chrome--solid .menu a[aria-current="page"]{ color:var(--ink); }
+.chrome--solid .menu a[aria-current="page"]::after{ transform:scaleX(1); transform-origin:left; }
+.panel--floor{ padding-top:clamp(132px,20vh,220px); }
+.panel--floor .sheet__head .display{ font-size:clamp(2.3rem,5.6vw,4.4rem); }
 
 /* ---------- reading sections ----------
    Cars, Parts and Sell are read, not choreographed, so they take their

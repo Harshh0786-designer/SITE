@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="theme-color" content="#F4F3EF" />
+<title>Cars — Car Story</title>
+<meta name="description" content="Every car on the Car Story floor, sourced worldwide and priced in rupees. Filter by marque." />
+
+<link rel="preload" href="vendor/fonts/marcellus-400.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="vendor/fonts/outfit-var.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="stylesheet" href="vendor/fonts.css" />
+<link rel="stylesheet" href="css/style.css" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230A0A0A'/%3E%3Ccircle cx='16' cy='16' r='11' fill='none' stroke='%23F5F4F0' stroke-width='3'/%3E%3Ccircle cx='16' cy='16' r='3.5' fill='%23F5F4F0'/%3E%3C/svg%3E" />
+</head>
+<body class="page--floor">
+
+<!-- ============ GRAIN ============ -->
+<div class="grain" aria-hidden="true"></div>
+
+<!-- ============ CHROME NAV ============ -->
+<header class="chrome chrome--solid">
+  <nav class="menu menu--bar" aria-label="Primary">
+    <a href="index.html">Home</a>
+    <a href="index.html#craft">About Us</a>
+    <a href="cars.html" aria-current="page">Cars</a>
+    <a href="index.html#parts">Parts</a>
+    <a href="index.html#sell">Sell a Car</a>
+    <a href="index.html#contact">Contact Us</a>
+  </nav>
+</header>
+
+<main id="floor">
+
+  <section class="panel panel--plain panel--floor">
+    <div class="sheet">
+      <header class="sheet__head">
+        <p class="eyebrow">The floor</p>
+        <h1 class="display">Sourced the world over.</h1>
+        <p class="sheet__note">Every car we hold, in one place. All of them are in our own
+           custody, inspected end to end, and priced in rupees, landed — duties, homologation
+           and registration accounted for. Pick a marque to see only its cars.</p>
+      </header>
+
+      <div class="floor">
+        <nav class="floor__rail" aria-label="Filter by marque">
+          <p class="floor__railhead">Marque</p>
+          <ul class="brands" id="brands" role="radiogroup" aria-label="Marque"></ul>
+        </nav>
+
+        <div class="floor__grid">
+          <p class="floor__tally" id="carsTally" role="status" aria-live="polite"></p>
+          <ul class="motors" id="motors"></ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6 — FOOTER (fades to black on arrival) -->
+  <footer class="foot" id="foot">
+    <div class="foot__inner">
+      <p class="foot__mark">Car Story</p>
+      <nav class="foot__nav" aria-label="Footer">
+        <a href="#floor">Cars</a>
+        <a href="index.html#craft">Craftsmanship</a>
+        <a href="index.html#contact">Enquiries</a>
+      </nav>
+      <p class="foot__line">
+        <a class="link" href="mailto:viewings@carstory.com">viewings@carstory.com</a>
+        <span class="contact__sep">·</span>
+        <a class="link" href="tel:+442071000000">+44 20 7100 0000</a>
+      </p>
+    </div>
+    <div class="foot__base">
+      <span>London</span>
+      <span>Fewer cars. Absolute condition.</span>
+      <span>© 2026</span>
+    </div>
+  </footer>
+
+</main>
+
+<script type="module" src="js/floor.js"></script>
+</body>
+</html>
