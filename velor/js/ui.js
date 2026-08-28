@@ -50,16 +50,14 @@ export function initFooter(root = document){
   ).observe(foot);
 }
 
-/* With the corner mark gone, the fixed bar would just repeat the hero
-   menu sitting right below it. So it stays out of the way until the
-   hero is behind you, and from then on it is the persistent nav. */
-export function initChrome(){
-  const chrome = document.querySelector('.chrome');
-  const hero = document.getElementById('hero');
-  if(!chrome || !hero) return;
-  if(!('IntersectionObserver' in window)) return;
-  new IntersectionObserver(
-    ([entry]) => chrome.classList.toggle('is-tucked', entry.isIntersecting),
-    { threshold: 0.35 }
-  ).observe(hero);
+/* Served from the repo these are ordinary pages; bundled into the
+   single-file preview they are views behind a hash router. Links written
+   at runtime have to work either way. */
+const ROUTED = !!document.querySelector('[data-view]');
+const VIEW_OF = { 'index.html': 'home', 'cars.html': 'cars', 'contact.html': 'contact' };
+
+export function pageHref(page, frag){
+  if(!ROUTED) return frag ? `${page}#${frag}` : page;
+  const view = VIEW_OF[page] || 'home';
+  return frag ? `#${view}:${frag}` : `#${view}`;
 }

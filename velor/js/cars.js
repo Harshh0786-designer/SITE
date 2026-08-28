@@ -107,7 +107,7 @@ function profile(type, paint, id){
 
 /* ---------- the floor ---------- */
 
-const FLOOR = [
+export const FLOOR = [
   ['Rolls-Royce','Goodwood, England','Phantom VIII','saloon','#E7E5DF','Arctic White','2022 · 12,400 km · 6.75 V12','₹9,50,00,000'],
   ['Rolls-Royce','Goodwood, England','Ghost Black Badge','saloon','#15161A','Black Badge','2023 · 8,100 km · 6.75 V12','₹8,20,00,000'],
   ['Rolls-Royce','Goodwood, England','Cullinan','suv','#1B3A63','Salamanca Blue','2022 · 16,700 km · 6.75 V12','₹6,95,00,000'],
@@ -141,7 +141,8 @@ const FLOOR = [
   ['Mercedes-AMG','Affalterbach, Germany','SL 55','roadster','#A2172A','Patagonia Red','2023 · 8,700 km · 4.0 V8','₹2,45,00,000']
 ];
 
-const slug = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+export const slug = (s) => s.normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+  .toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 
 export function initCars(){
   const grid = document.getElementById('motors');
@@ -151,7 +152,7 @@ export function initCars(){
 
   /* ---- cards ---- */
   grid.innerHTML = FLOOR.map(([marque, origin, name, type, paint, colour, spec, price], i) => `
-    <li class="motor" data-brand="${slug(marque)}">
+    <li class="motor" id="car-${slug(name)}" data-brand="${slug(marque)}">
       <span class="motor__frame">${profile(type, paint, i)}</span>
       <p class="motor__marque">${marque}<span class="motor__origin">${origin}</span></p>
       <h3 class="motor__name">${name}</h3>
@@ -201,4 +202,12 @@ export function initCars(){
   });
 
   show('all');
+
+  /* arriving from search: the cards only exist once this has run, so the
+     browser cannot do this jump for us */
+  const wanted = location.hash.match(/^#(car-[\w-]+)$/);
+  if(wanted){
+    const card = document.getElementById(wanted[1]);
+    if(card) requestAnimationFrame(() => card.scrollIntoView({ block: 'center' }));
+  }
 }

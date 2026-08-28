@@ -26,8 +26,12 @@
     <a href="cars.html" aria-current="page">Cars</a>
     <a href="index.html#parts">Parts</a>
     <a href="index.html#sell">Sell a Car</a>
-    <a href="index.html#contact">Contact Us</a>
+    <a href="contact.html">Contact Us</a>
   </nav>
+  <button class="search-btn" id="searchBtn" type="button" aria-label="Search" aria-expanded="false">
+    <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="8.6" cy="8.6" r="5.6"/><path d="M12.8 12.8 L17 17"/></svg>
+    <span>Search</span>
+  </button>
 </header>
 
 <main id="floor">
@@ -56,23 +60,33 @@
     </div>
   </section>
 
-  <!-- 6 — FOOTER (fades to black on arrival) -->
+  <!-- FOOTER (fades to black on arrival) -->
   <footer class="foot" id="foot">
-    <div class="foot__inner">
-      <p class="foot__mark">Car Story</p>
+    <div class="foot__top">
+      <a class="foot__mark" href="index.html">Car Story</a>
       <nav class="foot__nav" aria-label="Footer">
-        <a href="#floor">Cars</a>
+        <a href="cars.html">Cars</a>
         <a href="index.html#craft">Craftsmanship</a>
         <a href="index.html#contact">Enquiries</a>
+        <a href="contact.html">About Us</a>
       </nav>
+    </div>
+
+    <div class="foot__body">
       <p class="foot__line">
         <a class="link" href="mailto:viewings@carstory.com">viewings@carstory.com</a>
         <span class="contact__sep">·</span>
-        <a class="link" href="tel:+442071000000">+44 20 7100 0000</a>
+        <a class="link" href="tel:+912261004500">+91 22 6100 4500</a>
       </p>
+      <address class="foot__address">
+        Unit 4, Raghuvanshi Mills Compound<br />
+        Senapati Bapat Marg, Lower Parel<br />
+        Mumbai 400013
+      </address>
     </div>
+
     <div class="foot__base">
-      <span>London</span>
+      <span>Mumbai</span>
       <span>Fewer cars. Absolute condition.</span>
       <span>© 2026</span>
     </div>

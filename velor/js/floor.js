@@ -6,6 +6,7 @@
 
 import { initCars } from './cars.js';
 import { initAnchors, initFooter } from './ui.js';
+import { initSearch } from './search.js';
 
 /* served on its own this is the whole document; bundled into the
    single-file preview it is one view of two, so scope the footer
@@ -15,3 +16,4 @@ const root = document.querySelector('[data-view="cars"]') || document;
 initCars();
 initFooter(root);
 initAnchors(null);
+initSearch(root);

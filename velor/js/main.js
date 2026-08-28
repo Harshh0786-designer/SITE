@@ -5,7 +5,8 @@
    is the same object, somewhere else in its transformation.
    ============================================================ */
 
-import { initForm, initAnchors, initFooter, initChrome } from './ui.js';
+import { initForm, initAnchors, initFooter } from './ui.js';
+import { initSearch } from './search.js';
 
 const body   = document.body;
 const canvas = document.getElementById('scene');
@@ -17,7 +18,7 @@ const narrow  = window.matchMedia('(max-width: 880px)').matches;
 
 initForm();
 initFooter();
-initChrome();
+initSearch(document.querySelector('[data-view="home"]') || document);
 
 /* ---------- reduced motion / no WebGL: hold a still frame ---------- */
 
