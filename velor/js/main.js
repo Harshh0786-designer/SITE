@@ -151,7 +151,7 @@ async function boot(){
   state.idleSpeed = 0;
   state.rollCouple = 0;
 
-  gsap.set(['#wordmark span', '#heroSub', '#heroLede', '#scrollCue'], { opacity: 0 });
+  gsap.set(['#menu a', '#wordmark span', '#heroSub', '#heroLede', '#scrollCue'], { opacity: 0 });
 
   const intro = gsap.timeline({ defaults: { overwrite: 'auto' } });
 
@@ -194,6 +194,9 @@ async function boot(){
   const copyAt = at - 0.62;
   intro
     .to(state, { idleSpeed: 0.075, duration: 1.3, ease: 'power1.out' }, at - 0.3)
+    .fromTo('#menu a', { y: -8 }, {
+      y: 0, opacity: 1, duration: 0.7, stagger: 0.04, ease: 'power2.out'
+    }, copyAt - 0.12)
     .fromTo('#wordmark span', { yPercent: 60 }, {
       yPercent: 0, opacity: 1, duration: 0.9, stagger: 0.05, ease: 'power3.out'
     }, copyAt)

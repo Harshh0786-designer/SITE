@@ -202,6 +202,84 @@ main{ position:relative; z-index:10; }
 }
 .panel--trust .panel__type{ justify-content:flex-start; padding-top:18vh; }
 
+/* ---------- reading sections ----------
+   Cars, Parts and Sell are read, not choreographed, so they take their
+   own paper ground and let the stage carry on unseen behind them. */
+.panel--plain{
+  background:var(--paper);
+  padding-top:clamp(96px,16vh,180px);
+  padding-bottom:clamp(96px,16vh,180px);
+}
+.sheet{ max-width:1180px; margin:0 auto; }
+.sheet__head{ max-width:62ch; margin:0 0 clamp(52px,7vh,96px); }
+.sheet__head .display{ font-size:clamp(2.1rem,5vw,3.9rem); text-wrap:balance; }
+.sheet__note{
+  margin:clamp(20px,2.6vw,30px) 0 0;
+  max-width:56ch;
+  font-size:clamp(.95rem,1.15vw,1.05rem); line-height:1.65;
+  letter-spacing:.01em; color:var(--ink-dim);
+}
+.sheet__cta{ margin:clamp(44px,6vh,72px) 0 0; font-size:12px; letter-spacing:.18em; color:var(--ink-dim); }
+
+/* ---------- the floor: three to a row, hairlines and nothing else ---------- */
+.motors{
+  margin:0; padding:0; list-style:none;
+  display:grid; grid-template-columns:repeat(3,1fr);
+  column-gap:clamp(28px,4vw,68px); row-gap:clamp(40px,5.5vh,72px);
+}
+.motor{
+  display:flex; flex-direction:column;
+  padding-top:clamp(18px,2vw,26px);
+  border-top:1px solid var(--hair);
+}
+.motor__marque{
+  margin:0; display:flex; flex-direction:column; gap:3px;
+  font-size:10px; letter-spacing:.26em; text-transform:uppercase;
+  color:var(--ink);
+}
+.motor__origin{ letter-spacing:.14em; text-transform:none; color:var(--ink-faint); }
+.motor__name{
+  margin:clamp(14px,1.6vw,20px) 0 0;
+  font-family:var(--font-head); font-weight:400;
+  font-size:clamp(1.25rem,1.9vw,1.6rem); line-height:1.15; letter-spacing:-.01em;
+  text-wrap:balance;
+}
+.motor__spec{
+  margin:10px 0 0;
+  font-size:11px; letter-spacing:.14em; color:var(--ink-faint);
+}
+.motor__price{
+  margin:clamp(18px,2.2vw,28px) 0 0;
+  font-size:clamp(.95rem,1.2vw,1.05rem); letter-spacing:.03em;
+  font-variant-numeric:tabular-nums; color:var(--ink-dim);
+}
+
+/* ---------- short three-up copy blocks (Parts, Sell a Car) ---------- */
+.notes{
+  margin:0; padding:0; list-style:none;
+  display:grid; grid-template-columns:repeat(3,1fr);
+  column-gap:clamp(28px,4vw,68px); row-gap:clamp(36px,5vh,60px);
+  counter-reset:step;
+}
+.note{ padding-top:clamp(18px,2vw,26px); border-top:1px solid var(--hair); }
+.note__name{
+  margin:0;
+  font-family:var(--font-head); font-weight:400;
+  font-size:clamp(1.1rem,1.5vw,1.3rem); letter-spacing:-.01em;
+}
+.note__body{
+  margin:clamp(12px,1.4vw,18px) 0 0;
+  font-size:clamp(.88rem,1.05vw,.97rem); line-height:1.6; color:var(--ink-dim);
+}
+/* Sell a Car is an ordered process, so its blocks are numbered */
+.notes--steps .note{ counter-increment:step; }
+.notes--steps .note__name::before{
+  content:counter(step,decimal-leading-zero);
+  display:block; margin-bottom:10px;
+  font-family:var(--font-body);
+  font-size:10px; letter-spacing:.26em; color:var(--ink-faint);
+}
+
 /* ---------- type ---------- */
 .eyebrow{
   margin:0 0 clamp(18px,2vw,26px);
@@ -232,6 +310,32 @@ main{ position:relative; z-index:10; }
 /* ---------- hero ---------- */
 .panel--hero{ display:flex; align-items:flex-start; justify-content:center; padding-top:13vh; }
 .hero__center{ position:relative; z-index:2; text-align:center; }
+
+/* the primary menu sits above the name, set in the body face so it
+   reads as wayfinding rather than a second piece of branding */
+.menu{
+  display:flex; flex-wrap:wrap; justify-content:center;
+  gap:clamp(14px,2.4vw,34px);
+  margin:0 0 clamp(22px,3.4vw,40px);
+}
+.menu a{
+  position:relative;
+  font-family:var(--font-body);
+  font-size:clamp(9.5px,.78vw,11px); font-weight:400;
+  letter-spacing:.26em; text-transform:uppercase;
+  color:var(--ink-dim); text-decoration:none;
+  padding-bottom:5px;
+  text-shadow:0 0 14px var(--paper), 0 0 30px var(--paper);
+  transition:color .4s var(--ease);
+  will-change:transform,opacity;
+}
+.menu a::after{
+  content:""; position:absolute; left:0; bottom:0; width:100%; height:1px;
+  background:currentColor; transform:scaleX(0); transform-origin:right;
+  transition:transform .45s var(--ease);
+}
+.menu a:hover,.menu a:focus-visible{ color:var(--ink); }
+.menu a:hover::after,.menu a:focus-visible::after{ transform:scaleX(1); transform-origin:left; }
 
 .wordmark{
   margin:0; display:flex; justify-content:center;
@@ -439,6 +543,10 @@ main{ position:relative; z-index:10; }
 :focus-visible{ outline:1px solid var(--ink-dim); outline-offset:4px; }
 
 /* ---------- responsive: same beats, less room ---------- */
+@media (max-width:1080px) and (min-width:881px){
+  .motors,.notes{ grid-template-columns:repeat(2,1fr); }
+}
+
 @media (max-width:880px){
   :root{
     --h-craft:200vh; --h-selection:220vh; --h-trust:100vh; --h-contact:110vh;
@@ -458,6 +566,16 @@ main{ position:relative; z-index:10; }
   .annotation[data-part="tread"]{ left:var(--gut); top:86.5%; }
   .annotation[data-part="rim"]  { left:var(--gut); top:91%; }
   .annotation[data-part="hub"]  { left:var(--gut); top:95.5%; }
+  /* three to a row needs a desk; a phone reads them one at a time */
+  .motors,.notes{ grid-template-columns:1fr; }
+  /* six items will not sit on one phone line, and free wrapping strands
+     the last one alone — so on a phone they are two rows of three */
+  .menu{
+    display:grid; grid-template-columns:repeat(3,auto);
+    justify-content:center; justify-items:center;
+    gap:12px clamp(14px,4.4vw,22px);
+  }
+  .menu a{ font-size:9px; letter-spacing:.15em; }
   .foot__inner{ align-items:flex-start; flex-direction:column; }
   .foot__base{ font-size:9px; letter-spacing:.18em; }
 }
