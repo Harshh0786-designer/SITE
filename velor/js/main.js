@@ -5,6 +5,8 @@
    is the same object, somewhere else in its transformation.
    ============================================================ */
 
+import { initCars } from './cars.js';
+
 const body   = document.body;
 const canvas = document.getElementById('scene');
 const page   = document.getElementById('page');
@@ -46,6 +48,7 @@ function initAnchors(lenis){
 }
 
 initForm();
+initCars();
 
 /* ---------- footer: the page dips to black on arrival ----------
    An observer rather than a scrubbed tween, so the band commits to

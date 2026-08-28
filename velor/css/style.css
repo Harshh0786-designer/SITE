@@ -221,16 +221,90 @@ main{ position:relative; z-index:10; }
 }
 .sheet__cta{ margin:clamp(44px,6vh,72px) 0 0; font-size:12px; letter-spacing:.18em; color:var(--ink-dim); }
 
-/* ---------- the floor: three to a row, hairlines and nothing else ---------- */
+/* ---------- the floor: a marque rail, then three cars to a row ---------- */
+.floor{
+  display:grid;
+  grid-template-columns:minmax(168px,196px) 1fr;
+  gap:clamp(32px,5vw,80px);
+  align-items:start;
+}
+
+.floor__rail{ position:sticky; top:clamp(78px,11vh,104px); }
+.floor__railhead{
+  margin:0 0 clamp(16px,1.8vw,22px);
+  font-size:10px; letter-spacing:.3em; text-transform:uppercase;
+  color:var(--ink-faint);
+}
+.brands{ margin:0; padding:0; list-style:none; display:flex; flex-direction:column; }
+
+.brand{
+  width:100%;
+  display:grid; grid-template-columns:auto 1fr auto;
+  align-items:center; gap:12px;
+  appearance:none; background:none; border:0; cursor:pointer;
+  padding:9px 0; text-align:left;
+  color:var(--ink-dim); font:inherit;
+  font-size:11.5px; letter-spacing:.08em;
+  transition:color .35s var(--ease);
+}
+/* the check itself: an outline that fills in when its marque is the one on show */
+.brand__mark{
+  width:11px; height:11px; border-radius:50%;
+  border:1px solid var(--ink-faint);
+  display:grid; place-items:center;
+  transition:border-color .35s var(--ease);
+}
+.brand__mark::after{
+  content:""; width:5px; height:5px; border-radius:50%;
+  background:var(--accent);
+  transform:scale(0); transition:transform .35s var(--ease);
+}
+.brand__n{
+  font-size:10px; letter-spacing:.1em; color:var(--ink-faint);
+  font-variant-numeric:tabular-nums;
+}
+.brand:hover{ color:var(--ink); }
+.brand:hover .brand__mark{ border-color:var(--ink-dim); }
+.brand[aria-checked="true"]{ color:var(--ink); }
+.brand[aria-checked="true"] .brand__mark{ border-color:var(--accent); }
+.brand[aria-checked="true"] .brand__mark::after{ transform:scale(1); }
+
+.floor__tally{
+  margin:0 0 clamp(20px,2.4vw,30px);
+  font-size:10px; letter-spacing:.26em; text-transform:uppercase;
+  color:var(--ink-faint); font-variant-numeric:tabular-nums;
+}
+
 .motors{
   margin:0; padding:0; list-style:none;
   display:grid; grid-template-columns:repeat(3,1fr);
-  column-gap:clamp(28px,4vw,68px); row-gap:clamp(40px,5.5vh,72px);
+  column-gap:clamp(24px,2.6vw,44px); row-gap:clamp(40px,5.5vh,68px);
 }
 .motor{
   display:flex; flex-direction:column;
   padding-top:clamp(18px,2vw,26px);
   border-top:1px solid var(--hair);
+}
+/* display:flex above would otherwise beat the hidden attribute the
+   marque filter sets */
+.motor[hidden]{ display:none; }
+
+/* the car is drawn, not photographed: a side profile in its own paint */
+.motor__frame{
+  display:block; margin:0 0 clamp(14px,1.6vw,20px);
+  transition:transform .6s var(--ease);
+}
+.motor__art{ display:block; width:100%; height:auto; overflow:visible; }
+.motor:hover .motor__frame{ transform:translateX(6px); }
+
+.motor__colour{
+  margin:12px 0 0;
+  display:flex; align-items:center; gap:8px;
+  font-size:11px; letter-spacing:.12em; color:var(--ink-faint);
+}
+.motor__chip{
+  width:9px; height:9px; border-radius:50%;
+  background:var(--chip); box-shadow:inset 0 0 0 1px rgba(18,19,22,.18);
 }
 .motor__marque{
   margin:0; display:flex; flex-direction:column; gap:3px;
@@ -249,7 +323,7 @@ main{ position:relative; z-index:10; }
   font-size:11px; letter-spacing:.14em; color:var(--ink-faint);
 }
 .motor__price{
-  margin:clamp(18px,2.2vw,28px) 0 0;
+  margin:clamp(16px,2vw,24px) 0 0;
   font-size:clamp(.95rem,1.2vw,1.05rem); letter-spacing:.03em;
   font-variant-numeric:tabular-nums; color:var(--ink-dim);
 }
@@ -545,6 +619,7 @@ main{ position:relative; z-index:10; }
 /* ---------- responsive: same beats, less room ---------- */
 @media (max-width:1080px) and (min-width:881px){
   .motors,.notes{ grid-template-columns:repeat(2,1fr); }
+  .floor{ grid-template-columns:minmax(150px,168px) 1fr; }
 }
 
 @media (max-width:880px){
@@ -568,6 +643,14 @@ main{ position:relative; z-index:10; }
   .annotation[data-part="hub"]  { left:var(--gut); top:95.5%; }
   /* three to a row needs a desk; a phone reads them one at a time */
   .motors,.notes{ grid-template-columns:1fr; }
+  /* the rail keeps its vertical list, but moves above the cars and runs
+     two abreast so it does not push the floor off the bottom of the screen */
+  .floor{ grid-template-columns:1fr; gap:clamp(30px,5vh,44px); }
+  .floor__rail{ position:static; }
+  .brands{
+    display:grid; grid-template-columns:1fr 1fr;
+    column-gap:clamp(16px,4vw,28px);
+  }
   /* six items will not sit on one phone line, and free wrapping strands
      the last one alone — so on a phone they are two rows of three */
   .menu{

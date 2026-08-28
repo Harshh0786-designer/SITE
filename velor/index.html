@@ -123,66 +123,21 @@
         <p class="eyebrow">03 — Cars</p>
         <h2 class="display">Sourced the world over.</h2>
         <p class="sheet__note">Every car below is in our own custody, inspected end to end, and
-           priced in rupees,
-           landed — duties, homologation and registration accounted for.</p>
+           priced in rupees, landed — duties, homologation and registration accounted for.
+           Pick a marque to see only its cars.</p>
       </header>
 
-      <ul class="motors">
-      <li class="motor">
-        <p class="motor__marque">Rolls-Royce<span class="motor__origin">Goodwood, England</span></p>
-        <h3 class="motor__name">Phantom VIII</h3>
-        <p class="motor__spec">2022 · 12,400 km · 6.75 V12</p>
-        <p class="motor__price">₹9,50,00,000</p>
-      </li>
-      <li class="motor">
-        <p class="motor__marque">Ferrari<span class="motor__origin">Maranello, Italy</span></p>
-        <h3 class="motor__name">812 Superfast</h3>
-        <p class="motor__spec">2021 · 7,850 km · 6.5 V12</p>
-        <p class="motor__price">₹5,20,00,000</p>
-      </li>
-      <li class="motor">
-        <p class="motor__marque">Bugatti<span class="motor__origin">Molsheim, France</span></p>
-        <h3 class="motor__name">Chiron Pur Sport</h3>
-        <p class="motor__spec">2021 · 1,900 km · 8.0 W16</p>
-        <p class="motor__price">₹32,00,00,000</p>
-      </li>
-      <li class="motor">
-        <p class="motor__marque">McLaren<span class="motor__origin">Woking, England</span></p>
-        <h3 class="motor__name">750S Coupé</h3>
-        <p class="motor__spec">2024 · 2,100 km · 4.0 V8</p>
-        <p class="motor__price">₹5,91,00,000</p>
-      </li>
-      <li class="motor">
-        <p class="motor__marque">Aston Martin<span class="motor__origin">Gaydon, England</span></p>
-        <h3 class="motor__name">DB12 Coupé</h3>
-        <p class="motor__spec">2024 · 4,600 km · 4.0 V8</p>
-        <p class="motor__price">₹4,59,00,000</p>
-      </li>
-      <li class="motor">
-        <p class="motor__marque">Lamborghini<span class="motor__origin">Sant'Agata, Italy</span></p>
-        <h3 class="motor__name">Huracán Tecnica</h3>
-        <p class="motor__spec">2023 · 3,750 km · 5.2 V10</p>
-        <p class="motor__price">₹4,04,00,000</p>
-      </li>
-      <li class="motor">
-        <p class="motor__marque">Bentley<span class="motor__origin">Crewe, England</span></p>
-        <h3 class="motor__name">Continental GT Speed</h3>
-        <p class="motor__spec">2023 · 9,200 km · 6.0 W12</p>
-        <p class="motor__price">₹3,95,00,000</p>
-      </li>
-      <li class="motor">
-        <p class="motor__marque">Mercedes-AMG<span class="motor__origin">Affalterbach, Germany</span></p>
-        <h3 class="motor__name">G 63</h3>
-        <p class="motor__spec">2023 · 14,100 km · 4.0 V8</p>
-        <p class="motor__price">₹3,60,00,000</p>
-      </li>
-      <li class="motor">
-        <p class="motor__marque">Porsche<span class="motor__origin">Stuttgart, Germany</span></p>
-        <h3 class="motor__name">911 Turbo S</h3>
-        <p class="motor__spec">2022 · 11,600 km · 3.7 Flat-6</p>
-        <p class="motor__price">₹3,45,00,000</p>
-      </li>
-      </ul>
+      <div class="floor">
+        <nav class="floor__rail" aria-label="Filter by marque">
+          <p class="floor__railhead">Marque</p>
+          <ul class="brands" id="brands" role="radiogroup" aria-label="Marque"></ul>
+        </nav>
+
+        <div class="floor__grid">
+          <p class="floor__tally" id="carsTally" role="status" aria-live="polite"></p>
+          <ul class="motors" id="motors"></ul>
+        </div>
+      </div>
     </div>
   </section>
 
