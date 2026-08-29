@@ -4,6 +4,8 @@
    page runs them on their own.
    ============================================================ */
 
+import { MARQUES } from './data.js';
+
 export const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 export function initForm(){
@@ -24,16 +26,46 @@ export function initForm(){
   });
 }
 
-/* in-page anchors only: a link to another page is left alone */
+/* In-page anchors only. A router hash such as "#cars:marque=ferrari" is
+   not a valid selector, so match a plain id rather than handing anything
+   that starts with a hash to querySelector. */
+const PLAIN_ID = /^#[A-Za-z][\w-]*$/;
+
 export function initAnchors(lenis){
   document.querySelectorAll('a[href^="#"]:not([data-route])').forEach(a => {
+    const href = a.getAttribute('href');
+    if(!PLAIN_ID.test(href)) return;
     a.addEventListener('click', (ev) => {
-      const el = document.querySelector(a.getAttribute('href'));
+      const el = document.querySelector(href);
       if(!el) return;
       ev.preventDefault();
       if(lenis) lenis.scrollTo(el, { offset: 0 });
       else el.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth' });
     });
+  });
+}
+
+/* the footer lists the floor by marque, straight from the catalogue, so
+   it cannot drift out of step with what we actually hold */
+export function initFootMarques(root = document){
+  const list = root.querySelector('#footMarques, .foot__marques');
+  if(!list) return;
+  list.innerHTML = MARQUES.map(m =>
+    `<li><a href="${pageHref('cars.html', 'marque=' + m.id)}">${m.name}<span>${m.n}</span></a></li>`
+  ).join('');
+}
+
+/* the ask bar hands the question to the people who answer it */
+export function initAsk(root = document){
+  const form = root.querySelector('#ask, .ask');
+  if(!form) return;
+  form.addEventListener('submit', (ev) => {
+    ev.preventDefault();
+    const q = form.querySelector('.ask__input').value.trim();
+    window.location.href = q
+      ? `mailto:viewings@carstory.com?subject=${encodeURIComponent('Enquiry')}&body=${encodeURIComponent(q)}`
+      : 'mailto:viewings@carstory.com?subject=Enquiry';
+    form.reset();
   });
 }
 

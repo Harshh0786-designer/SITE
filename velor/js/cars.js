@@ -66,5 +66,13 @@ export function initCars(){
     if(b) show(b.dataset.brand);
   });
 
-  show('all');
+  /* arriving with a marque in the hash — from the footer, say — opens the
+     floor already filtered. Bundled, that hash reads "cars:marque=ferrari". */
+  function fromHash(){
+    const asked = (location.hash.match(/marque=([\w-]+)/) || [])[1];
+    show(asked && buttons.some(b => b.dataset.brand === asked) ? asked : 'all');
+  }
+
+  fromHash();
+  window.addEventListener('hashchange', fromHash);
 }

@@ -6,7 +6,7 @@
 
 import { FLOOR } from './data.js';
 import { profile } from './profile.js';
-import { initAnchors, initFooter, pageHref } from './ui.js';
+import { initAnchors, initFooter, pageHref, initFootMarques, initAsk } from './ui.js';
 import { initSearch } from './search.js';
 
 const root = document.querySelector('[data-view="car"]') || document;
@@ -131,5 +131,7 @@ if(mount){
 }
 
 initFooter(root);
+initFootMarques(root);
+initAsk(root);
 initAnchors(null);
 initSearch(root);

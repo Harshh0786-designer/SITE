@@ -146,11 +146,29 @@
   <footer class="foot" id="foot">
     <div class="foot__top">
       <a class="foot__mark" href="index.html">Car Story</a>
+
       <nav class="foot__nav" aria-label="Footer">
-        <a href="cars.html">Cars</a>
-        <a href="index.html#craft">Craftsmanship</a>
-        <a href="index.html#contact">Enquiries</a>
-        <a href="contact.html">About Us</a>
+        <div class="foot__col">
+          <a class="foot__colhead" href="cars.html">Cars</a>
+          <ul class="foot__marques" id="footMarques"></ul>
+        </div>
+
+        <div class="foot__col">
+          <a class="foot__colhead" href="index.html#craft">Craftsmanship</a>
+        </div>
+
+        <div class="foot__col">
+          <a class="foot__colhead" href="contact.html">About Us</a>
+        </div>
+
+        <div class="foot__col foot__col--ask">
+          <a class="foot__colhead" href="index.html#contact">Enquiries</a>
+          <form class="ask" id="ask">
+            <input class="ask__input" name="ask" type="text" autocomplete="off"
+                   placeholder="Ask anything" aria-label="Ask anything" />
+            <button class="ask__btn" type="submit">Enquire</button>
+          </form>
+        </div>
       </nav>
     </div>
 

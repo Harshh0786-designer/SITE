@@ -457,3 +457,11 @@ FLOOR.forEach(c => {
   c.id = slug(c.name);
   c.spec = `${c.year} · ${c.km} km · ${shortEngine(c.engine)}`;
 });
+
+/* the marques on the floor, in the order they first appear, with a count */
+export const MARQUES = FLOOR.reduce((list, c) => {
+  const id = slug(c.marque);
+  const found = list.find(m => m.id === id);
+  if(found) found.n++; else list.push({ name: c.marque, id, n: 1 });
+  return list;
+}, []);

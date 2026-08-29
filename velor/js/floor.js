@@ -5,7 +5,7 @@
    ============================================================ */
 
 import { initCars } from './cars.js';
-import { initAnchors, initFooter } from './ui.js';
+import { initAnchors, initFooter, initFootMarques, initAsk } from './ui.js';
 import { initSearch } from './search.js';
 
 /* served on its own this is the whole document; bundled into the
@@ -15,5 +15,7 @@ const root = document.querySelector('[data-view="cars"]') || document;
 
 initCars();
 initFooter(root);
+initFootMarques(root);
+initAsk(root);
 initAnchors(null);
 initSearch(root);
