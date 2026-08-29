@@ -480,3 +480,217 @@ export const MARQUES = FLOOR.reduce((list, c) => {
 }, []);
 
 export const carsOf = (id) => FLOOR.filter(c => slug(c.marque) === id);
+
+/* ============================================================
+   CRAFT — what the cars are actually made of.
+   One page per material, written from the inspection bay rather
+   than the brochure: what it is, how it is built, what we look
+   for, and what goes wrong with it in this climate.
+   ============================================================ */
+
+export const CRAFT = [
+{
+  id:'leather-seats', name:'Leather seats & stitching',
+  lede:'A seat is the part of the car you are in contact with for every minute you own it, and the first place a false history shows up.',
+  blocks:[
+    ['What it is', [
+      'The hides used at this level are full-grain or semi-aniline: the top layer of the skin, with the grain left intact rather than sanded off and embossed. Full-grain is stronger and ages by developing a patina; corrected grain, which most volume cars use, wears by losing its printed surface and never recovers.',
+      'A single Phantom interior takes the hides of several bulls, chosen from herds kept away from barbed wire so the skins carry no scar lines. That is not marketing — it is why the panels can be cut large and unbroken.'
+    ]],
+    ['How it is made', [
+      'Hides are drum-dyed rather than surface-sprayed, so colour runs through the leather instead of sitting on it. Panels are then cut to a nesting pattern that keeps the grain direction consistent across a seat, foam is laid up over the frame, and the cover is drawn down and stitched.',
+      'Stitching is where cost hides. A single row is quick; a double row with a contrast thread has to be laid parallel within a millimetre over a curve, and cross-stitching or quilting multiplies that. Thread is usually a bonded nylon or polyester — strong, but it abrades where a leg swings across it a thousand times.'
+    ]],
+    ['What goes wrong', [
+      'The driver bolster collapses first, because it takes the whole weight of a person getting in. Foam breaks down under the hide before the hide itself fails, so a seat can look sound and feel wrong.',
+      'In humidity, untreated hide takes up moisture and then dries hard. In direct sun it bleaches unevenly and the top coat crazes. And denim transfers dye into pale leather permanently within about a year of daily use.'
+    ]],
+    ['Living with it', [
+      'A damp microfibre and a pH-neutral cleaner, twice a year, is the whole regime. Anything that leaves a shine is a silicone dressing, and silicone seals the hide so it cannot breathe — the surface then cracks from underneath.'
+    ]]
+  ],
+  checks:[
+    'Bolster foam pressed by hand along its length, not just looked at',
+    'Stitch rows traced for pulled or abraded thread, especially the outer seam of the driver seat',
+    'Hide flexed to see whether it returns or stays creased',
+    'Colour transfer checked on pale interiors with a white cloth',
+    'Seat frame and rails cycled through their full travel for play'
+  ],
+  terms:[
+    ['Full-grain','The outermost layer with the grain intact. Ages, rather than wears out.'],
+    ['Semi-aniline','Dyed through, with a light protective coat. The compromise most marques use.'],
+    ['Drum-dyed','Colour taken up through the whole thickness, not sprayed on the surface.'],
+    ['Bonded thread','Nylon or polyester thread coated to resist abrasion at the seams.']
+  ]
+},
+{
+  id:'steering-wheel', name:'Steering wheel',
+  lede:'The most honest odometer on any car. A wheel cannot be wound back, and the way its rim has worn tells you what the numbers on the dash may not.',
+  blocks:[
+    ['What it is', [
+      'Under the leather is a cast magnesium or aluminium armature — light, stiff, and carrying the airbag, the clock spring, the horn contacts and, increasingly, the capacitive sensors that tell the car your hands are on it.',
+      'Over that goes a moulded foam of varying density: firmer at the nine and three positions where you hold it, softer at the rim top. The wrap is then hide, Alcantara, or on the sportier cars a mix of both.'
+    ]],
+    ['How it is made', [
+      'The cover is cut in three or four pieces and hand-stitched onto the rim in place, which is why the seam sits where it does — usually at six o’clock, out of the hands. The twelve o’clock marker on a performance car is either a stitched band or a moulded strip, and on a well-made wheel it is exactly centred.',
+      'Buttons and paddles are separate assemblies. Paddles at this level are machined aluminium or magnesium, fixed to the column rather than the wheel so they stay put as you steer.'
+    ]],
+    ['What goes wrong', [
+      'Alcantara shines. The nap flattens where hands rest and takes on a hard grey polish that cannot be brushed out — it is the clearest mileage tell on a car whose seats have been reconditioned.',
+      'Button lacquer wears through to the plastic beneath on the two or three controls anyone actually uses. Paddles develop lateral play at the pivot. And a wheel that has been re-wrapped is usually obvious from a seam in the wrong place or stitching that does not match the rest of the interior.'
+    ]],
+    ['Living with it', [
+      'Alcantara wants a soft brush and a damp cloth, worked in one direction. Solvent wipes dissolve the backing adhesive and the nap lifts away in patches.'
+    ]]
+  ],
+  checks:[
+    'Rim examined at nine and three under raking light for shine and nap flattening',
+    'Stitch seam located — a re-wrap rarely puts it back where the factory did',
+    'Every button pressed and its lacquer checked for wear-through',
+    'Paddles moved laterally at the pivot for play',
+    'Airbag cover seam checked for even gaps, which a deployment repair rarely restores'
+  ],
+  terms:[
+    ['Armature','The cast metal skeleton the wheel is built on.'],
+    ['Alcantara','A suede-like microfibre. Grippier than leather, and far quicker to show wear.'],
+    ['Clock spring','The coiled ribbon that keeps electrical contact while the wheel turns.'],
+    ['Twelve marker','The band or stripe at top dead centre on a performance wheel.']
+  ]
+},
+{
+  id:'dashboard', name:'Dashboard materials',
+  lede:'The largest single surface in the cabin, and the one this climate attacks hardest. Everything about a dashboard is a response to heat.',
+  blocks:[
+    ['What it is', [
+      'A dashboard is three things stacked: a rigid substrate, usually a glass-filled polypropylene, that carries the structure and the airbag chute; a foam layer for feel and for the way it collapses in an impact; and a skin.',
+      'The skin is where the cars separate. Volume cars use a slush-moulded PVC or TPO skin — a powder cast against a heated tool, which is why the grain looks identical on every car. At this level the top roll is usually hand-wrapped hide, cut and stitched over the foam like an upholstered panel.'
+    ]],
+    ['How it is made', [
+      'A wrapped dash is built up on the substrate by hand: the hide is warmed, drawn over compound curves, and held while the adhesive grabs. Where two panels meet, a stitched seam runs the length of the car — and on the best of them that seam is a single unbroken line from door to door.',
+      'The instrument binnacle and the top roll get the most attention because they sit in the driver’s eyeline and take the most sun. Anti-glare grain is embossed into the upper surface for exactly that reason.'
+    ]],
+    ['What goes wrong', [
+      'Heat is the whole story. Above about 60°C on the surface — which a dark dash reaches in a Mumbai car park — adhesive plasticises and the skin lifts, first at the A-pillar corners where the panel is under the most tension.',
+      'Older soft-touch coatings go tacky as the plasticiser migrates out, and once a dash is sticky it cannot be cleaned back. Stitched hide shrinks slightly as it dries, which shows as a wave in a seam that used to be straight.'
+    ]],
+    ['Living with it', [
+      'Shade matters more than any product. A sunshade in a parked car does more for a dashboard than a decade of dressings, and silicone shine products accelerate exactly the failure they are meant to hide.'
+    ]]
+  ],
+  checks:[
+    'A-pillar corners pressed for lift or bubbling under the skin',
+    'Top roll seam sighted along its length for waves that indicate shrinkage',
+    'Surface tested for tack with a clean fingertip in a hidden area',
+    'Panel run over a broken road surface, listening for squeak at the windscreen joint',
+    'Colour compared between the sun-exposed top and the shaded lower panel'
+  ],
+  terms:[
+    ['Substrate','The rigid moulding underneath that carries the structure.'],
+    ['Slush moulding','A skin cast by tumbling powder against a heated tool.'],
+    ['Top roll','The upper section of the dash, in the driver’s eyeline and the sun.'],
+    ['Plasticiser migration','The softener leaving a coating over time, leaving it tacky.']
+  ]
+},
+{
+  id:'metal-details', name:'Metal & aluminium details',
+  lede:'The switches, vent surrounds and treadplates you touch every day. Solid metal is heavier, colder and more expensive than the plated plastic that imitates it — and it is the difference you feel before you notice.',
+  blocks:[
+    ['What it is', [
+      'The hardware at this level is machined from solid billet: vent controls, pull switches, gear selectors, speaker grilles, pedal faces. Aluminium mostly, sometimes stainless for treadplates, occasionally magnesium where weight matters.',
+      'Bentley knurls its rotaries in a diamond pattern; Rolls-Royce uses organ-stop pulls for the vents; McLaren mills the switchgear thin to save grams. The point of solid metal is thermal mass — it feels cold in the hand and stays cold, which plated ABS never does.'
+    ]],
+    ['How it is made', [
+      'A control is turned or milled from bar stock, then finished one of three ways. Brushed gives a directional grain, applied with an abrasive belt so the lines run consistently across a set of parts. Bead-blasting gives an even matt. Polishing takes it to a mirror.',
+      'Then it is usually anodised: an electrochemical process that grows a hard oxide layer into the surface rather than depositing a coating on top of it. That is why anodising cannot chip — but it can be worn through.'
+    ]],
+    ['What goes wrong', [
+      'Anodising wears at touch points. On a heavily used car the ignition surround and the volume knob go bright where the finish has been rubbed away, and it cannot be touched in — the part is replaced or refinished whole.',
+      'Coastal humidity is the other enemy. Mumbai air pits unprotected aluminium and lifts the lacquer on darkened chrome, which then corrodes underneath in a way that looks like a bloom under the surface. Once that starts it does not stop.'
+    ]],
+    ['Living with it', [
+      'A damp cloth, nothing abrasive. Metal polish on an anodised part removes the finish it was meant to protect — the shine you get is the aluminium underneath, and it will not last.'
+    ]]
+  ],
+  checks:[
+    'Touch points — ignition, volume, selector — checked for wear-through of the anodising',
+    'Brightwork examined under raking light for lacquer lift and blooming beneath',
+    'Knurled surfaces run under a fingernail for flattened peaks',
+    'Treadplates checked for scoring and for fastener alignment after removal',
+    'Magnet run over metal-look trim to sort the solid from the plated'
+  ],
+  terms:[
+    ['Billet','Solid bar stock, machined rather than cast or moulded.'],
+    ['Anodising','A hard oxide layer grown into aluminium. Wears through; cannot chip.'],
+    ['Knurling','A cut pattern that gives grip. Diamond knurling is Bentley’s signature.'],
+    ['Bead-blasting','An even matt finish produced by blasting with fine media.']
+  ]
+},
+{
+  id:'trim', name:'Piano-black & wood trim',
+  lede:'Two very different materials asked to do the same job. One is a slice of a tree; the other is a sheet of plastic pretending to be a lacquered piano lid. Both scratch.',
+  blocks:[
+    ['What it is', [
+      'Wood veneer is a thin leaf cut from a single log, book-matched so the grain mirrors across the centreline of the car. A set of veneers for one interior comes from one tree, which is why a damaged panel is so hard to replace convincingly years later.',
+      'Piano black is not wood at all. It is a moulded polymer with a high-gloss lacquer over it, sometimes over a carbon or plastic substrate. It is cheap to form into complex shapes, which is why it spread across every cabin in the last decade.'
+    ]],
+    ['How it is made', [
+      'A veneer is laid onto a substrate, then built up with successive coats of polyurethane lacquer — often more than ten, cured and flatted between coats. The stack is then sanded through progressively finer grades and polished. The depth you see is real: you are looking through a millimetre of clear lacquer at the grain below.',
+      'Open-pore finishes skip most of that. The wood is sealed but not filled, so the grain stays textured under the hand. It is more expensive to get right, and it does not scratch the way gloss does.'
+    ]],
+    ['What goes wrong', [
+      'Piano black scratches if you look at it. Every dry dusting drags whatever grit is on the cloth across the lacquer, and the result is a haze of fine swirls that only shows in direct light — which is exactly the light a showroom avoids.',
+      'Veneer clouds when moisture penetrates a lacquer crack, usually starting at a fixing hole or a panel edge. Sustained UV fades the colour unevenly, so a car parked with one side to the sun ends up with mismatched trim across the cabin.'
+    ]],
+    ['Living with it', [
+      'Never dry dust piano black. A damp microfibre, one direction, then a dry one behind it. Wood wants the same, and both want to be kept out of the sun.'
+    ]]
+  ],
+  checks:[
+    'Gloss panels sighted under a raking light for swirl marks, which flat light hides',
+    'Veneer edges checked for lifting and for clouding under the lacquer',
+    'Colour compared between the sunward and shaded sides of the cabin',
+    'Fixing points examined for radiating cracks in the lacquer',
+    'Grain match checked across the centreline — a replaced panel rarely matches'
+  ],
+  terms:[
+    ['Book-matched','Adjacent veneer leaves opened like a book so the grain mirrors.'],
+    ['Open-pore','Sealed but unfilled, so the grain stays textured. Harder to do, harder to mark.'],
+    ['Flatting','Sanding a lacquer coat level before the next one goes on.'],
+    ['Swirl marks','Fine circular scratches from dry wiping. The default state of used piano black.']
+  ]
+},
+{
+  id:'paint-body', name:'Exterior paint & body lines',
+  lede:'Paint is four layers and about 120 microns — roughly the thickness of a sheet of paper. Which is why a gauge tells you more about a car’s history in ten minutes than the seller will in an hour.',
+  blocks:[
+    ['What it is', [
+      'From the steel outwards: an electrocoat for corrosion, a primer to fill and to give the topcoat something to key into, the basecoat that carries the colour and any metallic or pearl flake, and a clearcoat that provides the gloss and the UV protection. Together, about 100 to 140 microns on a factory panel.',
+      'Tri-coat colours — the deep whites and reds — add a translucent mid-coat, which is why they cost more to repair: the painter has to rebuild three layers in register, not two.'
+    ]],
+    ['How it is made', [
+      'A modern body is dipped, primed, and sprayed by robot in a controlled booth, then baked. The consistency of the orange peel — the fine texture in the clearcoat — is a signature of that process, and it is very hard to match by hand.',
+      'Body lines are pressed into the panel, not added. A swage line running the length of a Continental has to hold its reflection unbroken from headlamp to tail, and the only way to judge one is to stand at the corner of the car and sight down it.'
+    ]],
+    ['What goes wrong', [
+      'A repainted panel reads thicker on the gauge, usually 160 microns and up. It often has a different orange peel, and there is frequently overspray in the door shut or on a rubber seal where the masking stopped.',
+      'Otherwise: stone chips on leading edges, kerb rash on the alloys and lower sills, and lacquer peel where UV has broken the clearcoat down — which starts on horizontal surfaces, so the roof and the boot lid before anything else.'
+    ]],
+    ['Living with it', [
+      'Two buckets, a pH-neutral shampoo and a straight-line wash. Automatic brush washes are what put the swirl marks into most dark cars, and paint protection film is worth it on the leading edges long before it is worth it anywhere else.'
+    ]]
+  ],
+  checks:[
+    'Paint depth gauged at seventeen points and compared panel to panel',
+    'Door, bonnet and boot shuts inspected for overspray and masking lines',
+    'Body sighted along from each corner for reflection breaks in the swage lines',
+    'Panel gaps measured, not eyeballed, and compared side to side',
+    'Colour matched under daylight and under sodium light, which separates a good respray from a great one'
+  ],
+  terms:[
+    ['Micron','A thousandth of a millimetre. Factory paint runs 100–140 of them.'],
+    ['Orange peel','The fine texture in cured clearcoat. Its consistency is a factory signature.'],
+    ['Tri-coat','A colour with a translucent mid-layer. Expensive to repair convincingly.'],
+    ['Swage line','A pressed crease that carries a reflection down the length of a panel.']
+  ]
+}
+];

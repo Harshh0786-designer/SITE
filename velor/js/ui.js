@@ -4,7 +4,7 @@
    page runs them on their own.
    ============================================================ */
 
-import { MARQUES } from './data.js';
+import { MARQUES, CRAFT } from './data.js';
 
 export const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -48,7 +48,7 @@ export function initAnchors(lenis){
 /* the footer lists the floor by marque, straight from the catalogue, so
    it cannot drift out of step with what we actually hold */
 export function initFootMarques(root = document){
-  const list = root.querySelector('#footMarques, .foot__marques');
+  const list = root.querySelector('[id^="footMarques"]');
   if(!list) return;
   /* names only here — the count belongs on the floor, not in the footer */
   list.innerHTML = MARQUES.map(m =>
@@ -56,9 +56,18 @@ export function initFootMarques(root = document){
   ).join('');
 }
 
+/* and the same for what the cars are made of */
+export function initFootCraft(root = document){
+  const list = root.querySelector('[id^="footCraft"]');
+  if(!list) return;
+  list.innerHTML = CRAFT.map(t =>
+    `<li><a href="${pageHref('craft.html', t.id)}">${t.name}</a></li>`
+  ).join('');
+}
+
 /* the ask bar hands the question to the people who answer it */
 export function initAsk(root = document){
-  const form = root.querySelector('#ask, .ask');
+  const form = root.querySelector('.ask');
   if(!form) return;
   form.addEventListener('submit', (ev) => {
     ev.preventDefault();
@@ -89,7 +98,7 @@ export function initFooter(root = document){
 const ROUTED = !!document.querySelector('[data-view]');
 const VIEW_OF = { 'index.html': 'home', 'cars.html': 'cars',
                   'contact.html': 'contact', 'car.html': 'car',
-                  'brand.html': 'brand' };
+                  'brand.html': 'brand', 'craft.html': 'craft' };
 
 export function pageHref(page, frag){
   if(!ROUTED) return frag ? `${page}#${frag}` : page;

@@ -303,6 +303,8 @@ body.is-searching{ overflow:hidden; }
 .panel--floor{ padding-top:clamp(132px,20vh,220px); }
 .panel--floor .sheet__head .display{ font-size:clamp(2.3rem,5.6vw,4.4rem); }
 
+.terms{ margin-top:clamp(56px,8vh,100px); }
+
 /* ---------- moving between marques ---------- */
 .brandnav{ margin-top:clamp(56px,8vh,100px); padding-top:clamp(28px,4vh,40px); border-top:1px solid var(--hair); }
 .brandnav__head{
@@ -870,14 +872,15 @@ a.brand:hover .brand__mark,a.brand:focus-visible .brand__mark{ border-color:var(
 .foot.is-dark{ --foot-veil:1; color:#F4F3EF; --foot-ink:#F4F3EF; --foot-ground:#08090B; }
 .foot > *{ position:relative; z-index:1; }
 
-/* the name sits top-left; the ways through the site stand as columns
-   beside it, with the floor's marques listed under Cars */
+/* the name sits top-left with the ways of reaching us stacked directly
+   beneath it; the ways through the site stand as columns alongside */
 .foot__top{
-  display:grid; grid-template-columns:minmax(200px,1fr) minmax(0,2.6fr);
-  align-items:start; gap:clamp(32px,5vw,72px);
+  display:grid; grid-template-columns:minmax(210px,1fr) minmax(0,2.5fr);
+  align-items:start; gap:clamp(36px,5vw,80px);
 }
+.foot__id{ display:flex; flex-direction:column; }
 .foot__mark{
-  justify-self:start;
+  align-self:start;
   margin:0; display:inline-block;
   font-family:var(--font-head);
   font-size:clamp(1.7rem,4vw,3rem);
@@ -892,9 +895,23 @@ a.brand:hover .brand__mark,a.brand:focus-visible .brand__mark{ border-color:var(
 }
 .foot.is-dark .foot__mark::after{ background:#F4F3EF; opacity:1; }
 
+/* one to a line, not strung across */
+.foot__reach{
+  margin:clamp(22px,3vh,32px) 0 0; padding:0; list-style:none;
+  display:flex; flex-direction:column; gap:10px;
+  font-size:12px; letter-spacing:.14em;
+}
+.foot__reach a{ opacity:.82; transition:opacity .35s var(--ease); }
+.foot__reach a:hover,.foot__reach a:focus-visible{ opacity:1; }
+
+.foot__address{
+  margin:clamp(22px,3vh,30px) 0 0; font-style:normal;
+  font-size:11px; letter-spacing:.12em; line-height:1.9; opacity:.5;
+}
+
 .foot__nav{
   display:grid;
-  grid-template-columns:repeat(3,auto) minmax(240px,320px);
+  grid-template-columns:repeat(3,auto) minmax(220px,300px);
   gap:clamp(24px,3vw,48px);
   justify-content:end;
 }
@@ -906,15 +923,15 @@ a.brand:hover .brand__mark,a.brand:focus-visible .brand__mark{ border-color:var(
 }
 .foot__colhead:hover,.foot__colhead:focus-visible{ opacity:1; }
 
-.foot__marques{ margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:9px; }
-.foot__marques a{
+.foot__sub{ margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:9px; }
+.foot__sub a{
   display:flex; align-items:baseline; gap:10px;
   font-size:12px; letter-spacing:.06em;
   color:inherit; opacity:.55; text-decoration:none;
   transition:opacity .35s var(--ease);
 }
-.foot__marques a span{ font-size:10px; opacity:.6; font-variant-numeric:tabular-nums; }
-.foot__marques a:hover,.foot__marques a:focus-visible{ opacity:1; }
+.foot__sub a span{ font-size:10px; opacity:.6; font-variant-numeric:tabular-nums; }
+.foot__sub a:hover,.foot__sub a:focus-visible{ opacity:1; }
 
 /* the ask bar: transparent against whichever ground the footer is on,
    with the button taking the footer's ink as its fill */
@@ -947,23 +964,12 @@ a.brand:hover .brand__mark,a.brand:focus-visible .brand__mark{ border-color:var(
 }
 .ask__btn:hover,.ask__btn:focus-visible{ opacity:.82; }
 
-.foot__body{
-  display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between;
-  gap:clamp(20px,3vw,40px);
-  padding:clamp(40px,7vh,72px) 0 clamp(32px,5vh,52px);
-  border-bottom:1px solid var(--hair);
-  transition:border-color .8s var(--ease);
-}
-.foot.is-dark .foot__body{ border-bottom-color:rgba(244,243,239,.16); }
-.foot__line{ margin:0; font-size:12px; letter-spacing:.18em; opacity:.72; }
-.foot__address{
-  margin:0; font-style:normal; text-align:right;
-  font-size:11px; letter-spacing:.12em; line-height:1.9; opacity:.5;
-}
-
 .foot__base{
   display:flex; flex-wrap:wrap; justify-content:space-between; gap:12px 24px;
+  margin-top:clamp(48px,7vh,84px);
   padding-top:clamp(20px,3vh,32px);
+  border-top:1px solid var(--hair);
+  transition:border-color .8s var(--ease);
   font-size:10px; letter-spacing:.26em; text-transform:uppercase;
   opacity:.5;
 }
@@ -1019,8 +1025,6 @@ a.brand:hover .brand__mark,a.brand:focus-visible .brand__mark{ border-color:var(
     gap:clamp(24px,4vh,34px) clamp(20px,5vw,32px);
   }
   .foot__col--ask{ grid-column:1 / -1; }
-  .foot__body{ flex-direction:column; align-items:flex-start; }
-  .foot__address{ text-align:left; }
   .foot__base{ font-size:9px; letter-spacing:.18em; }
   .brief,.visit{ grid-template-columns:1fr; }
   .record__head{ grid-template-columns:1fr; }

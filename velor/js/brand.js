@@ -6,7 +6,7 @@
 
 import { MARQUES, carsOf } from './data.js';
 import { profile } from './profile.js';
-import { initAnchors, initFooter, initFootMarques, initAsk, pageHref } from './ui.js';
+import { initAnchors, initFooter, initFootMarques, initFootCraft, initAsk, pageHref } from './ui.js';
 import { initSearch } from './search.js';
 
 const root = document.querySelector('[data-view="brand"]') || document;
@@ -73,6 +73,7 @@ if(mount){
 
 initFooter(root);
 initFootMarques(root);
+initFootCraft(root);
 initAsk(root);
 initAnchors(null);
 initSearch(root);

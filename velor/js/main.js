@@ -5,7 +5,7 @@
    is the same object, somewhere else in its transformation.
    ============================================================ */
 
-import { initForm, initAnchors, initFooter, initFootMarques, initAsk } from './ui.js';
+import { initForm, initAnchors, initFooter, initFootMarques, initFootCraft, initAsk } from './ui.js';
 import { initSearch } from './search.js';
 
 const body   = document.body;
@@ -19,6 +19,7 @@ const narrow  = window.matchMedia('(max-width: 880px)').matches;
 initForm();
 initFooter();
 initFootMarques();
+initFootCraft();
 initAsk();
 initSearch(document.querySelector('[data-view="home"]') || document);
 

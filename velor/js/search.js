@@ -4,7 +4,7 @@
    type, and hands you to the best match on Enter.
    ============================================================ */
 
-import { FLOOR, MARQUES } from './data.js';
+import { FLOOR, MARQUES, CRAFT } from './data.js';
 import { pageHref } from './ui.js';
 
 /* "huracan" has to find Huracán, so both sides lose their accents */
@@ -37,6 +37,13 @@ const INDEX = [
     hay: fold(`${m.name} ${m.home} marque brand`),
     page: 'brand.html',
     frag: m.id
+  })),
+  ...CRAFT.map(t => ({
+    title: t.name,
+    note: 'Craftsmanship',
+    hay: fold(`${t.name} ${t.lede} craftsmanship material`),
+    page: 'craft.html',
+    frag: t.id
   })),
   ...PLACES.map(([title, note, page, frag]) => ({
     title, note, hay: fold(`${title} ${note}`), page, frag
