@@ -54,7 +54,8 @@ export function initFooter(root = document){
    single-file preview they are views behind a hash router. Links written
    at runtime have to work either way. */
 const ROUTED = !!document.querySelector('[data-view]');
-const VIEW_OF = { 'index.html': 'home', 'cars.html': 'cars', 'contact.html': 'contact' };
+const VIEW_OF = { 'index.html': 'home', 'cars.html': 'cars',
+                  'contact.html': 'contact', 'car.html': 'car' };
 
 export function pageHref(page, frag){
   if(!ROUTED) return frag ? `${page}#${frag}` : page;

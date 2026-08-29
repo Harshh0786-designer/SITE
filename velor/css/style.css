@@ -303,6 +303,113 @@ body.is-searching{ overflow:hidden; }
 .panel--floor{ padding-top:clamp(132px,20vh,220px); }
 .panel--floor .sheet__head .display{ font-size:clamp(2.3rem,5.6vw,4.4rem); }
 
+/* ---------- one car, in full ----------
+   A record, not a brochure: the numbers are set to be compared, and the
+   grades carry the weight the prose would otherwise have to. */
+.panel--car{ padding-top:clamp(120px,18vh,190px); }
+
+.crumb{
+  display:flex; gap:10px; margin-bottom:clamp(28px,4vh,48px);
+  font-size:10px; letter-spacing:.26em; text-transform:uppercase; color:var(--ink-faint);
+}
+.crumb a{ color:inherit; text-decoration:none; transition:color .35s var(--ease); }
+.crumb a:hover{ color:var(--ink); }
+
+.record__head{
+  display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);
+  gap:clamp(28px,4vw,64px); align-items:center;
+}
+.record__title .display{ font-size:clamp(2.2rem,5.2vw,4.2rem); text-wrap:balance; }
+.record__price{
+  margin:clamp(20px,2.6vw,30px) 0 0;
+  font-size:clamp(1.15rem,1.9vw,1.5rem); letter-spacing:.02em;
+  font-variant-numeric:tabular-nums;
+}
+.record__paint{
+  margin:12px 0 0; display:flex; align-items:center; gap:9px;
+  font-size:11px; letter-spacing:.14em; color:var(--ink-faint);
+}
+.record__art svg{ display:block; width:100%; height:auto; overflow:visible; }
+
+/* the four numbers people ask for before anything else */
+.record__band{
+  display:grid; grid-template-columns:repeat(4,1fr);
+  gap:clamp(16px,2vw,32px);
+  margin-top:clamp(44px,6vh,72px);
+  padding:clamp(24px,3vh,34px) 0;
+  border-top:1px solid var(--hair); border-bottom:1px solid var(--hair);
+}
+.stat{ display:flex; flex-direction:column; gap:8px; }
+.stat__k{ font-size:10px; letter-spacing:.26em; text-transform:uppercase; color:var(--ink-faint); }
+.stat__v{
+  font-family:var(--font-head); font-size:clamp(1.05rem,1.6vw,1.35rem);
+  letter-spacing:-.01em; font-variant-numeric:tabular-nums;
+}
+
+.record__note{
+  max-width:62ch; margin:clamp(40px,5.5vh,64px) 0 0;
+  font-size:clamp(1rem,1.25vw,1.12rem); line-height:1.75; color:var(--ink-dim);
+}
+
+.record__block,.record__cta,.record__more{ margin-top:clamp(56px,8vh,104px); }
+.record__h{
+  margin:0 0 clamp(14px,1.8vw,22px);
+  font-family:var(--font-head); font-weight:400;
+  font-size:clamp(1.3rem,2.2vw,1.9rem); letter-spacing:-.01em;
+}
+.record__lede{
+  max-width:58ch; margin:0 0 clamp(28px,3.6vh,42px);
+  font-size:clamp(.9rem,1.08vw,1rem); line-height:1.7; color:var(--ink-dim);
+}
+
+/* health: area, grade, and the sentence that earns the grade */
+.vitals{ margin:0; padding:0; list-style:none; border-top:1px solid var(--hair); }
+.vital{
+  display:grid; grid-template-columns:minmax(120px,180px) 56px 1fr;
+  gap:clamp(14px,2vw,28px); align-items:baseline;
+  padding:clamp(16px,2vh,22px) 0; border-bottom:1px solid var(--hair);
+}
+.vital__area{ font-size:11px; letter-spacing:.2em; text-transform:uppercase; }
+.vital__grade{
+  font-family:var(--font-head); font-size:1.15rem; letter-spacing:.02em;
+  cursor:help;
+}
+.vital__grade[data-grade^="B"]{ color:var(--accent); }
+.vital__note{ font-size:clamp(.88rem,1.05vw,.97rem); line-height:1.6; color:var(--ink-dim); }
+
+.dl{ margin:0; border-top:1px solid var(--hair); }
+.dl__row{
+  display:grid; grid-template-columns:minmax(120px,200px) 1fr;
+  gap:clamp(14px,2vw,28px);
+  padding:clamp(14px,1.8vh,20px) 0; border-bottom:1px solid var(--hair);
+}
+.dl dt{ font-size:11px; letter-spacing:.2em; text-transform:uppercase; color:var(--ink-faint); }
+.dl dd{ margin:0; font-size:clamp(.9rem,1.08vw,1rem); line-height:1.6; }
+.dl--split{ column-count:2; column-gap:clamp(32px,5vw,72px); }
+.dl--split .dl__row{ break-inside:avoid; }
+
+.record__actions{ margin:0; font-size:12px; letter-spacing:.18em; color:var(--ink-dim); }
+
+.record__morehead{
+  margin:0 0 clamp(16px,2vw,22px);
+  font-size:10px; letter-spacing:.3em; text-transform:uppercase; color:var(--ink-faint);
+}
+.siblings{ margin:0; padding:0; list-style:none; border-top:1px solid var(--hair); }
+.siblings a{
+  display:grid; grid-template-columns:1fr auto auto;
+  gap:clamp(14px,2.4vw,36px); align-items:baseline;
+  padding:clamp(16px,2vh,22px) 0; border-bottom:1px solid var(--hair);
+  text-decoration:none; color:inherit;
+  transition:padding-left .35s var(--ease);
+}
+.siblings a:hover,.siblings a:focus-visible{ padding-left:10px; }
+.siblings__name{ font-family:var(--font-head); font-size:clamp(1rem,1.4vw,1.2rem); }
+.siblings__spec{ font-size:11px; letter-spacing:.12em; color:var(--ink-faint); }
+.siblings__price{ font-size:.95rem; letter-spacing:.03em; font-variant-numeric:tabular-nums; color:var(--ink-dim); }
+
+/* the whole card is the way into a car */
+.motor__link{ display:flex; flex-direction:column; color:inherit; text-decoration:none; }
+
 /* ---------- the contact brief ----------
    Prose on the left at a readable measure, the points worth catching
    pulled out beside it. */
@@ -575,8 +682,11 @@ body.is-searching{ overflow:hidden; }
 }
 .wordmark span{ display:inline-block; will-change:transform,opacity; }
 .wordmark__gap{ width:.36em; }
+/* the line reads as part of the name here, so it sits tight beneath it
+   and the descriptor tucks in closer still */
+.hero__center .lede{ margin-top:clamp(12px,1.6vw,20px); }
 .hero__sub{
-  margin:clamp(6px,1vw,14px) 0 0;
+  margin:clamp(4px,.6vw,9px) 0 0;
   font-size:clamp(.6rem,1.05vw,.82rem);
   letter-spacing:.72em; text-indent:.72em; text-transform:uppercase;
   color:var(--ink-faint);
@@ -843,6 +953,15 @@ body.is-searching{ overflow:hidden; }
   .foot__address{ text-align:left; }
   .foot__base{ font-size:9px; letter-spacing:.18em; }
   .brief,.visit{ grid-template-columns:1fr; }
+  .record__head{ grid-template-columns:1fr; }
+  .record__art{ order:-1; }
+  .record__band{ grid-template-columns:repeat(2,1fr); row-gap:clamp(20px,3vh,28px); }
+  .vital{ grid-template-columns:1fr auto; row-gap:8px; }
+  .vital__note{ grid-column:1 / -1; }
+  .dl__row{ grid-template-columns:1fr; row-gap:6px; }
+  .dl--split{ column-count:1; }
+  .siblings a{ grid-template-columns:1fr auto; row-gap:6px; }
+  .siblings__spec{ grid-column:1 / -1; order:3; }
   .brief__aside{ position:static; }
   .search-btn span{ display:none; }
 }

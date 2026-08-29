@@ -158,8 +158,8 @@ async function boot(){
     .fromTo('#wordmark span', { yPercent: 60 }, {
       yPercent: 0, opacity: 1, duration: 0.9, stagger: 0.05, ease: 'power3.out'
     }, copyAt)
-    .to('#heroSub', { opacity: 1, duration: 0.8, ease: 'power2.out' }, copyAt + 0.28)
-    .fromTo('#heroLede', { y: 14 }, { y: 0, opacity: 1, duration: 0.85, ease: 'power2.out' }, copyAt + 0.42)
+    .fromTo('#heroLede', { y: 14 }, { y: 0, opacity: 1, duration: 0.85, ease: 'power2.out' }, copyAt + 0.28)
+    .to('#heroSub', { opacity: 1, duration: 0.8, ease: 'power2.out' }, copyAt + 0.46)
     .fromTo('#scrollCue', { scaleY: 0.2 }, { scaleY: 1, opacity: 1, duration: 0.7, ease: 'power2.out' }, copyAt + 0.66)
     .add(() => { state.rollCouple = 1; }, at);
 
