@@ -50,8 +50,9 @@ export function initAnchors(lenis){
 export function initFootMarques(root = document){
   const list = root.querySelector('#footMarques, .foot__marques');
   if(!list) return;
+  /* names only here — the count belongs on the floor, not in the footer */
   list.innerHTML = MARQUES.map(m =>
-    `<li><a href="${pageHref('cars.html', 'marque=' + m.id)}">${m.name}<span>${m.n}</span></a></li>`
+    `<li><a href="${pageHref('brand.html', m.id)}">${m.name}</a></li>`
   ).join('');
 }
 
@@ -87,7 +88,8 @@ export function initFooter(root = document){
    at runtime have to work either way. */
 const ROUTED = !!document.querySelector('[data-view]');
 const VIEW_OF = { 'index.html': 'home', 'cars.html': 'cars',
-                  'contact.html': 'contact', 'car.html': 'car' };
+                  'contact.html': 'contact', 'car.html': 'car',
+                  'brand.html': 'brand' };
 
 export function pageHref(page, frag){
   if(!ROUTED) return frag ? `${page}#${frag}` : page;

@@ -23,8 +23,7 @@ function row(label, value){
   return value ? `<div class="dl__row"><dt>${label}</dt><dd>${value}</dd></div>` : '';
 }
 
-function render(){
-  const id = location.hash.replace(/^#/, '').split(':').pop();
+function render(id){
   const car = FLOOR.find(c => c.id === id) || FLOOR[0];
   const i = FLOOR.indexOf(car);
 
@@ -121,12 +120,23 @@ function render(){
   });
 }
 
+/* Which record the hash is asking for — or null when it is addressing a
+   different page. Served alone the hash is just the id; bundled into the
+   single-file preview it is prefixed with this view's name. */
+function askedFor(){
+  const hash = location.hash.replace(/^#/, '');
+  if(root === document) return hash;
+  if(hash === 'car') return '';
+  return hash.startsWith('car:') ? hash.slice(4) : null;
+}
+
 if(mount){
-  render();
-  /* served alone the hash is just the car; bundled it is "car:<id>", and
-     either way a change means a different car */
+  render(askedFor() || '');
+  /* Do not gate this on the view being visible: the router unhides it in
+     its own hashchange listener, which may run after this one. */
   window.addEventListener('hashchange', () => {
-    if(root === document || !root.hidden) render();
+    const id = askedFor();
+    if(id !== null) render(id);
   });
 }
 

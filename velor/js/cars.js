@@ -25,54 +25,29 @@ export function initCars(){
       </a>
     </li>`).join('');
 
-  /* ---- brand rail: every marque on the floor, in stock order ---- */
-  const brands = [];
+  /* ---- marque rail: every marque leads to its own page ---- */
+  const marques = [];
   FLOOR.forEach(c => {
     const id = c.marque.toLowerCase().replace(/[^a-z0-9]+/g, '-');
-    const found = brands.find(b => b.id === id);
-    if(found) found.n++; else brands.push({ name: c.marque, id, n: 1 });
+    const found = marques.find(m => m.id === id);
+    if(found) found.n++; else marques.push({ name: c.marque, id, n: 1 });
   });
 
-  rail.innerHTML = [{ name: 'All marques', id: 'all', n: FLOOR.length }, ...brands]
-    .map(b => `
+  rail.innerHTML = `
+    <li>
+      <span class="brand brand--here" aria-current="page">
+        <span class="brand__mark" aria-hidden="true"></span>
+        <span class="brand__name">All marques</span>
+        <span class="brand__n">${FLOOR.length}</span>
+      </span>
+    </li>` + marques.map(m => `
       <li>
-        <button class="brand" role="radio" aria-checked="${b.id === 'all'}" data-brand="${b.id}">
+        <a class="brand" href="${pageHref('brand.html', m.id)}">
           <span class="brand__mark" aria-hidden="true"></span>
-          <span class="brand__name">${b.name}</span>
-          <span class="brand__n">${b.n}</span>
-        </button>
+          <span class="brand__name">${m.name}</span>
+          <span class="brand__n">${m.n}</span>
+        </a>
       </li>`).join('');
 
-  const cards   = [...grid.children];
-  const buttons = [...rail.querySelectorAll('.brand')];
-
-  function show(id){
-    let shown = 0;
-    cards.forEach(c => {
-      const on = id === 'all' || c.dataset.brand === id;
-      c.hidden = !on;
-      if(on) shown++;
-    });
-    buttons.forEach(b => b.setAttribute('aria-checked', String(b.dataset.brand === id)));
-    if(tally) tally.textContent = shown === FLOOR.length
-      ? `${shown} cars` : `${shown} of ${FLOOR.length} cars`;
-
-    /* the page just changed height — anything measuring it has to re-measure */
-    if(window.ScrollTrigger) window.ScrollTrigger.refresh();
-  }
-
-  rail.addEventListener('click', (ev) => {
-    const b = ev.target.closest('.brand');
-    if(b) show(b.dataset.brand);
-  });
-
-  /* arriving with a marque in the hash — from the footer, say — opens the
-     floor already filtered. Bundled, that hash reads "cars:marque=ferrari". */
-  function fromHash(){
-    const asked = (location.hash.match(/marque=([\w-]+)/) || [])[1];
-    show(asked && buttons.some(b => b.dataset.brand === asked) ? asked : 'all');
-  }
-
-  fromHash();
-  window.addEventListener('hashchange', fromHash);
+  if(tally) tally.textContent = `${FLOOR.length} cars`;
 }

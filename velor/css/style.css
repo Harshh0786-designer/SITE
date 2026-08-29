@@ -303,6 +303,25 @@ body.is-searching{ overflow:hidden; }
 .panel--floor{ padding-top:clamp(132px,20vh,220px); }
 .panel--floor .sheet__head .display{ font-size:clamp(2.3rem,5.6vw,4.4rem); }
 
+/* ---------- moving between marques ---------- */
+.brandnav{ margin-top:clamp(56px,8vh,100px); padding-top:clamp(28px,4vh,40px); border-top:1px solid var(--hair); }
+.brandnav__head{
+  margin:0 0 clamp(16px,2vw,22px);
+  font-size:10px; letter-spacing:.3em; text-transform:uppercase; color:var(--ink-faint);
+}
+.brandnav__list{
+  margin:0; padding:0; list-style:none;
+  display:flex; flex-wrap:wrap; gap:clamp(14px,2vw,28px);
+}
+.brandnav__list a{
+  font-size:12px; letter-spacing:.1em;
+  color:var(--ink-dim); text-decoration:none;
+  padding-bottom:4px; border-bottom:1px solid transparent;
+  transition:color .35s var(--ease), border-color .35s var(--ease);
+}
+.brandnav__list a:hover,.brandnav__list a:focus-visible{ color:var(--ink); border-bottom-color:var(--hair); }
+.brandnav__all{ color:var(--ink) !important; }
+
 /* ---------- one car, in full ----------
    A record, not a brochure: the numbers are set to be compared, and the
    grades carry the weight the prose would otherwise have to. */
@@ -504,12 +523,12 @@ body.is-searching{ overflow:hidden; }
   width:100%;
   display:grid; grid-template-columns:auto 1fr auto;
   align-items:center; gap:12px;
-  appearance:none; background:none; border:0; cursor:pointer;
   padding:9px 0; text-align:left;
-  color:var(--ink-dim); font:inherit;
+  color:var(--ink-dim); font:inherit; text-decoration:none;
   font-size:11.5px; letter-spacing:.08em;
   transition:color .35s var(--ease);
 }
+a.brand{ cursor:pointer; }
 /* the check itself: an outline that fills in when its marque is the one on show */
 .brand__mark{
   width:11px; height:11px; border-radius:50%;
@@ -526,11 +545,12 @@ body.is-searching{ overflow:hidden; }
   font-size:10px; letter-spacing:.1em; color:var(--ink-faint);
   font-variant-numeric:tabular-nums;
 }
-.brand:hover{ color:var(--ink); }
-.brand:hover .brand__mark{ border-color:var(--ink-dim); }
-.brand[aria-checked="true"]{ color:var(--ink); }
-.brand[aria-checked="true"] .brand__mark{ border-color:var(--accent); }
-.brand[aria-checked="true"] .brand__mark::after{ transform:scale(1); }
+a.brand:hover,a.brand:focus-visible{ color:var(--ink); }
+a.brand:hover .brand__mark,a.brand:focus-visible .brand__mark{ border-color:var(--ink-dim); }
+/* the marque you are already looking at */
+.brand--here{ color:var(--ink); }
+.brand--here .brand__mark{ border-color:var(--accent); }
+.brand--here .brand__mark::after{ transform:scale(1); }
 
 .floor__tally{
   margin:0 0 clamp(20px,2.4vw,30px);

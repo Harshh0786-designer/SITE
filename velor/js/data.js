@@ -458,10 +458,25 @@ FLOOR.forEach(c => {
   c.spec = `${c.year} · ${c.km} km · ${shortEngine(c.engine)}`;
 });
 
-/* the marques on the floor, in the order they first appear, with a count */
+/* the marques on the floor, in the order they first appear, each with the
+   count, where it is built, and how we read it */
+const BLURB = {
+  'rolls-royce': 'Goodwood builds cars to be sat in as much as driven, and the three we hold reflect that — two saloons and the Cullinan, every one of them on the 6.75-litre V12, every interior intact.',
+  'ferrari': 'Maranello\u2019s current range spans a naturally aspirated V12, a turbocharged grand tourer and a hybrid. We hold one of each, which is about as complete a picture of the modern range as three cars can give.',
+  'lamborghini': 'Sant\u2019Agata\u2019s cars are the loudest thing on any floor and the hardest to inspect honestly, because track use hides well. Ours are graded on what the tyres and the ceramics actually show.',
+  'porsche': 'Stuttgart makes the easiest cars here to live with and the hardest to fault. Ours run from a manual Cayman through a Turbo S to an electric saloon, which is most of what Porsche now is.',
+  'bentley': 'Crewe\u2019s W12 is nearly finished, and one of our three carries the last of it. All three have the long, warm mileage that these engines prefer to short city runs.',
+  'aston-martin': 'Gaydon\u2019s current cars are the best they have built, and all three of ours are 2023 or later. Mechanically straightforward, and specified the way people actually ask for rather than the way they sat on a forecourt.',
+  'mclaren': 'Woking builds around a carbon tub and hydraulic suspension, which is what we test first and hardest. All three of ours hold pressure overnight, which is the number that matters on these.',
+  'mercedes-amg': 'Affalterbach\u2019s range runs from a box on axles to a four-door coup\u00e9 to a roadster. We have one of each, and not one of them has been asked to do something it was not built for.'
+};
+
 export const MARQUES = FLOOR.reduce((list, c) => {
   const id = slug(c.marque);
   const found = list.find(m => m.id === id);
-  if(found) found.n++; else list.push({ name: c.marque, id, n: 1 });
+  if(found) found.n++;
+  else list.push({ name: c.marque, id, n: 1, home: c.origin, blurb: BLURB[id] || '' });
   return list;
 }, []);
+
+export const carsOf = (id) => FLOOR.filter(c => slug(c.marque) === id);
