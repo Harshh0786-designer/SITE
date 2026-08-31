@@ -98,7 +98,8 @@ export function initFooter(root = document){
 const ROUTED = !!document.querySelector('[data-view]');
 const VIEW_OF = { 'index.html': 'home', 'cars.html': 'cars',
                   'contact.html': 'contact', 'car.html': 'car',
-                  'brand.html': 'brand', 'craft.html': 'craft' };
+                  'brand.html': 'brand', 'craft.html': 'craft',
+                  'about.html': 'about' };
 
 export function pageHref(page, frag){
   if(!ROUTED) return frag ? `${page}#${frag}` : page;

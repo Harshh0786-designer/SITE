@@ -19,7 +19,9 @@ const PLACES = [
   ['Sell a Car',      'We buy outright and we broker',      'index.html',  'sell'],
   ['Enquiries',       'Reserve your drive',                 'index.html',  'contact'],
   ['Cars',            'Every car on the floor',             'cars.html',   ''],
-  ['Contact Us',      'Who we are and how to reach us',     'contact.html',''],
+  ['About Us',        'Why we hold fewer cars, and who does the work', 'about.html', ''],
+  ['Story',           'How Car Story started, and what it believes',    'about.html', ''],
+  ['Contact Us',      'How to reach us, and where to find us',          'contact.html',''],
   ['Reaching us',     'Four ways in, and where to find us', 'contact.html','reach']
 ];
 
