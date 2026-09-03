@@ -134,17 +134,29 @@ body.no-webgl .stage canvas{ display:none; }
 /* ---------- chrome nav ---------- */
 .chrome{
   position:fixed; z-index:50; top:0; left:0; right:0;
-  display:flex; align-items:center; justify-content:flex-end; gap:clamp(16px,3vw,40px);
+  display:flex; align-items:center; justify-content:space-between; gap:clamp(16px,3vw,40px);
   padding:clamp(18px,2.4vw,30px) var(--gut);
-  mix-blend-mode:difference;
   transition:opacity .55s var(--ease), transform .55s var(--ease);
+}
+/* The bar used to carry mix-blend-mode:difference so its white type would
+   invert over the studio. That cannot stay once a logo sits in it — the mark
+   would invert too — and the studio is pale enough for real ink anyway. */
+
+/* the extracted mark, on the home page and nowhere else for now */
+.chrome__logo{
+  display:block; margin-right:auto;
+  line-height:0;
+}
+.chrome__logo img{
+  display:block; height:auto;
+  width:clamp(124px,13vw,176px);
 }
 .chrome__nav{ display:flex; gap:clamp(18px,2.4vw,34px); }
 .chrome__nav a{
   font-size:11px; letter-spacing:.24em; text-transform:uppercase;
-  color:rgba(255,255,255,.62); text-decoration:none; transition:color .4s var(--ease);
+  color:var(--ink-dim); text-decoration:none; transition:color .4s var(--ease);
 }
-.chrome__nav a:hover{ color:#fff; }
+.chrome__nav a:hover{ color:var(--ink); }
 
 /* ---------- panels ---------- */
 main{ position:relative; z-index:10; }
@@ -211,17 +223,14 @@ main{ position:relative; z-index:10; }
   appearance:none; background:none; border:0; cursor:pointer;
   padding:6px 0; color:inherit; font:inherit;
   font-size:11px; letter-spacing:.24em; text-transform:uppercase;
-  color:rgba(255,255,255,.62);
+  color:var(--ink-dim);
   transition:color .4s var(--ease);
 }
-.search-btn:hover,.search-btn:focus-visible{ color:#fff; }
+.search-btn:hover,.search-btn:focus-visible{ color:var(--ink); }
 .search-btn svg{
   width:15px; height:15px; flex:none;
   fill:none; stroke:currentColor; stroke-width:1.5; stroke-linecap:round;
 }
-/* on paper-backed pages the bar is not blended, so it takes real ink */
-.chrome--solid .search-btn{ color:var(--ink-dim); }
-.chrome--solid .search-btn:hover,.chrome--solid .search-btn:focus-visible{ color:var(--ink); }
 
 .search{ position:fixed; inset:0; z-index:120; display:grid; place-items:start center; }
 .search__scrim{
