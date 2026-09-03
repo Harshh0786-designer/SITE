@@ -144,9 +144,12 @@ body.no-webgl .stage canvas{ display:none; }
 
 /* the extracted mark, on the home page and nowhere else for now */
 .chrome__logo{
+  /* one width drives the mark and the line under it, so the two keep the
+     same edges at every viewport rather than only at one */
+  --mark: clamp(124px,13vw,176px);
   display:block; margin-right:auto;
   line-height:0; text-decoration:none;
-  width:clamp(124px,13vw,176px);
+  width:var(--mark);
 }
 .chrome__logo img{ display:block; width:100%; height:auto; }
 /* set quieter than the liner above it, so the mark still leads */
@@ -155,8 +158,11 @@ body.no-webgl .stage canvas{ display:none; }
 .chrome__strap{
   display:block; margin-top:7px;
   font-family:var(--font-body);
-  font-size:clamp(6px,.53vw,7.4px); font-weight:400;
-  letter-spacing:.16em; text-transform:uppercase;
+  font-size:calc(var(--mark) * .0425); font-weight:400;
+  /* tracked out to span the mark exactly; the negative margin takes back the
+     trailing space letter-spacing adds after the final letter */
+  letter-spacing:.208em; margin-right:-.208em;
+  text-transform:uppercase;
   line-height:1.4; color:var(--ink-faint);
   white-space:nowrap;
 }
