@@ -145,11 +145,20 @@ body.no-webgl .stage canvas{ display:none; }
 /* the extracted mark, on the home page and nowhere else for now */
 .chrome__logo{
   display:block; margin-right:auto;
-  line-height:0;
-}
-.chrome__logo img{
-  display:block; height:auto;
+  line-height:0; text-decoration:none;
   width:clamp(124px,13vw,176px);
+}
+.chrome__logo img{ display:block; width:100%; height:auto; }
+/* set quieter than the liner above it, so the mark still leads */
+/* set quieter than the liner above it, and sized to sit within the mark's
+   own width rather than overhang it */
+.chrome__strap{
+  display:block; margin-top:7px;
+  font-family:var(--font-body);
+  font-size:clamp(6px,.53vw,7.4px); font-weight:400;
+  letter-spacing:.16em; text-transform:uppercase;
+  line-height:1.4; color:var(--ink-faint);
+  white-space:nowrap;
 }
 .chrome__nav{ display:flex; gap:clamp(18px,2.4vw,34px); }
 .chrome__nav a{
