@@ -35,6 +35,8 @@ export function initAnchors(lenis){
   document.querySelectorAll('a[href^="#"]:not([data-route])').forEach(a => {
     const href = a.getAttribute('href');
     if(!PLAIN_ID.test(href)) return;
+    if(a.dataset.anchored) return;   /* the fallback path may call this twice */
+    a.dataset.anchored = '1';
     a.addEventListener('click', (ev) => {
       const el = document.querySelector(href);
       if(!el) return;

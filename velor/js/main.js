@@ -33,13 +33,36 @@ function webglAvailable(){
   }catch(e){ return false; }
 }
 
-if(reduced || !webglAvailable()){
+/* The intro hides the hero copy and then plays it back in. Anything that
+   stops it in between — a lost WebGL context, a shader that will not compile,
+   a module that fails to load — would leave the menu sitting at zero opacity:
+   invisible, and with nothing to click. Falling back has to be able to happen
+   at any point, not just before the stage is asked to start. */
+function holdStillFrame(why){
+  if(body.dataset.stillFrame) return;
+  body.dataset.stillFrame = '1';
+  if(why) console.warn('Car Story: holding the still frame —', why);
   body.classList.add(reduced ? 'reduced' : 'no-webgl');
   body.classList.remove('is-loading');
-  document.getElementById('stageFallback').style.opacity = 1;
+  const fallback = document.getElementById('stageFallback');
+  if(fallback) fallback.style.opacity = 1;
+  document.querySelectorAll('#menu a, #wordmark span, #heroSub, #heroLede, #scrollCue')
+    .forEach(el => { el.style.opacity = ''; el.style.transform = ''; });
   initAnchors(null);
+}
+
+if(reduced || !webglAvailable()){
+  holdStillFrame(reduced ? 'reduced motion' : 'no WebGL');
 }else{
-  boot();
+  boot().catch(err => holdStillFrame(err));
+
+  /* and a backstop for a stage that fails without throwing */
+  setTimeout(() => {
+    const item = document.querySelector('#menu a');
+    if(item && parseFloat(getComputedStyle(item).opacity) < 0.05){
+      holdStillFrame('the intro did not play');
+    }
+  }, 8000);
 }
 
 /* ============================================================ */
