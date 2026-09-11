@@ -193,7 +193,7 @@ a{ color:inherit; }
 }
 .scene img{
   position:absolute; inset:-3%;
-  width:106%; height:106%;
+  width:106%; height:106%; max-width:none;
   object-fit:cover;
   user-select:none;
 }
