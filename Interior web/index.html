@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Meridian House</title>
+<meta name="description" content="A scroll-flown tour of Meridian House — a 8,400 sq ft villa in the Hudson meadowlands, by Altus Interior Studio.">
+<meta name="theme-color" content="#07080A">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2307080A'/%3E%3Cpath d='M5 19 16 8l11 11v6H5z' fill='none' stroke='%23C9702F' stroke-width='1.6'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500;6..96,600&family=IBM+Plex+Mono:wght@400;500&family=Jost:wght@300;400;500&display=swap">
+<link rel="preload" as="image" href="assets/villa-aerial.jpg">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ───────────────────────── PRELOADER ───────────────────────── -->
+<div class="boot" id="boot" role="status" aria-live="polite">
+  <div class="boot__inner">
+    <p class="mono boot__studio">Altus Interior Studio</p>
+    <h1 class="boot__title">Meridian<br>House</h1>
+    <div class="boot__bar"><span id="bootFill"></span></div>
+    <p class="mono boot__pct"><span id="bootPct">0</span>%&nbsp;&nbsp;·&nbsp;&nbsp;<span id="bootMsg">Loading elevation data</span></p>
+  </div>
+</div>
+
+<!-- ───────────────────────── NAV ───────────────────────── -->
+<header class="nav" id="nav">
+  <a class="nav__mark" href="#top"><span class="nav__glyph" aria-hidden="true"></span> Altus</a>
+  <nav class="nav__links" aria-label="Primary">
+    <a href="#overture">The House</a>
+    <a href="#tour">House Tour</a>
+    <a href="#services">Services</a>
+    <a href="#process">Process</a>
+    <a href="#contact">Enquire</a>
+  </nav>
+  <a href="#contact" class="btn btn--ghost nav__cta">Start a project</a>
+</header>
+
+<!-- ───────────────────────── THE FLIGHT ───────────────────────── -->
+<section class="journey" id="journey" aria-label="Cinematic arrival at Meridian House">
+  <div class="stage" id="stage">
+
+    <canvas class="sky" id="sky" aria-hidden="true"></canvas>
+
+    <figure class="scene" id="sc-aerial">
+      <img src="assets/villa-aerial.jpg" alt="Aerial view of Meridian House at sunset, its pool terrace set into open meadowland." decoding="async">
+    </figure>
+    <figure class="scene" id="sc-entry">
+      <img src="assets/villa-entry.jpg" alt="The entry hall of Meridian House: white oak millwork, a quarried limestone wall, and a glazed corridor opening to the meadow." decoding="async">
+    </figure>
+    <figure class="scene" id="sc-great">
+      <img src="assets/villa-great-room.jpg" alt="The great room of Meridian House: stone hearth, Douglas fir beams, and a retractable glass wall onto the sunset terrace." decoding="async">
+    </figure>
+    <figure class="scene scene--mirror" id="sc-exit">
+      <img src="assets/villa-aerial.jpg" alt="Meridian House seen from the rear terrace as the camera pulls away over the meadow." decoding="async">
+    </figure>
+
+    <div class="bloom" id="bloom" aria-hidden="true"></div>
+    <div class="grade" id="grade" aria-hidden="true"></div>
+    <div class="scrim" id="scrim" aria-hidden="true"></div>
+    <div class="grain" aria-hidden="true"></div>
+
+    <!-- flight instruments -->
+    <div class="hud" aria-hidden="true">
+      <div class="hud__tl">
+        <span class="mono hud__alt"><i id="altVal">4,280</i> <i id="altUnit">ft</i></span>
+        <span class="mono hud__sub" id="altLabel">Descending</span>
+      </div>
+      <div class="hud__tr mono">41.7°N&nbsp; 73.9°W&nbsp;·&nbsp;18:42</div>
+      <ol class="rail" id="rail">
+        <li data-p="0.02"><span></span>Descent</li>
+        <li data-p="0.155"><span></span>Arrival</li>
+        <li data-p="0.335"><span></span>Approach</li>
+        <li data-p="0.465"><span></span>Entry hall</li>
+        <li data-p="0.625"><span></span>Great room</li>
+        <li data-p="0.875"><span></span>Terrace</li>
+      </ol>
+      <p class="mono caption" id="caption">Hudson Meadowlands · 62 acres</p>
+    </div>
+
+    <!-- title lockup -->
+    <div class="lockup" id="lockup">
+      <p class="mono lockup__eyebrow">Altus Interior Studio presents</p>
+      <h2 class="lockup__title">Meridian House</h2>
+      <p class="lockup__line">Eight thousand four hundred square feet of cedar, limestone and low sun, set down on a meadow that keeps no straight lines.</p>
+    </div>
+
+    <div class="cue" id="cue">
+      <span class="mono">Scroll to descend</span>
+      <span class="cue__track"><i></i></span>
+    </div>
+
+    <button class="skip" id="skip" type="button">Skip the flight</button>
+  </div>
+</section>
+
+<!-- ───────────────────────── CONTENT ───────────────────────── -->
+<main id="top">
+
+  <!-- OVERTURE -->
+  <section class="sec sec--overture" id="overture">
+    <div class="wrap">
+      <div class="sec__head">
+        <p class="mono eyebrow">01 — The house</p>
+        <div>
+          <h2 class="h-display">We design the inside of a building as if the outside were watching.</h2>
+          <div class="lede">
+            <p>Meridian House was drawn around one fact: at 18:40 in late summer, the sun drops into a gap in the tree line due west of the site. Every decision after that — the twenty-four foot glass span, the hearth set off-axis, the corridor that runs the long way round — was made to protect that twelve-minute window.</p>
+            <p>Altus works in that register. Interior architecture, joinery, light and the objects that live between them, handled as one continuous piece of work rather than a sequence of trades.</p>
+          </div>
+        </div>
+      </div>
+
+      <dl class="specs">
+        <div><dt class="mono">Interior area</dt><dd>8,400 <span>sq ft</span></dd></div>
+        <div><dt class="mono">Glazing</dt><dd>3,200 <span>sq ft</span></dd></div>
+        <div><dt class="mono">Great room span</dt><dd>24 <span>ft</span></dd></div>
+        <div><dt class="mono">Bedrooms</dt><dd>5 <span>· 6.5 bath</span></dd></div>
+        <div><dt class="mono">Site</dt><dd>62 <span>acres</span></dd></div>
+        <div><dt class="mono">Elevation</dt><dd>1,140 <span>ft</span></dd></div>
+        <div><dt class="mono">Pool</dt><dd>52 <span>ft infinity edge</span></dd></div>
+        <div><dt class="mono">Completed</dt><dd>2025 <span>· spring</span></dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- HOUSE TOUR -->
+  <section class="sec sec--tour" id="tour">
+    <div class="wrap">
+      <div class="sec__head">
+        <p class="mono eyebrow">02 — House tour</p>
+        <div>
+          <h2 class="h-display">Walk it yourself.</h2>
+          <p class="lede lede--tight">Drag inside the frame to look around a room. The numbered marks open the specification behind what you are looking at — material, dimension, and who made it.</p>
+        </div>
+      </div>
+
+      <div class="tour">
+        <div class="tour__tabs" role="tablist" aria-label="Rooms">
+          <button role="tab" id="tab-entry" aria-controls="room-entry" aria-selected="true" class="tour__tab is-on" data-room="entry"><span class="mono">A</span> Entry hall</button>
+          <button role="tab" id="tab-great" aria-controls="room-great" aria-selected="false" class="tour__tab" data-room="great"><span class="mono">B</span> Great room</button>
+          <button role="tab" id="tab-aerial" aria-controls="room-aerial" aria-selected="false" class="tour__tab" data-room="aerial"><span class="mono">C</span> Pool terrace</button>
+        </div>
+
+        <div class="tour__frame" id="tourFrame">
+          <div class="tour__pan" id="tourPan">
+            <img id="tourImg" src="assets/villa-entry.jpg" alt="Entry hall of Meridian House" draggable="false">
+            <div class="hotspots" id="hotspots"></div>
+          </div>
+          <p class="mono tour__hint" id="tourHint">Drag to look around</p>
+          <div class="tour__plate" id="tourPlate" hidden>
+            <button class="tour__close" id="plateClose" type="button" aria-label="Close detail">×</button>
+            <p class="mono tour__plate-i" id="plateIndex">01</p>
+            <h3 id="plateTitle">—</h3>
+            <p id="plateBody">—</p>
+            <p class="mono tour__plate-meta" id="plateMeta">—</p>
+          </div>
+        </div>
+
+        <div class="tour__legend">
+          <p class="mono" id="roomLabel">Entry hall · north approach</p>
+          <p class="mono" id="roomMeta">4 marks · white oak, limestone, blackened steel</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="sec sec--services" id="services">
+    <div class="wrap">
+      <div class="sec__head">
+        <p class="mono eyebrow">03 — Services</p>
+        <div>
+          <h2 class="h-display">What we actually do.</h2>
+          <p class="lede lede--tight">Eight disciplines, one drawing set. We take a project from the first site walk to the day the art goes on the wall.</p>
+        </div>
+      </div>
+
+      <ul class="svc">
+        <li><h3>Interior architecture</h3><p>Plan, section and circulation. We move walls, floor levels and openings before we ever choose a fabric.</p><span class="mono">Drawings · 1:50 / 1:20</span></li>
+        <li><h3>Custom millwork</h3><p>Every case piece drawn to the millimetre and cut by a shop we have used for eleven years. The entry hall wardrobe wall is one of ours.</p><span class="mono">Shop drawings · prototypes</span></li>
+        <li><h3>Lighting design</h3><p>Layered circuits, warm-dim sources, and linear coves that disappear into the beam line. Nothing over 2700K after dark.</p><span class="mono">DALI · scene programming</span></li>
+        <li><h3>Material &amp; finish palettes</h3><p>Physical boards, not renders. Stone is selected at the slab yard; timber is chosen by board before it is cut.</p><span class="mono">Sample boards · site mock-ups</span></li>
+        <li><h3>Furniture &amp; fittings</h3><p>Full FF&amp;E: specification, procurement, custom commissions, and the logistics of getting a twelve-foot sectional up a meadow track.</p><span class="mono">Schedules · procurement</span></li>
+        <li><h3>Terrace &amp; threshold</h3><p>Where the inside stops. Paving falls, fire tables, planting immediately against the glass, and the pool coping detail.</p><span class="mono">With landscape architect</span></li>
+        <li><h3>Art &amp; object curation</h3><p>We buy for the room, not the résumé. Commissioned ceramics, found driftwood, and one sculpture that had to arrive by crane.</p><span class="mono">Commission · placement</span></li>
+        <li><h3>Project delivery</h3><p>Site attendance, trade coordination, snagging and handover. One director stays on the job from first sketch to final walkthrough.</p><span class="mono">Weekly site · handover file</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="sec sec--process" id="process">
+    <div class="wrap">
+      <div class="sec__head">
+        <p class="mono eyebrow">04 — Process</p>
+        <div>
+          <h2 class="h-display">Six stages, in this order.</h2>
+          <p class="lede lede--tight">The sequence matters. Nothing is specified before the site has told us what it wants, and nothing is ordered before it has been drawn.</p>
+        </div>
+      </div>
+
+      <ol class="steps">
+        <li><span class="mono steps__n">01</span><h3>Site reading</h3><p>A full day on the ground at three different hours. Sun path, wind, the noise of the road, where the land actually drains.</p><span class="mono steps__t">1 week</span></li>
+        <li><span class="mono steps__n">02</span><h3>Concept &amp; massing</h3><p>Plans, sections and a physical model. We argue about circulation now so we are not arguing about it on site.</p><span class="mono steps__t">4–6 weeks</span></li>
+        <li><span class="mono steps__n">03</span><h3>Material board</h3><p>Stone, timber, metal and textile in your hands, in the real light of the real room. Signed off before anything is detailed.</p><span class="mono steps__t">3 weeks</span></li>
+        <li><span class="mono steps__n">04</span><h3>Documentation</h3><p>The full set: joinery, lighting, finishes schedule, FF&amp;E. This is where a project is either saved or lost.</p><span class="mono steps__t">8–12 weeks</span></li>
+        <li><span class="mono steps__n">05</span><h3>Making</h3><p>Shop visits, site attendance, mock-ups on the wall. We answer the trades in hours, not weeks.</p><span class="mono steps__t">Build duration</span></li>
+        <li><span class="mono steps__n">06</span><h3>Handover</h3><p>Styling, art placement, lighting scenes programmed, and a maintenance file that tells you how to look after the stone in ten years.</p><span class="mono steps__t">2 weeks</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- MATERIALS -->
+  <section class="sec sec--mat" id="materials">
+    <div class="wrap">
+      <div class="sec__head">
+        <p class="mono eyebrow">05 — Palette</p>
+        <div>
+          <h2 class="h-display">The six things this house is made of.</h2>
+          <p class="lede lede--tight">Specified for Meridian House and carried through every room, from the entry threshold to the pool coping.</p>
+        </div>
+      </div>
+
+      <ul class="mats">
+        <li style="--sw:#B9AE9B"><h3>Honed limestone</h3><p class="mono">Split-face cladding · 90 × 300 mm</p></li>
+        <li style="--sw:#9A5A28"><h3>Western red cedar</h3><p class="mono">Rain screen · vertical shiplap</p></li>
+        <li style="--sw:#23282E"><h3>Blackened steel</h3><p class="mono">Glazing frames · 60 mm sightline</p></li>
+        <li style="--sw:#C08B4E"><h3>White oak</h3><p class="mono">Millwork · rift sawn, oiled</p></li>
+        <li style="--sw:#D8CDBB"><h3>Bouclé wool</h3><p class="mono">Seating · undyed, 780 gsm</p></li>
+        <li style="--sw:#6B4630"><h3>Walnut, live edge</h3><p class="mono">Tables · single slab, 60 mm</p></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="sec sec--contact" id="contact">
+    <div class="wrap">
+      <div class="sec__head">
+        <p class="mono eyebrow">06 — Enquire</p>
+        <div>
+          <h2 class="h-display">Tell us about the site.</h2>
+          <p class="lede lede--tight">We take on six projects a year. The more you can say about the land, the light and how you actually live, the more useful our first reply will be.</p>
+        </div>
+      </div>
+
+      <div class="contact">
+        <form class="form" id="form" novalidate>
+          <div class="field">
+            <label class="mono" for="f-name">Name</label>
+            <input id="f-name" name="name" type="text" autocomplete="name" required placeholder="Your name">
+          </div>
+          <div class="field">
+            <label class="mono" for="f-email">Email</label>
+            <input id="f-email" name="email" type="email" autocomplete="email" required placeholder="you@domain.com">
+          </div>
+          <div class="field">
+            <label class="mono" for="f-place">Where is it</label>
+            <input id="f-place" name="place" type="text" placeholder="Town, region or coordinates">
+          </div>
+          <div class="field">
+            <label class="mono" for="f-scope">Scope</label>
+            <select id="f-scope" name="scope">
+              <option>Whole house</option>
+              <option>New build, interior package</option>
+              <option>Single room</option>
+              <option>FF&amp;E only</option>
+              <option>Not sure yet</option>
+            </select>
+          </div>
+          <div class="field field--wide">
+            <label class="mono" for="f-note">The project</label>
+            <textarea id="f-note" name="note" rows="4" placeholder="Orientation, existing structure, how you want the mornings to feel."></textarea>
+          </div>
+          <div class="form__foot">
+            <button class="btn btn--solid" type="submit" id="submit">Send enquiry</button>
+            <p class="mono form__note" id="formNote">Demo form — no message leaves your browser.</p>
+          </div>
+        </form>
+
+        <aside class="card-detail">
+          <p class="mono">Studio</p>
+          <p class="card-detail__big">Altus Interior Studio<br>18 Quarry Lane, Hudson NY</p>
+          <p class="mono">Direct</p>
+          <p class="card-detail__big"><a href="mailto:studio@altus.example">studio@altus.example</a><br><a href="tel:+15185550142">+1 518 555 0142</a></p>
+          <p class="mono">Enquiries close</p>
+          <p class="card-detail__big">Six projects a year<br>Next intake · January</p>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <div class="wrap foot__in">
+      <p class="mono">© 2026 Altus Interior Studio · Meridian House, Hudson Meadowlands</p>
+      <p class="mono">Photography of Meridian House · <a href="#top">Back to the sky</a></p>
+    </div>
+  </footer>
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>
