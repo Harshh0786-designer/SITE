@@ -547,7 +547,7 @@
      ============================================================ */
   function reveals() {
     if (REDUCED || !('IntersectionObserver' in window)) return;
-    var targets = $$('.sec__head, .specs > div, .svc li, .steps li, .mats li, .tour, .contact, .foot__in');
+    var targets = $$('.sec__head, .specs > div, .svc li, .steps li, .mats li, .amen li, .systems, .tour, .contact, .foot__in');
     var vh = window.innerHeight;
     var watched = targets.filter(function (el) {
       return el.getBoundingClientRect().top > vh * .92;

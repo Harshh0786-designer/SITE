@@ -66,8 +66,12 @@ room and open the specification behind anything marked.
 
 ## Content sections
 
-Black ground, limestone text, six numbered sections: the house, the interactive
-house tour, services, process, material palette, and an enquiry form. The form is
+Black ground, limestone text, seven numbered sections: the house, the interactive
+house tour, services, process, material palette, amenities, and an enquiry form.
+
+Amenities is a four-column icon grid (inline line-drawn SVG, no icon font) over a
+ruled `House systems` strip — the two densities a property page needs: the things
+you use, then the things that run underneath. The form is
 **local only** — it validates and confirms in the browser and posts nothing. Wire
 `#form`'s submit handler in `script.js` to a real endpoint before using it.
 
