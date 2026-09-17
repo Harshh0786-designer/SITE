@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="theme-color" content="#0A0A0A" />
+<title>Car Story — Fewer cars. Absolute condition.</title>
+<meta name="description" content="Car Story. A curated few, not a lot. Inspected. Verified. Delivered." />
+
+<link rel="preload" href="vendor/fonts/marcellus-400.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="vendor/fonts/outfit-var.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="stylesheet" href="vendor/fonts.css" />
+<link rel="stylesheet" href="css/style.css" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230A0A0A'/%3E%3Ccircle cx='16' cy='16' r='11' fill='none' stroke='%23F5F4F0' stroke-width='3'/%3E%3Ccircle cx='16' cy='16' r='3.5' fill='%23F5F4F0'/%3E%3C/svg%3E" />
+</head>
+<body class="is-loading">
+
+<!-- ============ FIXED 3D STAGE ============ -->
+<div class="stage" aria-hidden="true">
+  <canvas id="scene"></canvas>
+  <div class="stage-fallback" id="stageFallback"></div>
+</div>
+
+<!-- ============ SMOKE VEIL (section transitions) ============ -->
+<div class="veil" aria-hidden="true">
+  <span class="veil__cloud veil__cloud--a"></span>
+  <span class="veil__cloud veil__cloud--b"></span>
+</div>
+
+<!-- ============ GRAIN ============ -->
+<div class="grain" aria-hidden="true"></div>
+
+<!-- ============ CHROME NAV ============ -->
+<header class="chrome">
+  <a class="chrome__logo" href="#hero" aria-label="Car Story — home">
+    <img src="img/logo-wordmark.png" alt="Car Story" width="360" height="48" />
+    <span class="chrome__strap">Fewer Cars, Absolute Condition</span>
+  </a>
+  <button class="search-btn" id="searchBtn" type="button" aria-label="Search" aria-expanded="false">
+    <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="8.6" cy="8.6" r="5.6"/><path d="M12.8 12.8 L17 17"/></svg>
+    <span>Search</span>
+  </button>
+</header>
+
+<main id="page">
+
+  <!-- 1 — HERO -->
+  <section class="panel panel--hero" id="hero">
+    <div class="hero__center">
+      <nav class="menu" id="menu" aria-label="Primary">
+        <a href="#hero">Home</a>
+        <a href="about.html">About Us</a>
+        <a href="cars.html">Cars</a>
+        <a href="#parts">Parts</a>
+        <a href="#sell">Sell a Car</a>
+        <a href="contact.html">Contact Us</a>
+      </nav>
+      <h1 class="wordmark" id="wordmark">
+        <span>C</span><span>a</span><span>r</span><span class="wordmark__gap"></span><span>S</span><span>t</span><span>o</span><span>r</span><span>y</span>
+      </h1>
+      <p class="lede" id="heroLede">Fewer cars. Absolute condition.</p>
+      <p class="hero__sub" id="heroSub">Curated Automobiles</p>
+    </div>
+    <div class="scroll-cue" id="scrollCue"><span class="scroll-cue__line"></span></div>
+  </section>
+
+  <!-- 2 — CRAFTSMANSHIP / EXPLODE -->
+  <section class="panel panel--craft" id="craft">
+    <div class="panel__type panel__type--left">
+      <p class="eyebrow">01 — Craftsmanship</p>
+      <h2 class="display">Nothing overlooked.</h2>
+    </div>
+    <ul class="annotations" id="annotations">
+      <li class="annotation" data-part="tread"><span class="annotation__dot"></span><span class="annotation__text">Tread depth logged</span></li>
+      <li class="annotation" data-part="rim"><span class="annotation__dot"></span><span class="annotation__text">Rim trued</span></li>
+      <li class="annotation" data-part="hub"><span class="annotation__dot"></span><span class="annotation__text">Every component inspected</span></li>
+    </ul>
+  </section>
+
+  <!-- 3 — SELECTION -->
+  <section class="panel panel--selection" id="selection">
+    <div class="selection__col">
+    <div class="panel__type panel__type--right">
+      <p class="eyebrow">02 — Selection</p>
+      <h2 class="display">A curated few,<br />not a lot.</h2>
+    </div>
+
+    <ol class="inventory" id="inventory">
+      <li class="car">
+        <span class="car__idx">01</span>
+        <span class="car__plate" aria-hidden="true"></span>
+        <h3 class="car__name">Carrera 4 GTS</h3>
+        <p class="car__spec">2019 · 11,400 km · Manual</p>
+        <p class="car__price">₹1,42,00,000</p>
+      </li>
+      <li class="car">
+        <span class="car__idx">02</span>
+        <span class="car__plate" aria-hidden="true"></span>
+        <h3 class="car__name">Continental GT</h3>
+        <p class="car__spec">2021 · 8,900 km · W12</p>
+        <p class="car__price">₹1,84,00,000</p>
+      </li>
+      <li class="car">
+        <span class="car__idx">03</span>
+        <span class="car__plate" aria-hidden="true"></span>
+        <h3 class="car__name">Vantage Roadster</h3>
+        <p class="car__spec">2020 · 6,200 km · V8</p>
+        <p class="car__price">₹1,26,00,000</p>
+      </li>
+      <li class="car">
+        <span class="car__idx">04</span>
+        <span class="car__plate" aria-hidden="true"></span>
+        <h3 class="car__name">Ghost Series II</h3>
+        <p class="car__spec">2018 · 19,050 km · V12</p>
+        <p class="car__price">₹2,11,00,000</p>
+      </li>
+    </ol>
+    </div>
+  </section>
+
+
+  <!-- 4 — PARTS -->
+  <section class="panel panel--plain" id="parts">
+    <div class="sheet">
+      <header class="sheet__head">
+        <p class="eyebrow">03 — Parts</p>
+        <h2 class="display">Authenticity process.</h2>
+        <p class="sheet__note">We hold what these cars actually need, and we can trace where
+           every piece came from.</p>
+      </header>
+
+      <ul class="notes">
+        <li class="note">
+          <h3 class="note__name">Factory-supplied</h3>
+          <p class="note__body">Wheels, brakes, trim and service parts ordered against your
+             chassis number, direct from the marque.</p>
+        </li>
+        <li class="note">
+          <h3 class="note__name">Traced</h3>
+          <p class="note__body">Every part arrives with its invoice and part number, and the
+             record stays with the car when it changes hands.</p>
+        </li>
+        <li class="note">
+          <h3 class="note__name">Fitted here</h3>
+          <p class="note__body">Fitted in our own workshop by the technicians who inspected the
+             car, never subcontracted out.</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 5 — SELL A CAR -->
+  <section class="panel panel--plain" id="sell">
+    <div class="sheet">
+      <header class="sheet__head">
+        <p class="eyebrow">04 — Sell a Car</p>
+        <h2 class="display">Sell yours.</h2>
+        <p class="sheet__note">We buy outright and we broker. Either way you get one valuation,
+           one number, and no car sitting on a forecourt for months.</p>
+      </header>
+
+      <ul class="notes notes--steps">
+        <li class="note">
+          <h3 class="note__name">Send the details</h3>
+          <p class="note__body">Chassis number, service history and honest photographs. That is
+             enough for a first number.</p>
+        </li>
+        <li class="note">
+          <h3 class="note__name">We inspect</h3>
+          <p class="note__body">A technician comes to the car, wherever it is kept, within a week.</p>
+        </li>
+        <li class="note">
+          <h3 class="note__name">You are paid</h3>
+          <p class="note__body">Outright purchase settles in three working days. Brokered sales
+             carry a fixed fee, agreed up front.</p>
+        </li>
+      </ul>
+
+      <p class="sheet__cta">
+        <a class="link" href="mailto:sell@carstory.com">sell@carstory.com</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- 6 — TRUST -->
+  <section class="panel panel--trust" id="process">
+    <div class="panel__type panel__type--center">
+      <p class="eyebrow">05 — Process</p>
+      <h2 class="display display--wide" id="trustLine">
+        <span>Inspected.</span> <span>Verified.</span> <span>Delivered.</span>
+      </h2>
+    </div>
+  </section>
+
+  <!-- 7 — CONTACT -->
+  <section class="panel panel--contact" id="contact">
+    <div class="panel__type panel__type--center">
+      <p class="eyebrow">06 — Enquiries</p>
+      <h2 class="display">Reserve your Drive.</h2>
+
+      <form class="reserve" id="reserve" novalidate>
+        <label class="reserve__label" for="email">Email</label>
+        <div class="reserve__row">
+          <input class="reserve__input" id="email" name="email" type="email" inputmode="email"
+                 autocomplete="email" placeholder="you@domain.com" required />
+          <button class="btn" type="submit"><span>Request</span></button>
+        </div>
+        <p class="reserve__note" id="reserveNote" role="status" aria-live="polite"></p>
+      </form>
+
+      <p class="contact__direct">
+        <a class="link" href="mailto:viewings@carstory.com">viewings@carstory.com</a>
+        <span class="contact__sep">·</span>
+        <a class="link" href="tel:+912261004500">+91 22 6100 4500</a>
+      </p>
+    </div>
+
+  </section>
+
+  <!-- FOOTER (fades to black on arrival) -->
+  <footer class="foot" id="foot">
+    <div class="foot__top">
+      <div class="foot__id">
+        <a class="foot__mark" href="index.html">Car Story</a>
+        <ul class="foot__reach">
+          <li><a class="link" href="mailto:viewings@carstory.com">viewings@carstory.com</a></li>
+          <li><a class="link" href="tel:+912261004500">+91 22 6100 4500</a></li>
+        </ul>
+        <address class="foot__address">
+          Unit 4, Raghuvanshi Mills Compound<br />
+          Senapati Bapat Marg, Lower Parel<br />
+          Mumbai 400013
+        </address>
+      </div>
+
+      <nav class="foot__nav" aria-label="Footer">
+        <div class="foot__col">
+          <a class="foot__colhead" href="cars.html">Cars</a>
+          <ul class="foot__sub" id="footMarques"></ul>
+        </div>
+
+        <div class="foot__col">
+          <a class="foot__colhead" href="index.html#craft">Craftsmanship</a>
+          <ul class="foot__sub" id="footCraft"></ul>
+        </div>
+
+        <div class="foot__col">
+          <a class="foot__colhead" href="about.html">About Us</a>
+          <ul class="foot__sub">
+            <li><a href="about.html">Story</a></li>
+          </ul>
+        </div>
+
+        <div class="foot__col foot__col--ask">
+          <a class="foot__colhead" href="index.html#contact">Enquiries</a>
+          <form class="ask" id="ask">
+            <input class="ask__input" name="ask" type="text" autocomplete="off"
+                   placeholder="Ask anything" aria-label="Ask anything" />
+            <button class="ask__btn" type="submit">Enquire</button>
+          </form>
+        </div>
+      </nav>
+    </div>
+
+    <div class="foot__base">
+      <span>Mumbai</span>
+      <span>Fewer cars. Absolute condition.</span>
+      <span>© 2026</span>
+    </div>
+  </footer>
+
+</main>
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "./vendor/three/three.module.js",
+    "three/addons/": "./vendor/three/addons/"
+  }
+}
+</script>
+<script src="vendor/gsap.min.js" defer></script>
+<script src="vendor/ScrollTrigger.min.js" defer></script>
+<script src="vendor/lenis.min.js" defer></script>
+<script type="module" src="js/main.js"></script>
+</body>
+</html>
