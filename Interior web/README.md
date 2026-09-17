@@ -28,6 +28,14 @@ closer to how it will be deployed.
 | `script.js` | The camera, the cloud canvas, the house tour, reveals, the form |
 | `assets/*.jpg` | The three villa plates (aerial, entry hall, great room) |
 
+The plates carried the generator's visible sparkle glyph at a fixed position
+(x 1231-1280, y 623-672 of 1376 x 768). It was removed by estimating the overlay's
+alpha from the aerial plate - where the mark sits on uniform gravel - and solving
+`bg = (obs - 255a) / (1 - a)` on all three, which preserves the detail underneath
+instead of blurring it away. On the aerial, where a uniform background shows any
+residue, the remaining glyph core was replaced with matching gravel grain lifted
+from 88 px below it.
+
 ## How the flight works
 
 The page does **not** hijack scrolling. `#journey` is a tall block (820vh) with a
