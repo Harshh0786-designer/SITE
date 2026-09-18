@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Burger King | Have It Your Way</title>
+  <meta name="description" content="Burger King - Home of the Whopper. Flame-grilled burgers, fries, and more." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Anton&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="#" class="logo">
+        <span class="logo-mark">BK</span>
+        <span class="logo-text">BURGER KING</span>
+      </a>
+
+      <nav class="main-nav" id="main-nav">
+        <ul>
+          <li><a href="#menu">Menu</a></li>
+          <li><a href="#deals">Deals</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#locations">Locations</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <a href="#order" class="btn btn-primary">Order Now</a>
+        <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero" id="hero">
+      <div class="container hero-inner">
+        <div class="hero-copy">
+          <p class="eyebrow">Home of the Whopper&reg;</p>
+          <h1>Have It <span>Your Way.</span></h1>
+          <p class="hero-sub">Flame-grilled to perfection. Stacked with flavor. Made for you, your way, every single time.</p>
+          <div class="hero-cta">
+            <a href="#menu" class="btn btn-primary btn-lg">See Full Menu</a>
+            <a href="#deals" class="btn btn-outline btn-lg">Today's Deals</a>
+          </div>
+        </div>
+        <div class="hero-media">
+          <div class="hero-plate">
+            <img src="assets/images/hero-whopper.png" alt="Signature flame-grilled Whopper burger" onerror="this.style.display='none'; this.parentElement.classList.add('placeholder')" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROMO STRIP -->
+    <section class="promo-strip" id="deals">
+      <div class="container promo-inner">
+        <div class="promo-card">
+          <span class="promo-tag">Limited Time</span>
+          <h3>2 for $6</h3>
+          <p>Mix &amp; match any two classic favorites.</p>
+        </div>
+        <div class="promo-card">
+          <span class="promo-tag">App Exclusive</span>
+          <h3>Free Fries</h3>
+          <p>With any $1+ purchase, every Friday.</p>
+        </div>
+        <div class="promo-card">
+          <span class="promo-tag">New</span>
+          <h3>Ghost Pepper Whopper</h3>
+          <p>Spicy heat meets flame-grilled beef.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- MENU -->
+    <section class="menu-section" id="menu">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">Fan Favorites</p>
+          <h2>Our Signature Menu</h2>
+        </div>
+
+        <div class="menu-tabs" id="menu-tabs">
+          <button class="tab-btn active" data-filter="all">All</button>
+          <button class="tab-btn" data-filter="burgers">Burgers</button>
+          <button class="tab-btn" data-filter="chicken">Chicken</button>
+          <button class="tab-btn" data-filter="sides">Sides</button>
+          <button class="tab-btn" data-filter="drinks">Drinks</button>
+        </div>
+
+        <div class="menu-grid" id="menu-grid">
+          <article class="menu-card" data-category="burgers">
+            <div class="menu-card-img"><img src="assets/images/whopper.png" alt="Whopper" onerror="this.style.display='none'" /></div>
+            <h3>Whopper&reg;</h3>
+            <p>Flame-grilled beef, tomatoes, lettuce, mayo, pickles, onions.</p>
+            <span class="price">$6.49</span>
+          </article>
+
+          <article class="menu-card" data-category="burgers">
+            <div class="menu-card-img"><img src="assets/images/double-cheeseburger.png" alt="Double Cheeseburger" onerror="this.style.display='none'" /></div>
+            <h3>Double Cheeseburger</h3>
+            <p>Two flame-grilled patties, melted cheese, pickles, onions.</p>
+            <span class="price">$4.99</span>
+          </article>
+
+          <article class="menu-card" data-category="chicken">
+            <div class="menu-card-img"><img src="assets/images/chicken-royale.png" alt="Chicken Royale" onerror="this.style.display='none'" /></div>
+            <h3>Chicken Royale</h3>
+            <p>Crispy chicken fillet, lettuce, creamy mayo, toasted bun.</p>
+            <span class="price">$5.79</span>
+          </article>
+
+          <article class="menu-card" data-category="chicken">
+            <div class="menu-card-img"><img src="assets/images/spicy-nuggets.png" alt="Spicy Chicken Fries" onerror="this.style.display='none'" /></div>
+            <h3>Spicy Chicken Fries</h3>
+            <p>Crispy chicken strips with a fiery kick, served hot.</p>
+            <span class="price">$3.99</span>
+          </article>
+
+          <article class="menu-card" data-category="sides">
+            <div class="menu-card-img"><img src="assets/images/fries.png" alt="French Fries" onerror="this.style.display='none'" /></div>
+            <h3>Classic Fries</h3>
+            <p>Golden, crispy, salted to perfection.</p>
+            <span class="price">$2.49</span>
+          </article>
+
+          <article class="menu-card" data-category="sides">
+            <div class="menu-card-img"><img src="assets/images/onion-rings.png" alt="Onion Rings" onerror="this.style.display='none'" /></div>
+            <h3>Onion Rings</h3>
+            <p>Crunchy battered rings, golden fried.</p>
+            <span class="price">$2.99</span>
+          </article>
+
+          <article class="menu-card" data-category="drinks">
+            <div class="menu-card-img"><img src="assets/images/shake.png" alt="Milkshake" onerror="this.style.display='none'" /></div>
+            <h3>Oreo&reg; Shake</h3>
+            <p>Creamy shake blended with Oreo cookie pieces.</p>
+            <span class="price">$3.49</span>
+          </article>
+
+          <article class="menu-card" data-category="drinks">
+            <div class="menu-card-img"><img src="assets/images/soda.png" alt="Soft Drink" onerror="this.style.display='none'" /></div>
+            <h3>Fountain Drink</h3>
+            <p>Your choice of ice-cold soft drink.</p>
+            <span class="price">$1.99</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="about-section" id="about">
+      <div class="container about-inner">
+        <div class="about-media">
+          <img src="assets/images/flame-grill.png" alt="Flame grilling process" onerror="this.style.display='none'; this.parentElement.classList.add('placeholder')" />
+        </div>
+        <div class="about-copy">
+          <p class="eyebrow">Since 1954</p>
+          <h2>Flame-Grilled, Never Compromised.</h2>
+          <p>For over 70 years, Burger King has stayed true to one thing: fire-grilling our burgers for that unmistakable taste you can't get anywhere else. Real ingredients. Bold flavor. Your way, always.</p>
+          <ul class="about-stats">
+            <li><strong>19,000+</strong><span>Restaurants Worldwide</span></li>
+            <li><strong>100+</strong><span>Countries Served</span></li>
+            <li><strong>70+</strong><span>Years of Flame-Grilling</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- LOCATIONS / CONTACT -->
+    <section class="locate-section" id="locations">
+      <div class="container locate-inner">
+        <div class="section-heading light">
+          <p class="eyebrow">Find Us</p>
+          <h2>Grab a Whopper Near You</h2>
+        </div>
+        <form class="locate-form" id="locate-form">
+          <input type="text" placeholder="Enter ZIP code or city" aria-label="Search location" required />
+          <button type="submit" class="btn btn-primary">Find a Restaurant</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="contact-section" id="contact">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">Get In Touch</p>
+          <h2>We'd Love to Hear From You</h2>
+        </div>
+        <form class="contact-form" id="contact-form">
+          <div class="form-row">
+            <input type="text" name="name" placeholder="Your Name" required />
+            <input type="email" name="email" placeholder="Your Email" required />
+          </div>
+          <textarea name="message" rows="4" placeholder="Your Message" required></textarea>
+          <button type="submit" class="btn btn-primary btn-lg">Send Message</button>
+          <p class="form-status" id="form-status" role="status"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <span class="logo-mark">BK</span>
+        <span class="logo-text">BURGER KING</span>
+        <p>&copy; <span id="year"></span> Burger King Design Concept. For demo purposes only.</p>
+      </div>
+      <div class="footer-links">
+        <div>
+          <h4>Explore</h4>
+          <a href="#menu">Menu</a>
+          <a href="#deals">Deals</a>
+          <a href="#about">About</a>
+        </div>
+        <div>
+          <h4>Company</h4>
+          <a href="#">Careers</a>
+          <a href="#">Franchise</a>
+          <a href="#">Investors</a>
+        </div>
+        <div>
+          <h4>Follow</h4>
+          <a href="#">Instagram</a>
+          <a href="#">Facebook</a>
+          <a href="#">X / Twitter</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
