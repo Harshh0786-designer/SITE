@@ -2,242 +2,627 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Burger King | Have It Your Way</title>
-  <meta name="description" content="Burger King - Home of the Whopper. Flame-grilled burgers, fries, and more." />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Burger King India | Have It Your Way</title>
+  <meta name="description" content="Flame-grilled burgers, Masala Fries and Whoppers built your way. Burger King India menu with prices in rupees." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Anton&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
 
-  <header class="site-header">
-    <div class="container header-inner">
-      <a href="#" class="logo">
-        <span class="logo-mark">BK</span>
-        <span class="logo-text">BURGER KING</span>
-      </a>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="ico-burger" viewBox="0 0 64 64">
+    <path d="M7 27c0-12 11-19 25-19s25 7 25 19z" fill="#f5b335" />
+    <rect x="5" y="29" width="54" height="6" rx="3" fill="#5fa83c" />
+    <rect x="7" y="37" width="50" height="9" rx="4.5" fill="#e8420b" />
+    <path d="M7 48h50c0 6-5 9-11 9H18c-6 0-11-3-11-9z" fill="#f5b335" />
+  </symbol>
+  <symbol id="ico-fries" viewBox="0 0 64 64">
+    <rect x="19" y="9" width="7" height="24" rx="3.5" fill="#f5b335" transform="rotate(-13 22 21)" />
+    <rect x="29" y="5" width="7" height="28" rx="3.5" fill="#f5b335" />
+    <rect x="38" y="9" width="7" height="24" rx="3.5" fill="#f5b335" transform="rotate(13 42 21)" />
+    <path d="M15 30h34l-4 27H19z" fill="#e8420b" />
+    <rect x="15" y="34" width="34" height="6" rx="3" fill="#b32d00" />
+  </symbol>
+  <symbol id="ico-drink" viewBox="0 0 64 64">
+    <rect x="33" y="3" width="5" height="17" rx="2.5" fill="#5fa83c" transform="rotate(14 35 11)" />
+    <path d="M18 24h28l-4 33H22z" fill="#e8420b" />
+    <rect x="15" y="17" width="34" height="8" rx="4" fill="#f5b335" />
+  </symbol>
+  <symbol id="ico-dessert" viewBox="0 0 64 64">
+    <circle cx="32" cy="11" r="5" fill="#b32d00" />
+    <path d="M19 30c0-10 6-16 13-16s13 6 13 16z" fill="#f5b335" />
+    <path d="M19 31h26l-4 26H23z" fill="#e8420b" />
+  </symbol>
+</svg>
 
-      <nav class="main-nav" id="main-nav">
-        <ul>
-          <li><a href="#menu">Menu</a></li>
-          <li><a href="#deals">Deals</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#locations">Locations</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-      </nav>
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="#" class="logo" aria-label="Burger King India home">
+      <span class="logo-mark">BK</span>
+      <span class="logo-text">BURGER KING<small>INDIA</small></span>
+    </a>
 
-      <div class="header-actions">
-        <a href="#order" class="btn btn-primary">Order Now</a>
-        <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
-          <span></span><span></span><span></span>
-        </button>
+    <nav class="main-nav" id="main-nav" aria-label="Main">
+      <ul>
+        <li><a href="#deals">Offers</a></li>
+        <li><a href="#menu">Menu</a></li>
+        <li><a href="#builder">Build Yours</a></li>
+        <li><a href="#stores">Stores</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+
+    <div class="header-actions">
+      <button class="btn btn--ghost btn--sm tray-btn" id="tray-btn" aria-label="Open your tray">
+        Tray
+        <span class="tray-count" id="tray-count" hidden>0</span>
+      </button>
+      <a href="#menu" class="btn btn--flame btn--sm">Order Now</a>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="main-nav">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <!-- ============================================================ HERO -->
+  <section class="hero">
+    <canvas id="ember-canvas" aria-hidden="true"></canvas>
+    <div class="container hero-inner">
+      <div class="hero-copy">
+        <p class="hero-badge"><b>NEW</b> Mutton Whopper&reg; is here &mdash; &#8377;299</p>
+        <h1>
+          <span class="line-flame">Flame-Grilled.</span>
+          <span class="line-outline">Never Fried.</span>
+        </h1>
+        <p class="hero-sub">
+          Real fire, real smoke, zero shortcuts. Stack it, spice it, size it &mdash;
+          every burger is built exactly the way you want it.
+        </p>
+        <div class="hero-cta">
+          <a href="#builder" class="btn btn--mustard btn--lg">Build Your Whopper</a>
+          <a href="#menu" class="btn btn--ghost btn--lg" style="color:#fff1dc;border-color:#fff1dc;box-shadow:0 3px 0 #fff1dc">See the Menu</a>
+        </div>
+        <div class="hero-meta">
+          <div><strong>700&deg;F</strong><span>Open-flame broiler</span></div>
+          <div><strong>&#8377;69</strong><span>Burgers start at</span></div>
+          <div><strong>22 min</strong><span>Average delivery</span></div>
+        </div>
+      </div>
+
+      <div class="hero-media">
+        <div class="grill-ring">
+          <div class="stack" aria-hidden="true">
+            <div class="layer layer--bun-top"></div>
+            <div class="layer layer--lettuce"></div>
+            <div class="layer layer--tomato"></div>
+            <div class="layer layer--cheese"></div>
+            <div class="layer layer--patty"></div>
+            <div class="layer layer--onion"></div>
+            <div class="layer layer--bun-bottom"></div>
+            <div class="stack-sizzle"></div>
+          </div>
+        </div>
       </div>
     </div>
-  </header>
+  </section>
 
-  <main>
-    <!-- HERO -->
-    <section class="hero" id="hero">
-      <div class="container hero-inner">
-        <div class="hero-copy">
-          <p class="eyebrow">Home of the Whopper&reg;</p>
-          <h1>Have It <span>Your Way.</span></h1>
-          <p class="hero-sub">Flame-grilled to perfection. Stacked with flavor. Made for you, your way, every single time.</p>
-          <div class="hero-cta">
-            <a href="#menu" class="btn btn-primary btn-lg">See Full Menu</a>
-            <a href="#deals" class="btn btn-outline btn-lg">Today's Deals</a>
+  <!-- ========================================================== TICKER -->
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-track">
+      <div class="ticker-group">
+        <span>Flame-grilled since 1954</span>
+        <span>&#8377;50 off above &#8377;399</span>
+        <span>Free delivery above &#8377;199</span>
+        <span>Have it your way</span>
+      </div>
+      <div class="ticker-group">
+        <span>Flame-grilled since 1954</span>
+        <span>&#8377;50 off above &#8377;399</span>
+        <span>Free delivery above &#8377;199</span>
+        <span>Have it your way</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================== DEALS -->
+  <section class="band band--cream" id="deals">
+    <div class="container">
+      <div class="band-head band-head--center reveal">
+        <p class="eyebrow">Today at the counter</p>
+        <h2>Offers Worth the Detour</h2>
+        <p>Tap a code to copy it, then apply at checkout. All prices in rupees, inclusive of taxes.</p>
+      </div>
+
+      <div class="deal-grid">
+        <article class="deal-card reveal" data-delay="0">
+          <span class="deal-tag">Limited time</span>
+          <h3>&#8377;50 OFF</h3>
+          <p>On every order above &#8377;399. Valid across all India outlets.</p>
+          <button class="deal-code" data-code="KING50">KING50</button>
+        </article>
+
+        <article class="deal-card reveal" data-delay="1">
+          <span class="deal-tag">Stack &amp; save</span>
+          <h3>2 for &#8377;99</h3>
+          <p>Two Crispy Veg Burgers, one very happy evening.</p>
+          <button class="deal-code" data-code="STACK99">STACK99</button>
+        </article>
+
+        <article class="deal-card reveal" data-delay="2">
+          <span class="deal-tag">Campus</span>
+          <h3>&#8377;149 Meal</h3>
+          <p>Burger + Fries + Drink with any valid student ID.</p>
+          <button class="deal-code" data-code="CAMPUS149">CAMPUS149</button>
+        </article>
+
+        <article class="deal-card reveal" data-delay="3">
+          <span class="deal-tag">Delivery</span>
+          <h3>&#8377;0 Delivery</h3>
+          <p>Free doorstep delivery on every order above &#8377;199.</p>
+          <button class="deal-code" data-code="FREEDEL">FREEDEL</button>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ MENU -->
+  <section class="band band--tint" id="menu">
+    <div class="container">
+      <div class="band-head reveal">
+        <p class="eyebrow">The line-up</p>
+        <h2>Menu &amp; Prices</h2>
+        <p>Green marker for vegetarian, red for non-veg &mdash; the way every Indian menu should read.</p>
+      </div>
+
+      <div class="menu-controls">
+        <div class="tab-row" id="menu-tabs" role="group" aria-label="Filter menu by category">
+          <button class="tab-btn is-active" data-filter="all" aria-pressed="true">Everything</button>
+          <button class="tab-btn" data-filter="burgers" aria-pressed="false">Burgers</button>
+          <button class="tab-btn" data-filter="sides" aria-pressed="false">Fries &amp; Sides</button>
+          <button class="tab-btn" data-filter="desserts" aria-pressed="false">Desserts</button>
+          <button class="tab-btn" data-filter="beverages" aria-pressed="false">Beverages</button>
+        </div>
+
+        <label class="veg-switch">
+          <input type="checkbox" id="veg-only" />
+          <span class="track"></span>
+          Pure veg only
+        </label>
+      </div>
+
+      <div class="menu-grid">
+        <article class="menu-card reveal" data-id="veg-whopper" data-name="Veg Whopper&reg;" data-price="179" data-category="burgers" data-diet="veg">
+          <div class="thumb"><svg><use href="#ico-burger" /></svg></div>
+          <div class="card-top"><h3>Veg Whopper&reg;</h3><span class="diet" title="Vegetarian"></span></div>
+          <p>Flame-grilled veg patty, tomato, lettuce, onion and creamy mayo in a sesame bun.</p>
+          <div class="spice" aria-label="Mild"><i class="on"></i><i></i><i></i></div>
+          <div class="card-foot">
+            <div class="price">&#8377;179<small>SERVES 1</small></div>
+            <button class="add-btn">Add</button>
+          </div>
+        </article>
+
+        <article class="menu-card reveal" data-id="whopper" data-name="Whopper&reg; Chicken" data-price="229" data-category="burgers" data-diet="nonveg">
+          <div class="thumb"><svg><use href="#ico-burger" /></svg></div>
+          <div class="card-top"><h3>Whopper&reg; Chicken</h3><span class="diet diet--nonveg" title="Non-vegetarian"></span></div>
+          <p>The original: a quarter-pound chicken patty grilled over an open flame.</p>
+          <div class="spice" aria-label="Mild"><i class="on"></i><i></i><i></i></div>
+          <div class="card-foot">
+            <div class="price">&#8377;229<small>SERVES 1</small></div>
+            <button class="add-btn">Add</button>
+          </div>
+        </article>
+
+        <article class="menu-card reveal" data-id="crispy-veg" data-name="Crispy Veg Burger" data-price="69" data-category="burgers" data-diet="veg">
+          <div class="thumb"><svg><use href="#ico-burger" /></svg></div>
+          <div class="card-top"><h3>Crispy Veg Burger</h3><span class="diet" title="Vegetarian"></span></div>
+          <p>Golden crumb-fried patty with shredded lettuce and a swipe of mayo.</p>
+          <div class="spice" aria-label="Not spicy"><i></i><i></i><i></i></div>
+          <div class="card-foot">
+            <div class="price">&#8377;69<small>SERVES 1</small></div>
+            <button class="add-btn">Add</button>
+          </div>
+        </article>
+
+        <article class="menu-card reveal" data-id="paneer-melt" data-name="Paneer King Melt" data-price="149" data-category="burgers" data-diet="veg">
+          <div class="thumb"><svg><use href="#ico-burger" /></svg></div>
+          <div class="card-top"><h3>Paneer King Melt</h3><span class="diet" title="Vegetarian"></span></div>
+          <p>Thick paneer slab, molten cheese and tandoori mayo on a toasted bun.</p>
+          <div class="spice" aria-label="Medium"><i class="on"></i><i class="on"></i><i></i></div>
+          <div class="card-foot">
+            <div class="price">&#8377;149<small>SERVES 1</small></div>
+            <button class="add-btn">Add</button>
+          </div>
+        </article>
+
+        <article class="menu-card reveal" data-id="crispy-chicken" data-name="Crispy Chicken Burger" data-price="89" data-category="burgers" data-diet="nonveg">
+          <div class="thumb"><svg><use href="#ico-burger" /></svg></div>
+          <div class="card-top"><h3>Crispy Chicken Burger</h3><span class="diet diet--nonveg" title="Non-vegetarian"></span></div>
+          <p>Crunchy chicken fillet, fresh lettuce, classic mayo. The everyday hero.</p>
+          <div class="spice" aria-label="Mild"><i class="on"></i><i></i><i></i></div>
+          <div class="card-foot">
+            <div class="price">&#8377;89<small>SERVES 1</small></div>
+            <button class="add-btn">Add</button>
+          </div>
+        </article>
+
+        <article class="menu-card reveal" data-id="mutton-whopper" data-name="Mutton Whopper&reg;" data-price="299" data-category="burgers" data-diet="nonveg">
+          <div class="thumb"><svg><use href="#ico-burger" /></svg></div>
+          <div class="card-top"><h3>Mutton Whopper&reg;</h3><span class="diet diet--nonveg" title="Non-vegetarian"></span></div>
+          <p>Smoked mutton patty, caramelised onion and pepper mayo. Brand new.</p>
+          <div class="spice" aria-label="Medium"><i class="on"></i><i class="on"></i><i></i></div>
+          <div class="card-foot">
+            <div class="price">&#8377;299<small>SERVES 1</small></div>
+            <button class="add-btn">Add</button>
+          </div>
+        </article>
+
+        <article class="menu-card reveal" data-id="tandoori-grill" data-name="Chicken Tandoori Grill" data-price="199" data-category="burgers" data-diet="nonveg">
+          <div class="thumb"><svg><use href="#ico-burger" /></svg></div>
+          <div class="card-top"><h3>Chicken Tandoori Grill</h3><span class="diet diet--nonveg" title="Non-vegetarian"></span></div>
+          <p>Charred tandoori chicken, mint mayo and sliced onion. Built for Indian palates.</p>
+          <div class="spice" aria-label="Hot"><i class="on"></i><i class="on"></i><i class="on"></i></div>
+          <div class="card-foot">
+            <div class="price">&#8377;199<small>SERVES 1</small></div>
+            <button class="add-btn">Add</button>
+          </div>
+        </article>
+
+        <article class="menu-card reveal" data-id="masala-fries" data-name="Masala Fries (Medium)" data-price="99" data-category="sides" data-diet="veg">
+          <div class="thumb"><svg><use href="#ico-fries" /></svg></div>
+          <div class="card-top"><h3>Masala Fries</h3><span class="diet" title="Vegetarian"></span></div>
+          <p>Our classic fries tossed in a chatpata masala shaker. Medium portion.</p>
+          <div class="spice" aria-label="Medium"><i class="on"></i><i class="on"></i><i></i></div>
+          <div class="card-foot">
+            <div class="price">&#8377;99<small>MEDIUM</small></div>
+            <button class="add-btn">Add</button>
+          </div>
+        </article>
+
+        <article class="menu-card reveal" data-id="classic-fries" data-name="Classic Fries (Medium)" data-price="89" data-category="sides" data-diet="veg">
+          <div class="thumb"><svg><use href="#ico-fries" /></svg></div>
+          <div class="card-top"><h3>Classic Fries</h3><span class="diet" title="Vegetarian"></span></div>
+          <p>Thick-cut, golden and salted the moment they leave the fryer.</p>
+          <div class="spice" aria-label="Not spicy"><i></i><i></i><i></i></div>
+          <div class="card-foot">
+            <div class="price">&#8377;89<small>MEDIUM</small></div>
+            <button class="add-btn">Add</button>
+          </div>
+        </article>
+
+        <article class="menu-card reveal" data-id="onion-rings" data-name="Onion Rings (6 pc)" data-price="99" data-category="sides" data-diet="veg">
+          <div class="thumb"><svg><use href="#ico-fries" /></svg></div>
+          <div class="card-top"><h3>Onion Rings</h3><span class="diet" title="Vegetarian"></span></div>
+          <p>Six battered rings with a sweet-onion centre. Best shared, rarely shared.</p>
+          <div class="spice" aria-label="Not spicy"><i></i><i></i><i></i></div>
+          <div class="card-foot">
+            <div class="price">&#8377;99<small>6 PIECES</small></div>
+            <button class="add-btn">Add</button>
+          </div>
+        </article>
+
+        <article class="menu-card reveal" data-id="peri-fries" data-name="Peri Peri Chicken Fries" data-price="129" data-category="sides" data-diet="nonveg">
+          <div class="thumb"><svg><use href="#ico-fries" /></svg></div>
+          <div class="card-top"><h3>Peri Peri Chicken Fries</h3><span class="diet diet--nonveg" title="Non-vegetarian"></span></div>
+          <p>Chicken strips dusted in peri peri. Handle with napkins.</p>
+          <div class="spice" aria-label="Hot"><i class="on"></i><i class="on"></i><i class="on"></i></div>
+          <div class="card-foot">
+            <div class="price">&#8377;129<small>8 PIECES</small></div>
+            <button class="add-btn">Add</button>
+          </div>
+        </article>
+
+        <article class="menu-card reveal" data-id="lava-cake" data-name="Choco Lava Cake" data-price="79" data-category="desserts" data-diet="veg">
+          <div class="thumb"><svg><use href="#ico-dessert" /></svg></div>
+          <div class="card-top"><h3>Choco Lava Cake</h3><span class="diet" title="Vegetarian"></span></div>
+          <p>Warm cocoa sponge with a molten centre that actually flows.</p>
+          <div class="spice" aria-label="Not spicy"><i></i><i></i><i></i></div>
+          <div class="card-foot">
+            <div class="price">&#8377;79<small>SERVES 1</small></div>
+            <button class="add-btn">Add</button>
+          </div>
+        </article>
+
+        <article class="menu-card reveal" data-id="sundae" data-name="Chocolate Sundae" data-price="69" data-category="desserts" data-diet="veg">
+          <div class="thumb"><svg><use href="#ico-dessert" /></svg></div>
+          <div class="card-top"><h3>Chocolate Sundae</h3><span class="diet" title="Vegetarian"></span></div>
+          <p>Soft-serve under a thick pour of Belgian-style chocolate sauce.</p>
+          <div class="spice" aria-label="Not spicy"><i></i><i></i><i></i></div>
+          <div class="card-foot">
+            <div class="price">&#8377;69<small>SERVES 1</small></div>
+            <button class="add-btn">Add</button>
+          </div>
+        </article>
+
+        <article class="menu-card reveal" data-id="oreo-shake" data-name="Oreo&reg; Thick Shake" data-price="149" data-category="beverages" data-diet="veg">
+          <div class="thumb"><svg><use href="#ico-drink" /></svg></div>
+          <div class="card-top"><h3>Oreo&reg; Thick Shake</h3><span class="diet" title="Vegetarian"></span></div>
+          <p>Hand-blended with real cookie pieces. Thick enough to hold the straw up.</p>
+          <div class="spice" aria-label="Not spicy"><i></i><i></i><i></i></div>
+          <div class="card-foot">
+            <div class="price">&#8377;149<small>400 ML</small></div>
+            <button class="add-btn">Add</button>
+          </div>
+        </article>
+
+        <article class="menu-card reveal" data-id="iced-coffee" data-name="BK Caf&eacute; Iced Coffee" data-price="109" data-category="beverages" data-diet="veg">
+          <div class="thumb"><svg><use href="#ico-drink" /></svg></div>
+          <div class="card-top"><h3>BK Caf&eacute; Iced Coffee</h3><span class="diet" title="Vegetarian"></span></div>
+          <p>Double-shot cold brew over ice with a splash of milk.</p>
+          <div class="spice" aria-label="Not spicy"><i></i><i></i><i></i></div>
+          <div class="card-foot">
+            <div class="price">&#8377;109<small>350 ML</small></div>
+            <button class="add-btn">Add</button>
+          </div>
+        </article>
+
+        <p class="menu-empty" id="menu-empty" hidden>No items match that combination. Try another category.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================= BUILDER -->
+  <section class="band band--cream" id="builder">
+    <div class="container">
+      <div class="band-head reveal">
+        <p class="eyebrow">Have it your way</p>
+        <h2>Build Your Whopper&reg;</h2>
+        <p>Pick a patty, stack what you love, drop what you don't. The burger and the bill update as you go.</p>
+      </div>
+
+      <div class="builder-inner">
+        <div class="builder-stage">
+          <div class="stack" id="builder-stack" aria-hidden="true">
+            <div class="layer layer--bun-top" data-layer="bun-top"></div>
+            <div class="layer layer--lettuce" data-layer="lettuce"></div>
+            <div class="layer layer--tomato" data-layer="tomato"></div>
+            <div class="layer layer--cheese" data-layer="cheese"></div>
+            <div class="layer layer--patty" data-layer="patty"></div>
+            <div class="layer layer--jalapeno is-off" data-layer="jalapeno"></div>
+            <div class="layer layer--onion" data-layer="onion"></div>
+            <div class="layer layer--patty is-off" data-layer="patty2"></div>
+            <div class="layer layer--bun-bottom" data-layer="bun-bottom"></div>
+            <div class="stack-sizzle"></div>
           </div>
         </div>
-        <div class="hero-media">
-          <div class="hero-plate">
-            <img src="assets/images/hero-whopper.png" alt="Signature flame-grilled Whopper burger" onerror="this.style.display='none'; this.parentElement.classList.add('placeholder')" />
+
+        <form class="builder-panel" id="builder-form">
+          <div class="panel-section">
+            <h3>1 &mdash; Choose your patty</h3>
+            <div class="opt-row">
+              <label class="opt">
+                <input type="radio" name="patty" data-price="119" data-kcal="320" data-name="Crispy Veg Whopper" checked />
+                <span class="mark"></span>
+                <span class="opt-label"><b>Crispy Veg</b><span>&#8377;119</span></span>
+              </label>
+              <label class="opt">
+                <input type="radio" name="patty" data-price="149" data-kcal="390" data-name="Paneer Royale" />
+                <span class="mark"></span>
+                <span class="opt-label"><b>Paneer Royale</b><span>&#8377;149</span></span>
+              </label>
+              <label class="opt">
+                <input type="radio" name="patty" data-price="159" data-kcal="360" data-name="Chicken Tandoori" />
+                <span class="mark"></span>
+                <span class="opt-label"><b>Chicken Tandoori</b><span>&#8377;159</span></span>
+              </label>
+              <label class="opt">
+                <input type="radio" name="patty" data-price="199" data-kcal="430" data-name="Smoked Mutton" />
+                <span class="mark"></span>
+                <span class="opt-label"><b>Smoked Mutton</b><span>&#8377;199</span></span>
+              </label>
+            </div>
           </div>
-        </div>
-      </div>
-    </section>
 
-    <!-- PROMO STRIP -->
-    <section class="promo-strip" id="deals">
-      <div class="container promo-inner">
-        <div class="promo-card">
-          <span class="promo-tag">Limited Time</span>
-          <h3>2 for $6</h3>
-          <p>Mix &amp; match any two classic favorites.</p>
-        </div>
-        <div class="promo-card">
-          <span class="promo-tag">App Exclusive</span>
-          <h3>Free Fries</h3>
-          <p>With any $1+ purchase, every Friday.</p>
-        </div>
-        <div class="promo-card">
-          <span class="promo-tag">New</span>
-          <h3>Ghost Pepper Whopper</h3>
-          <p>Spicy heat meets flame-grilled beef.</p>
-        </div>
-      </div>
-    </section>
+          <div class="panel-section">
+            <h3>2 &mdash; Stack it up</h3>
+            <div class="opt-row">
+              <label class="opt">
+                <input type="checkbox" data-price="0" data-kcal="8" data-layer="lettuce" checked />
+                <span class="mark"></span>
+                <span class="opt-label"><b>Crisp Lettuce</b><span>Free</span></span>
+              </label>
+              <label class="opt">
+                <input type="checkbox" data-price="0" data-kcal="12" data-layer="tomato" checked />
+                <span class="mark"></span>
+                <span class="opt-label"><b>Fresh Tomato</b><span>Free</span></span>
+              </label>
+              <label class="opt">
+                <input type="checkbox" data-price="0" data-kcal="10" data-layer="onion" checked />
+                <span class="mark"></span>
+                <span class="opt-label"><b>Sliced Onion</b><span>Free</span></span>
+              </label>
+              <label class="opt">
+                <input type="checkbox" data-price="30" data-kcal="70" data-layer="cheese" checked />
+                <span class="mark"></span>
+                <span class="opt-label"><b>Cheddar Slice</b><span>&#8377;30</span></span>
+              </label>
+              <label class="opt">
+                <input type="checkbox" data-price="25" data-kcal="14" data-layer="jalapeno" />
+                <span class="mark"></span>
+                <span class="opt-label"><b>Jalape&ntilde;os</b><span>&#8377;25</span></span>
+              </label>
+              <label class="opt">
+                <input type="checkbox" data-price="70" data-kcal="260" data-layer="patty2" />
+                <span class="mark"></span>
+                <span class="opt-label"><b>Double the Patty</b><span>&#8377;70</span></span>
+              </label>
+            </div>
+          </div>
 
-    <!-- MENU -->
-    <section class="menu-section" id="menu">
-      <div class="container">
-        <div class="section-heading">
-          <p class="eyebrow">Fan Favorites</p>
-          <h2>Our Signature Menu</h2>
-        </div>
+          <div class="panel-section">
+            <h3>3 &mdash; Finish it</h3>
+            <div class="opt-row">
+              <label class="opt">
+                <input type="checkbox" data-price="15" data-kcal="20" />
+                <span class="mark"></span>
+                <span class="opt-label"><b>Peri Peri Sprinkle</b><span>&#8377;15</span></span>
+              </label>
+              <label class="opt">
+                <input type="checkbox" data-price="20" data-kcal="90" />
+                <span class="mark"></span>
+                <span class="opt-label"><b>Tandoori Mayo</b><span>&#8377;20</span></span>
+              </label>
+              <label class="opt">
+                <input type="checkbox" data-price="99" data-kcal="420" />
+                <span class="mark"></span>
+                <span class="opt-label"><b>Make it a Meal</b><span>&#8377;99 &middot; Fries + Drink</span></span>
+              </label>
+              <label class="opt">
+                <input type="checkbox" data-price="40" data-kcal="0" />
+                <span class="mark"></span>
+                <span class="opt-label"><b>Upsize the Fries</b><span>&#8377;40</span></span>
+              </label>
+            </div>
+          </div>
 
-        <div class="menu-tabs" id="menu-tabs">
-          <button class="tab-btn active" data-filter="all">All</button>
-          <button class="tab-btn" data-filter="burgers">Burgers</button>
-          <button class="tab-btn" data-filter="chicken">Chicken</button>
-          <button class="tab-btn" data-filter="sides">Sides</button>
-          <button class="tab-btn" data-filter="drinks">Drinks</button>
-        </div>
-
-        <div class="menu-grid" id="menu-grid">
-          <article class="menu-card" data-category="burgers">
-            <div class="menu-card-img"><img src="assets/images/whopper.png" alt="Whopper" onerror="this.style.display='none'" /></div>
-            <h3>Whopper&reg;</h3>
-            <p>Flame-grilled beef, tomatoes, lettuce, mayo, pickles, onions.</p>
-            <span class="price">$6.49</span>
-          </article>
-
-          <article class="menu-card" data-category="burgers">
-            <div class="menu-card-img"><img src="assets/images/double-cheeseburger.png" alt="Double Cheeseburger" onerror="this.style.display='none'" /></div>
-            <h3>Double Cheeseburger</h3>
-            <p>Two flame-grilled patties, melted cheese, pickles, onions.</p>
-            <span class="price">$4.99</span>
-          </article>
-
-          <article class="menu-card" data-category="chicken">
-            <div class="menu-card-img"><img src="assets/images/chicken-royale.png" alt="Chicken Royale" onerror="this.style.display='none'" /></div>
-            <h3>Chicken Royale</h3>
-            <p>Crispy chicken fillet, lettuce, creamy mayo, toasted bun.</p>
-            <span class="price">$5.79</span>
-          </article>
-
-          <article class="menu-card" data-category="chicken">
-            <div class="menu-card-img"><img src="assets/images/spicy-nuggets.png" alt="Spicy Chicken Fries" onerror="this.style.display='none'" /></div>
-            <h3>Spicy Chicken Fries</h3>
-            <p>Crispy chicken strips with a fiery kick, served hot.</p>
-            <span class="price">$3.99</span>
-          </article>
-
-          <article class="menu-card" data-category="sides">
-            <div class="menu-card-img"><img src="assets/images/fries.png" alt="French Fries" onerror="this.style.display='none'" /></div>
-            <h3>Classic Fries</h3>
-            <p>Golden, crispy, salted to perfection.</p>
-            <span class="price">$2.49</span>
-          </article>
-
-          <article class="menu-card" data-category="sides">
-            <div class="menu-card-img"><img src="assets/images/onion-rings.png" alt="Onion Rings" onerror="this.style.display='none'" /></div>
-            <h3>Onion Rings</h3>
-            <p>Crunchy battered rings, golden fried.</p>
-            <span class="price">$2.99</span>
-          </article>
-
-          <article class="menu-card" data-category="drinks">
-            <div class="menu-card-img"><img src="assets/images/shake.png" alt="Milkshake" onerror="this.style.display='none'" /></div>
-            <h3>Oreo&reg; Shake</h3>
-            <p>Creamy shake blended with Oreo cookie pieces.</p>
-            <span class="price">$3.49</span>
-          </article>
-
-          <article class="menu-card" data-category="drinks">
-            <div class="menu-card-img"><img src="assets/images/soda.png" alt="Soft Drink" onerror="this.style.display='none'" /></div>
-            <h3>Fountain Drink</h3>
-            <p>Your choice of ice-cold soft drink.</p>
-            <span class="price">$1.99</span>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- ABOUT -->
-    <section class="about-section" id="about">
-      <div class="container about-inner">
-        <div class="about-media">
-          <img src="assets/images/flame-grill.png" alt="Flame grilling process" onerror="this.style.display='none'; this.parentElement.classList.add('placeholder')" />
-        </div>
-        <div class="about-copy">
-          <p class="eyebrow">Since 1954</p>
-          <h2>Flame-Grilled, Never Compromised.</h2>
-          <p>For over 70 years, Burger King has stayed true to one thing: fire-grilling our burgers for that unmistakable taste you can't get anywhere else. Real ingredients. Bold flavor. Your way, always.</p>
-          <ul class="about-stats">
-            <li><strong>19,000+</strong><span>Restaurants Worldwide</span></li>
-            <li><strong>100+</strong><span>Countries Served</span></li>
-            <li><strong>70+</strong><span>Years of Flame-Grilling</span></li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- LOCATIONS / CONTACT -->
-    <section class="locate-section" id="locations">
-      <div class="container locate-inner">
-        <div class="section-heading light">
-          <p class="eyebrow">Find Us</p>
-          <h2>Grab a Whopper Near You</h2>
-        </div>
-        <form class="locate-form" id="locate-form">
-          <input type="text" placeholder="Enter ZIP code or city" aria-label="Search location" required />
-          <button type="submit" class="btn btn-primary">Find a Restaurant</button>
+          <div class="builder-total">
+            <div>
+              <div class="label">Your burger</div>
+              <div class="amount" id="builder-price">&#8377;149</div>
+              <div class="kcal" id="builder-kcal">640 kcal &middot; incl. all taxes</div>
+            </div>
+            <button type="button" class="btn btn--mustard" id="builder-add">Add to Tray</button>
+          </div>
         </form>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- CONTACT -->
-    <section class="contact-section" id="contact">
-      <div class="container">
-        <div class="section-heading">
-          <p class="eyebrow">Get In Touch</p>
-          <h2>We'd Love to Hear From You</h2>
-        </div>
-        <form class="contact-form" id="contact-form">
-          <div class="form-row">
-            <input type="text" name="name" placeholder="Your Name" required />
-            <input type="email" name="email" placeholder="Your Email" required />
-          </div>
-          <textarea name="message" rows="4" placeholder="Your Message" required></textarea>
-          <button type="submit" class="btn btn-primary btn-lg">Send Message</button>
-          <p class="form-status" id="form-status" role="status"></p>
-        </form>
+  <!-- =========================================================== STATS -->
+  <section class="band band--char">
+    <div class="container">
+      <div class="band-head reveal">
+        <p class="eyebrow" style="color:var(--mustard)">Since 1954</p>
+        <h2 style="color:#fff1dc">We Grill Over Fire. Everyone Else Just Cooks.</h2>
+        <p style="color:#c2a88e">
+          Every patty passes over an open flame on a conveyor broiler &mdash; not a griddle, not a fryer.
+          That is where the char marks, and the taste, come from.
+        </p>
       </div>
-    </section>
-  </main>
 
-  <footer class="site-footer">
-    <div class="container footer-inner">
+      <div class="stat-grid">
+        <div class="stat reveal" data-delay="0"><b data-count="500" data-suffix="+">500+</b><span>Restaurants across India</span></div>
+        <div class="stat reveal" data-delay="1"><b data-count="100" data-suffix="+">100+</b><span>Cities served</span></div>
+        <div class="stat reveal" data-delay="2"><b data-count="70" data-suffix="+">70+</b><span>Years of flame-grilling</span></div>
+        <div class="stat reveal" data-delay="3"><b data-count="700" data-suffix="&deg;F">700&deg;F</b><span>Open-flame broiler</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================== STORES -->
+  <section class="band band--tint" id="stores">
+    <div class="container">
+      <div class="band-head band-head--center reveal">
+        <p class="eyebrow">Find us</p>
+        <h2>A Whopper Near You</h2>
+        <p>Search a city or locality to see the nearest outlets, distance and delivery time.</p>
+      </div>
+
+      <form class="locate-form" id="locate-form">
+        <input type="text" id="locate-input" placeholder="Try Mumbai, Bengaluru or Saket" aria-label="Search by city or locality" />
+        <button type="submit" class="btn btn--flame">Find Outlets</button>
+      </form>
+
+      <div class="chip-row" id="city-chips">
+        <button type="button" class="chip" data-city="mumbai">Mumbai</button>
+        <button type="button" class="chip" data-city="delhi">Delhi NCR</button>
+        <button type="button" class="chip" data-city="bengaluru">Bengaluru</button>
+        <button type="button" class="chip" data-city="pune">Pune</button>
+        <button type="button" class="chip" data-city="hyderabad">Hyderabad</button>
+      </div>
+
+      <div class="outlet-list" id="outlet-list"></div>
+    </div>
+  </section>
+
+  <!-- ========================================================= CONTACT -->
+  <section class="band band--cream" id="contact">
+    <div class="container">
+      <div class="band-head band-head--center reveal">
+        <p class="eyebrow">Guest care</p>
+        <h2>Tell Us How We Did</h2>
+        <p>Compliments, complaints, or a franchise enquiry &mdash; it all reaches a real person.</p>
+      </div>
+
+      <form class="contact-form" id="contact-form">
+        <div class="form-row">
+          <input type="text" id="contact-name" name="name" placeholder="Your name" required />
+          <input type="tel" id="contact-phone" name="phone" placeholder="Mobile number" pattern="[0-9+ ]{10,14}" required />
+        </div>
+        <input type="email" id="contact-email" name="email" placeholder="Email address" required />
+        <textarea id="contact-message" name="message" rows="4" placeholder="What's on your mind?" required></textarea>
+        <button type="submit" class="btn btn--flame btn--lg">Send Message</button>
+        <p class="form-status" id="form-status" role="status"></p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<!-- ============================================================== TRAY -->
+<div class="tray-backdrop" id="tray-backdrop"></div>
+<aside class="tray" id="tray" aria-label="Your tray" aria-hidden="true">
+  <div class="tray-head">
+    <h2>Your Tray</h2>
+    <button class="tray-close" id="tray-close" aria-label="Close tray">&times;</button>
+  </div>
+  <div class="tray-items" id="tray-items"></div>
+  <div class="tray-foot">
+    <div class="bill-row"><span>Item total</span><span id="bill-sub">&#8377;0</span></div>
+    <div class="bill-row"><span>GST (5%)</span><span id="bill-gst">&#8377;0</span></div>
+    <div class="bill-row total"><span>To pay</span><span id="bill-total">&#8377;0</span></div>
+    <button class="btn btn--flame" id="checkout">Proceed to Checkout</button>
+    <p class="free-del" id="free-del" hidden></p>
+  </div>
+</aside>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-inner">
       <div class="footer-brand">
-        <span class="logo-mark">BK</span>
-        <span class="logo-text">BURGER KING</span>
-        <p>&copy; <span id="year"></span> Burger King Design Concept. For demo purposes only.</p>
+        <span class="logo">
+          <span class="logo-mark">BK</span>
+          <span class="logo-text">BURGER KING<small>INDIA</small></span>
+        </span>
+        <p>A flame-grilled design concept. Prices shown in Indian rupees and inclusive of all taxes.</p>
       </div>
-      <div class="footer-links">
+
+      <div class="footer-cols">
         <div>
           <h4>Explore</h4>
-          <a href="#menu">Menu</a>
-          <a href="#deals">Deals</a>
-          <a href="#about">About</a>
+          <a href="#menu">Full menu</a>
+          <a href="#deals">Offers</a>
+          <a href="#builder">Build your burger</a>
+          <a href="#stores">Store locator</a>
         </div>
         <div>
           <h4>Company</h4>
           <a href="#">Careers</a>
-          <a href="#">Franchise</a>
-          <a href="#">Investors</a>
+          <a href="#">Franchise enquiry</a>
+          <a href="#">Nutrition &amp; allergens</a>
+          <a href="#">Press</a>
         </div>
         <div>
           <h4>Follow</h4>
           <a href="#">Instagram</a>
           <a href="#">Facebook</a>
-          <a href="#">X / Twitter</a>
+          <a href="#">X</a>
+          <a href="#">YouTube</a>
         </div>
       </div>
     </div>
-  </footer>
 
-  <script src="js/script.js"></script>
+    <div class="footer-bottom">
+      <span>&copy; <span id="year"></span> Burger King design concept &mdash; not an official site.</span>
+      <span>Built for demonstration purposes only.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/script.js"></script>
 </body>
 </html>
