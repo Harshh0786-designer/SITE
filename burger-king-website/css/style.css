@@ -462,6 +462,26 @@ h1, h2, h3, h4 {
   border: 2px dashed rgba(245, 179, 53, 0.35);
 }
 
+.hero-caption {
+  position: absolute;
+  top: 9%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;
+  padding: 7px 16px;
+  border-radius: var(--r-pill);
+  border: 1px solid rgba(245, 179, 53, 0.4);
+  background: rgba(28, 19, 16, 0.72);
+  color: var(--mustard);
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 0.88rem;
+  white-space: nowrap;
+  transition: opacity 0.25s ease;
+}
+
+.hero-caption.is-swapping { opacity: 0; }
+
 /* ==========================================================================
    Burger stack (shared: hero + configurator)
    ========================================================================== */

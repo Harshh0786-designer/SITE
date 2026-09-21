@@ -93,6 +93,77 @@
     document.addEventListener("visibilitychange", () => (document.hidden ? stop() : play()));
   }
 
+  /* ------------------------------------------------------- hero burger loop */
+  const HERO_BUILDS = [
+    { name: "The Whopper®", layers: ["lettuce", "tomato", "cheese", "patty", "onion"] },
+    { name: "Double Patty Stack", layers: ["cheese", "patty", "patty2", "onion"] },
+    { name: "Chicken Tandoori Grill", layers: ["lettuce", "tomato", "patty", "jalapeno", "onion"] },
+    { name: "Paneer King Melt", layers: ["lettuce", "tomato", "cheese", "patty"] }
+  ];
+
+  function initHeroBurger() {
+    const stack = $("#hero-stack");
+    const caption = $("#hero-caption");
+    const buns = ["bun-top", "bun-bottom"];
+    const layers = $$(".layer", stack);
+
+    // Resting markup shows every layer, so the hero reads complete without JS.
+    if (reduceMotion) {
+      const first = new Set([...buns, ...HERO_BUILDS[0].layers]);
+      layers.forEach((l) => l.classList.toggle("is-off", !first.has(l.dataset.layer)));
+      caption.textContent = HERO_BUILDS[0].name;
+      return;
+    }
+
+    const apply = (build) => {
+      const on = new Set([...buns, ...build.layers]);
+      let step = 0;
+
+      for (const layer of layers) {
+        const shouldShow = on.has(layer.dataset.layer);
+        const showing = !layer.classList.contains("is-off");
+        // Stagger only the layers being added, top-down, so it reads as stacking.
+        layer.style.transitionDelay = shouldShow && !showing ? `${step++ * 90}ms` : "0ms";
+        layer.classList.toggle("is-off", !shouldShow);
+      }
+
+      caption.classList.add("is-swapping");
+      setTimeout(() => {
+        caption.textContent = build.name;
+        caption.classList.remove("is-swapping");
+      }, 250);
+    };
+
+    let index = 0;
+    let timer = null;
+
+    const advance = () => {
+      index = (index + 1) % HERO_BUILDS.length;
+      apply(HERO_BUILDS[index]);
+    };
+
+    const start = () => {
+      if (timer === null) timer = setInterval(advance, 4200);
+    };
+    const stop = () => {
+      if (timer !== null) clearInterval(timer);
+      timer = null;
+    };
+
+    setTimeout(() => apply(HERO_BUILDS[0]), 900);
+
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver(
+        ([entry]) => (entry.isIntersecting && !document.hidden ? start() : stop()),
+        { threshold: 0.2 }
+      ).observe(stack);
+    } else {
+      start();
+    }
+
+    document.addEventListener("visibilitychange", () => (document.hidden ? stop() : start()));
+  }
+
   /* ------------------------------------------------------------------- nav */
   function initNav() {
     const toggle = $("#nav-toggle");
@@ -475,6 +546,7 @@
 
   const boot = () => {
     startEmbers();
+    initHeroBurger();
     initNav();
     initTray();
     initMenu();
