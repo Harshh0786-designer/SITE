@@ -3,151 +3,413 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HD Creations</title>
+    <title>Digital Birbal | Websites, Ads, Social Media &amp; SEO Under One Roof</title>
+    <meta name="description" content="Digital Birbal is a full-service digital agency: website creation, Meta &amp; Google Ads management, social media handling and SEO services, all under one roof.">
+    <meta name="theme-color" content="#000000">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Digital Birbal | All your digital services under one roof">
+    <meta property="og:description" content="Website creation, Meta &amp; Google Ads, social media handling and SEO, all from one team.">
+    <meta property="og:image" content="android-chrome-512x512.png">
+
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="manifest" href="site.webmanifest">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <script>document.documentElement.classList.add('js');</script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "ProfessionalService",
+        "name": "Digital Birbal",
+        "description": "Website creation, Meta & Google Ads management, social media handling and SEO services under one roof.",
+        "serviceType": ["Website Creation", "Meta Ads Management", "Google Ads Management", "Social Media Management", "SEO Services"]
+    }
+    </script>
 </head>
-<body >
-    <header>
-        <div class="container">
-            <a href="https://www.instagram.com/hd_creations0906?igsh=b3BybDR6bmRlMjFo"><img src="/Assets/DPP.png" alt="LOGO" width="150"></a>
-            
-            <nav>
-                <div class="menu-toggle" id="menu-toggle">
-                    <div class="hamburger"></div>
-                    <div class="hamburger"></div>
-                    <div class="hamburger"></div>
+<body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <!-- ============ HEADER ============ -->
+    <header class="site-header" id="top">
+        <div class="header-inner">
+
+            <!-- Left: navigation -->
+            <div class="header-left">
+                <button class="icon-btn menu-btn" id="menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="primary-nav">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+                </button>
+                <nav class="primary-nav" id="primary-nav" aria-label="Primary">
+                    <ul>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#why">Why Us</a></li>
+                        <li><a href="#process">Process</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+
+            <!-- Centre: logo -->
+            <a href="#top" class="logo" aria-label="Digital Birbal home">
+                <span class="logo-top">Digital</span>
+                <span class="logo-bottom">Birbal<span class="logo-dot" aria-hidden="true"></span></span>
+            </a>
+
+            <!-- Right: search + profile -->
+            <div class="header-right">
+                <div class="search" id="search">
+                    <button class="icon-btn search-toggle" id="search-toggle" aria-label="Open search" aria-expanded="false" aria-controls="search-form">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+                    </button>
+                    <form class="search-form" id="search-form" role="search" autocomplete="off">
+                        <div class="search-field">
+                            <label for="search-input" class="visually-hidden">Search services</label>
+                            <svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+                            <input type="search" id="search-input" placeholder="Search services…"
+                                   role="combobox" aria-expanded="false" aria-controls="search-results" aria-autocomplete="list">
+                            <kbd class="search-kbd" aria-hidden="true">/</kbd>
+                        </div>
+                        <ul class="search-results" id="search-results" role="listbox" aria-label="Search results" hidden></ul>
+                    </form>
                 </div>
-                <ul id="menu">
-                    <li><a href="#services">Services</a></li>
-                    <li><a href="#portfolio">Portfolio</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
+
+                <div class="profile" id="profile">
+                    <button class="icon-btn profile-btn" id="profile-btn" aria-label="Account menu" aria-haspopup="menu" aria-expanded="false" aria-controls="profile-menu">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>
+                    </button>
+                    <div class="profile-menu" id="profile-menu" role="menu" hidden>
+                        <p class="profile-menu-title">Client account</p>
+                        <button role="menuitem" data-open-auth="signin">Sign in</button>
+                        <button role="menuitem" data-open-auth="signup">Create account</button>
+                        <hr>
+                        <a role="menuitem" href="#contact">Book a free consultation</a>
+                        <a role="menuitem" href="#faq">Help &amp; FAQs</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </header>
 
-    <section id="hero">
-        <div class="container">
-            <div class="heading">
-                <h1>HD CREATIONS</h1>
-            </div>
-            <div class="sub-head">
-            <h2>ELEVATE YOUR VISION WITH HD CREATIONS</h2>
-        </div>
-       
-            <p>We bring your ideas to life with our expertise in branding, web design, 3D modeling, and more.</p>
-            <a href="#contact" class="btn">Get in Touch</a>
-        </div>
-    </section>
+    <main id="main">
 
-    <section id="services" class="container">
-        <div class="heading">
-        <h2>Our Services</h2>
-    </div>
-        <div class="service-list">
-            <div class="service">
-                <h3>Branding</h3>
-                <p>Creating unique and impactful brand identities.</p>
+        <!-- ============ HERO ============ -->
+        <section class="hero">
+            <div class="container hero-inner">
+                <p class="eyebrow reveal">Digital agency &middot; All under one roof</p>
+                <h1 class="hero-title reveal">Clever ideas.<br><span class="stroke">Clear results.</span></h1>
+                <p class="hero-sub reveal">
+                    Website creation, Meta &amp; Google Ads, social media handling and SEO,
+                    planned and run by one team with one strategy and one point of contact.
+                </p>
+                <div class="hero-actions reveal">
+                    <a href="#contact" class="btn btn-solid">Get a free consultation</a>
+                    <a href="#services" class="btn btn-ghost">Explore services</a>
+                </div>
+                <ul class="hero-chips reveal" aria-label="Our services">
+                    <li><a href="#service-web">Websites</a></li>
+                    <li><a href="#service-ads">Meta &amp; Google Ads</a></li>
+                    <li><a href="#service-social">Social Media</a></li>
+                    <li><a href="#service-seo">SEO</a></li>
+                </ul>
             </div>
-            <div class="service">
-                <h3>Business Card Designs</h3>
-                <p>Designing professional and memorable business cards.</p>
-            </div>
-            <div class="service">
-                <h3>Web Designs</h3>
-                <p>Developing responsive and engaging websites.</p>
-            </div>
-            <div class="service">
-                <h3>3D Models & Interior Designs</h3>
-                <p>Crafting realistic 3D models for interior designs.</p>
-            </div>
-            <div class="service">
-                <h3>Brochures & Pamphlets</h3>
-                <p>Let people know about your company.</p>
-            </div>
-            <div class="service">
-                <h3> Vector Image Manipulation</h3>
-                <p>A cartoon creation.</p>
-            </div>
-            <div class="service">
-                <h3>Image Restoration</h3>
-                <p>Restore your blurred memories.</p>
-            </div>
-            <div class="service">
-                <h3>Product Packing & Display</h3>
-                <p>Creating identity for your own products.</p>
-            </div>
-            <div class="service">
-                <h3>Video Sequencing & Editting</h3>
-                <p>Combining clips to make a scene.</p>
-            </div>
-            <div class="service">
-                <h3>Image Typography</h3>
-                <p>The art & technique of creating images from texts.</p>
-            </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="portfolio" class="container">
-        <div class="heading">
-            <div class="heading">
-        <h2>Our Portfolio</h2>
-        </div><hr><hr>
-        <center>
-        <div class="heading">
-            <h1><u><b>LANDSCAPE</b></u></h1>
+        <!-- ============ MARQUEE ============ -->
+        <div class="marquee" aria-hidden="true">
+            <div class="marquee-track">
+                <span>Website Creation</span><span>Meta Ads</span><span>Google Ads</span><span>Social Media</span><span>SEO</span>
+                <span>Website Creation</span><span>Meta Ads</span><span>Google Ads</span><span>Social Media</span><span>SEO</span>
+            </div>
         </div>
-        </center>
-        </div>
-        <center>
-        <img src="Assets/3d Bike.png" alt="3D BIKE" width="500">
-        <img src="/Assets/bath interior.jpg" alt="BATH INTERIOR DESIGN " width="500">
-        <img src="/Assets/black and white to color.jpg" alt="BEFORE & AFTER" width="500" height="290">
-        <img src="Assets/living.jpg" alt="3d interior" width="500">
-        <img src="Assets/PA.jpg" alt="Advertisement" width="500" height="250">
-        <img src="Assets/Untitled-2-01.jpg" alt="banner" width="500" height="250">
-        <img src="Assets/Product ad-01.jpg" alt="Ads" width="500">
-        <br><br><br><br><br><br><br><br><hr><hr><br>
-        <div class="heading">
-        <h1><u><b>PORTRAITS</b></u></h1>
-        </div>
-        <br><br><br><br>
-        <img src="/Assets/product ad.jpg" alt="PACKAGING" width="500" >
-        <img src="/Assets/web banner port.jpg" alt="BANNER " width="500">
-        <img src="/Assets/infography-01.jpg" alt="INGOGRAPHY" width="500">
-        <img src="/Assets//POST.jpg" alt="Pamphlets" width="500">
-        <img src="/Assets/poster.jpg" alt="POSTER" width="500">
-        <img src="/Assets/INCREDIBLES MOVIE POSTER-01.jpg" alt="POSTER" width="500">
-        </center>
-    </section>
 
-    <section id="about" class="container">
-        <h2>About Us</h2>
-        <p>HD Creations is a full-service design studio specializing in branding, web design, and 3D modeling. We are passionate about bringing your vision to life.</p>
-    </section>
+        <!-- ============ SERVICES ============ -->
+        <section class="section" id="services">
+            <div class="container">
+                <div class="section-head reveal">
+                    <p class="eyebrow">Services</p>
+                    <h2>Everything digital.<br>One roof.</h2>
+                    <p class="section-sub">Start with one service or combine them all. Every channel is planned to work together towards the same goal.</p>
+                </div>
 
-    <section id="contact" class="container">
-        <h2>Contact Us</h2>
-        
-        <form action="#" method="post">
-            <input type="text" name="name" placeholder="Your Name" required>
-            <input type="email" name="email" placeholder="Your Email" required>
-            <textarea name="message" placeholder="Your Message" required></textarea>
-            <button type="submit">Send Message</button>
-        </form>
-    </section>
+                <div class="service-grid">
+                    <article class="service-card reveal" id="service-web">
+                        <div class="service-top">
+                            <span class="service-num">01</span>
+                            <svg class="service-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 8h18M8 21h8M12 18v3"/></svg>
+                        </div>
+                        <h3>Website Creation</h3>
+                        <p>Fast, mobile-first websites that look sharp, load quickly and turn visitors into customers.</p>
+                        <ul class="service-list">
+                            <li>Custom design &amp; development</li>
+                            <li>Business sites, landing pages &amp; e-commerce</li>
+                            <li>Domain, hosting &amp; security setup</li>
+                            <li>Ongoing updates &amp; maintenance</li>
+                        </ul>
+                        <a href="#contact" class="service-link" data-service="Website Creation">Enquire about websites <span aria-hidden="true">&rarr;</span></a>
+                    </article>
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2024 HD Creations. All rights reserved.</p>
-        </div>
-        <div class="social-media">
-            <a href="https://www.linkedin.com/company/hdcreations0906/"><img src="/Assets/Linkdin icon.png" alt="LinkdIN" width="30" ></a>
-            
-            <a href="https://www.instagram.com/hd_creations0906?igsh=b3BybDR6bmRlMjFo"><img src="/Assets/insta icon.png" alt="Instagram" width="30"></a>
+                    <article class="service-card reveal" id="service-ads">
+                        <div class="service-top">
+                            <span class="service-num">02</span>
+                            <svg class="service-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg>
+                        </div>
+                        <h3>Meta &amp; Google Ads</h3>
+                        <p>Paid campaigns on Facebook, Instagram, Google Search, YouTube and Display, built to bring leads and sales, not just clicks.</p>
+                        <ul class="service-list">
+                            <li>Campaign strategy &amp; account setup</li>
+                            <li>Audience targeting &amp; retargeting</li>
+                            <li>Ad creatives &amp; copywriting</li>
+                            <li>Conversion tracking &amp; budget optimisation</li>
+                        </ul>
+                        <a href="#contact" class="service-link" data-service="Meta & Google Ads">Enquire about ads <span aria-hidden="true">&rarr;</span></a>
+                    </article>
+
+                    <article class="service-card reveal" id="service-social">
+                        <div class="service-top">
+                            <span class="service-num">03</span>
+                            <svg class="service-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12Z"/><path d="M8.5 12h.01M12 12h.01M15.5 12h.01"/></svg>
+                        </div>
+                        <h3>Social Media Handling</h3>
+                        <p>Consistent, on-brand content and community management that keeps your audience engaged every week.</p>
+                        <ul class="service-list">
+                            <li>Monthly content calendar</li>
+                            <li>Post, carousel &amp; reel design</li>
+                            <li>Captions, hashtags &amp; scheduling</li>
+                            <li>Comment &amp; DM management</li>
+                        </ul>
+                        <a href="#contact" class="service-link" data-service="Social Media Handling">Enquire about social media <span aria-hidden="true">&rarr;</span></a>
+                    </article>
+
+                    <article class="service-card reveal" id="service-seo">
+                        <div class="service-top">
+                            <span class="service-num">04</span>
+                            <svg class="service-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg>
+                        </div>
+                        <h3>SEO Services</h3>
+                        <p>Get found on Google by the people already searching for what you offer, and keep climbing.</p>
+                        <ul class="service-list">
+                            <li>Technical SEO audit &amp; fixes</li>
+                            <li>Keyword research &amp; on-page SEO</li>
+                            <li>Local SEO &amp; Google Business Profile</li>
+                            <li>Content &amp; link building</li>
+                        </ul>
+                        <a href="#contact" class="service-link" data-service="SEO Services">Enquire about SEO <span aria-hidden="true">&rarr;</span></a>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ WHY ONE ROOF ============ -->
+        <section class="section section-line" id="why">
+            <div class="container">
+                <div class="section-head reveal">
+                    <p class="eyebrow">Why Digital Birbal</p>
+                    <h2>Why one roof<br>works better.</h2>
+                </div>
+                <div class="why-grid">
+                    <div class="why-item reveal">
+                        <h3>One strategy</h3>
+                        <p>Your website, ads, social and SEO all push towards the same goals instead of pulling in different directions.</p>
+                    </div>
+                    <div class="why-item reveal">
+                        <h3>One team</h3>
+                        <p>A single point of contact who knows your brand. No chasing between separate freelancers and agencies.</p>
+                    </div>
+                    <div class="why-item reveal">
+                        <h3>One report</h3>
+                        <p>Clear, plain-language reporting across every channel, so you always know what is working and why.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ PROCESS ============ -->
+        <section class="section section-line" id="process">
+            <div class="container">
+                <div class="section-head reveal">
+                    <p class="eyebrow">Process</p>
+                    <h2>Simple steps.<br>Smart growth.</h2>
+                </div>
+                <ol class="process-list">
+                    <li class="reveal">
+                        <span class="step-num">01</span>
+                        <h3>Discover</h3>
+                        <p>We learn your business, audience and goals, and audit where you stand online today.</p>
+                    </li>
+                    <li class="reveal">
+                        <span class="step-num">02</span>
+                        <h3>Plan</h3>
+                        <p>A clear roadmap: which channels, what budget, and which results to expect.</p>
+                    </li>
+                    <li class="reveal">
+                        <span class="step-num">03</span>
+                        <h3>Launch</h3>
+                        <p>We build and go live with your website, campaigns, content and SEO fixes.</p>
+                    </li>
+                    <li class="reveal">
+                        <span class="step-num">04</span>
+                        <h3>Grow</h3>
+                        <p>Measure, report and refine every month to keep results improving.</p>
+                    </li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- ============ FAQ ============ -->
+        <section class="section section-line" id="faq">
+            <div class="container faq-wrap">
+                <div class="section-head reveal">
+                    <p class="eyebrow">FAQ</p>
+                    <h2>Good questions.</h2>
+                </div>
+                <div class="faq-list">
+                    <details class="reveal">
+                        <summary>Do I have to take all four services?</summary>
+                        <p>No. You can start with a single service and add more whenever you are ready. Combining them simply makes each channel work harder.</p>
+                    </details>
+                    <details class="reveal">
+                        <summary>Is the ad budget included in your fee?</summary>
+                        <p>Your ad budget is paid directly to Meta or Google. Our fee covers strategy, setup, creatives and ongoing management of your campaigns.</p>
+                    </details>
+                    <details class="reveal">
+                        <summary>How long does SEO take to show results?</summary>
+                        <p>Early improvements often appear within a few weeks, while stronger rankings usually build over three to six months depending on your competition.</p>
+                    </details>
+                    <details class="reveal">
+                        <summary>Who owns my website and ad accounts?</summary>
+                        <p>You do. Your website, domain, ad accounts and social profiles are set up in your business's name.</p>
+                    </details>
+                    <details class="reveal">
+                        <summary>Do you work with small businesses and startups?</summary>
+                        <p>Yes. We shape every plan around your stage and budget, whether you are launching your first website or scaling your campaigns.</p>
+                    </details>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ CONTACT ============ -->
+        <section class="section section-line" id="contact">
+            <div class="container contact-grid">
+                <div class="contact-intro reveal">
+                    <p class="eyebrow">Contact</p>
+                    <h2>Let's make your brand the wisest in the room.</h2>
+                    <p class="section-sub">Tell us about your business and what you need. We'll get back to you with a clear plan and next steps.</p>
+                    <ul class="contact-details">
+                        <li>
+                            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+                            <a href="mailto:hello@digitalbirbal.com">hello@digitalbirbal.com</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Set data-endpoint to a form service URL (e.g. Formspree) to receive submissions.
+                     Without it, the form opens the visitor's email app instead. -->
+                <form class="contact-form reveal" id="contact-form" data-endpoint="" data-email="hello@digitalbirbal.com" novalidate>
+                    <div class="field-row">
+                        <div class="field">
+                            <label for="cf-name">Name</label>
+                            <input id="cf-name" name="name" type="text" autocomplete="name" required>
+                        </div>
+                        <div class="field">
+                            <label for="cf-email">Email</label>
+                            <input id="cf-email" name="email" type="email" autocomplete="email" required>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label for="cf-phone">Phone <span class="optional">(optional)</span></label>
+                        <input id="cf-phone" name="phone" type="tel" autocomplete="tel">
+                    </div>
+                    <fieldset class="field">
+                        <legend>What do you need?</legend>
+                        <div class="chip-group">
+                            <label class="chip"><input type="checkbox" name="services" value="Website Creation"><span>Website</span></label>
+                            <label class="chip"><input type="checkbox" name="services" value="Meta & Google Ads"><span>Meta &amp; Google Ads</span></label>
+                            <label class="chip"><input type="checkbox" name="services" value="Social Media Handling"><span>Social Media</span></label>
+                            <label class="chip"><input type="checkbox" name="services" value="SEO Services"><span>SEO</span></label>
+                        </div>
+                    </fieldset>
+                    <div class="field">
+                        <label for="cf-message">Message</label>
+                        <textarea id="cf-message" name="message" rows="4" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-solid btn-block">Send enquiry</button>
+                    <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- ============ FOOTER ============ -->
+    <footer class="site-footer">
+        <div class="container footer-inner">
+            <a href="#top" class="logo logo-footer" aria-label="Back to top">
+                <span class="logo-top">Digital</span>
+                <span class="logo-bottom">Birbal<span class="logo-dot" aria-hidden="true"></span></span>
+            </a>
+            <p class="footer-tag">Clever ideas. Clear results.</p>
+            <nav aria-label="Footer">
+                <ul class="footer-nav">
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#why">Why Us</a></li>
+                    <li><a href="#process">Process</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <ul class="social">
+                <li>
+                    <a href="#" aria-label="Instagram">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/></svg>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" aria-label="LinkedIn">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 10v7M8 7v.01M12 17v-4a2 2 0 0 1 4 0v4M12 10v7"/></svg>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" aria-label="Facebook">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 3h-2a4 4 0 0 0-4 4v3H7v4h2v7h4v-7h2.5l.5-4h-3V7.5a.5.5 0 0 1 .5-.5H15Z"/></svg>
+                    </a>
+                </li>
+            </ul>
+            <p class="copyright">&copy; <span id="year">2026</span> Digital Birbal. All rights reserved.</p>
         </div>
     </footer>
+
+    <!-- ============ SIGN-IN DIALOG ============ -->
+    <dialog class="auth-dialog" id="auth-dialog" aria-labelledby="auth-title">
+        <form method="dialog" class="auth-close-form">
+            <button class="icon-btn auth-close" aria-label="Close">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+            </button>
+        </form>
+        <h2 id="auth-title">Sign in</h2>
+        <p class="auth-sub" id="auth-sub">Access your project updates and reports.</p>
+        <form class="auth-form" id="auth-form" novalidate>
+            <div class="field auth-name-field" hidden>
+                <label for="auth-name">Name</label>
+                <input id="auth-name" name="name" type="text" autocomplete="name">
+            </div>
+            <div class="field">
+                <label for="auth-email">Email</label>
+                <input id="auth-email" name="email" type="email" autocomplete="email" required>
+            </div>
+            <div class="field">
+                <label for="auth-password">Password</label>
+                <input id="auth-password" name="password" type="password" autocomplete="current-password" required minlength="6">
+            </div>
+            <button type="submit" class="btn btn-solid btn-block" id="auth-submit">Sign in</button>
+            <p class="form-status" id="auth-status" role="status" aria-live="polite"></p>
+            <p class="auth-switch" id="auth-switch">New here? <button type="button" data-open-auth="signup">Create an account</button></p>
+        </form>
+    </dialog>
 
     <script src="script.js"></script>
 </body>
