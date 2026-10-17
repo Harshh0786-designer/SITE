@@ -897,6 +897,22 @@ svg {
     padding-top: 0;
 }
 
+/* "Explore further": white by default, black on hover */
+.btn-explore:hover {
+    background: var(--ink);
+    border-color: var(--ink);
+    color: var(--white);
+}
+
+/* The card keeps its white background while the button is hovered */
+.service-card:has(.btn-explore:hover) {
+    background: var(--white);
+}
+
+.service-card:has(.btn-explore:hover) .service-icon {
+    transform: none;
+}
+
 /* ---------- Why ---------- */
 .why-grid {
     display: grid;
@@ -1354,20 +1370,10 @@ svg {
     padding: clamp(48px, 8vw, 96px) 0 clamp(32px, 5vw, 56px);
 }
 
+/* "Back to home" sits in the top-left corner, clear of the heading */
 .back-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    margin-bottom: 28px;
-    font-size: 0.9rem;
-    font-weight: 500;
-    color: var(--ink-muted);
-}
-
-.back-link:hover {
-    color: var(--ink);
-    text-decoration: underline;
-    text-underline-offset: 4px;
+    align-self: flex-start;
+    margin-bottom: clamp(32px, 5vw, 48px);
 }
 
 .page-title {
