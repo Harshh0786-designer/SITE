@@ -499,7 +499,7 @@
 
     /* =========================================================
        Services carousel (services page): 2x2 cards per slide
-       Arrows, dots, swipe (scroll-snap) and arrow keys.
+       Dots, swipe (scroll-snap) and arrow keys; arrow buttons are optional.
        ========================================================= */
     const track = $('#carousel-track');
     if (track) {
@@ -518,8 +518,8 @@
                 slide.setAttribute('aria-hidden', String(!on));
             });
             dots.forEach((dot, i) => dot.setAttribute('aria-current', String(i === index)));
-            prevBtn.disabled = index === 0;
-            nextBtn.disabled = index === slides.length - 1;
+            if (prevBtn) prevBtn.disabled = index === 0;
+            if (nextBtn) nextBtn.disabled = index === slides.length - 1;
             counter.textContent = index + 1;
         };
 
@@ -529,8 +529,8 @@
             update(i);
         };
 
-        prevBtn.addEventListener('click', () => show(current - 1));
-        nextBtn.addEventListener('click', () => show(current + 1));
+        prevBtn?.addEventListener('click', () => show(current - 1));
+        nextBtn?.addEventListener('click', () => show(current + 1));
         dots.forEach((dot, i) => dot.addEventListener('click', () => show(i)));
 
         track.addEventListener('keydown', (e) => {
