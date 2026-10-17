@@ -276,15 +276,15 @@ svg {
 }
 
 .site-footer .brand {
-    gap: 14px;
+    gap: 6px;
 }
 
 .site-footer .brand-mascot {
-    height: 140px;
+    height: 84px;
 }
 
 .site-footer .wordmark {
-    font-size: 1.9rem;
+    font-size: 1.15rem;
 }
 
 /* =========================================================
@@ -1208,23 +1208,35 @@ svg {
 }
 
 /* =========================================================
-   Footer
+   Footer: logo (left) · menu (centre) · social icons (bottom right)
    ========================================================= */
 .site-footer {
     background: var(--beige);
-    padding: 72px 0 40px;
+    padding: 48px 0 28px;
 }
 
 .footer-inner {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 24px;
+}
+
+.footer-brand {
+    justify-self: start;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    text-align: center;
+    align-items: flex-start;
+    gap: 10px;
 }
 
 .footer-tag {
-    margin-top: 16px;
+    font-size: 0.85rem;
     color: var(--ink-muted);
+}
+
+.footer-menu {
+    justify-self: center;
 }
 
 .footer-nav {
@@ -1232,7 +1244,6 @@ svg {
     flex-wrap: wrap;
     justify-content: center;
     gap: 8px 28px;
-    margin-top: 32px;
     font-size: 0.92rem;
 }
 
@@ -1247,17 +1258,29 @@ svg {
     text-underline-offset: 4px;
 }
 
+.footer-bottom {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-top: 12px;
+    padding-top: 20px;
+    border-top: 1px solid var(--white);
+}
+
 .social {
     display: flex;
-    gap: 12px;
-    margin-top: 32px;
+    gap: 10px;
+    margin-left: auto;
 }
 
 .social a {
     display: grid;
     place-items: center;
-    width: 42px;
-    height: 42px;
+    width: 40px;
+    height: 40px;
     background: var(--white);
     border: var(--outline);
     border-radius: 50%;
@@ -1274,7 +1297,6 @@ svg {
 }
 
 .copyright {
-    margin-top: 48px;
     font-size: 0.82rem;
     color: var(--ink-muted);
 }
@@ -1608,11 +1630,21 @@ svg {
     }
 
     .site-footer .brand-mascot {
-        height: 120px;
+        height: 72px;
     }
 
     .site-footer .wordmark {
-        font-size: 1.6rem;
+        font-size: 1rem;
+    }
+
+    /* Footer stacks: logo, menu, then copyright with icons on the right */
+    .footer-inner {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+
+    .footer-menu {
+        justify-self: center;
     }
 
     /* Search collapses to an icon and opens as a row under the header */
