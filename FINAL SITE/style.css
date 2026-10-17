@@ -1239,38 +1239,24 @@ svg {
 /* Centre column: menu, then the list of every service */
 .footer-center {
     justify-self: center;
-    display: grid;
-    justify-items: center;
-    gap: 28px;
     margin-top: 40px; /* level with the mascot */
 }
 
-.footer-label {
-    margin-bottom: 12px;
-    font-size: 0.72rem;
-    font-weight: 600;
-    letter-spacing: 0.18em;
-    text-align: center;
-    text-transform: uppercase;
-    color: var(--ink-muted);
+/* All services listed under "Services" in the footer menu */
+.footer-nav {
+    align-items: flex-start;
 }
 
-.footer-services ul {
+.footer-subnav {
     display: grid;
-    grid-template-columns: repeat(2, auto);
-    gap: 8px 40px;
-    font-size: 0.9rem;
+    gap: 6px;
+    margin-top: 12px;
+    font-size: 0.85rem;
 }
 
-.footer-services a {
+.footer-subnav a {
     color: var(--ink-muted);
-    transition: color 0.2s;
-}
-
-.footer-services a:hover {
-    color: var(--ink);
-    text-decoration: underline;
-    text-underline-offset: 4px;
+    white-space: nowrap;
 }
 
 /* Address, phone, email and website under the footer logo */
@@ -1878,8 +1864,16 @@ svg {
         margin-top: 0;
     }
 
-    .footer-services ul {
-        gap: 8px 24px;
+    /* Services with its list on the left, other links on the right */
+    .footer-nav {
+        display: grid;
+        grid-template-columns: auto auto;
+        grid-template-rows: repeat(4, auto) 1fr; /* last row soaks up the list's height */
+        gap: 10px 40px;
+    }
+
+    .footer-nav-services {
+        grid-row: 1 / -1;
     }
 
     /* Search collapses to an icon and opens as a row under the header */
