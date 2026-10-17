@@ -40,11 +40,16 @@
     <header class="site-header" id="top">
         <div class="header-inner">
 
-            <!-- Left: logo -->
-            <a href="#top" class="brand" aria-label="Digital Birbal home">
-                <img class="brand-mascot" src="Assets/digital-birbal-mascot.png" alt="" width="280" height="262">
-                <span class="wordmark" aria-hidden="true"><span class="wm-initial">D</span>igital <span class="wm-initial">B</span>irbal<sup class="wm-tm">TM</sup></span>
-            </a>
+            <!-- Left: menu button (small screens) + logo -->
+            <div class="header-left">
+                <button class="icon-btn menu-btn" id="menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="primary-nav">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+                </button>
+                <a href="#top" class="brand" aria-label="Digital Birbal home">
+                    <img class="brand-mascot" src="Assets/digital-birbal-mascot.png" alt="" width="280" height="262">
+                    <span class="wordmark" aria-hidden="true"><span class="wm-initial">D</span>igital <span class="wm-initial">B</span>irbal<sup class="wm-tm">TM</sup></span>
+                </a>
+            </div>
 
             <!-- Centre: menu -->
             <nav class="primary-nav" id="primary-nav" aria-label="Primary">
@@ -89,9 +94,6 @@
                     </div>
                 </div>
 
-                <button class="icon-btn menu-btn" id="menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="primary-nav">
-                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
-                </button>
             </div>
         </div>
     </header>
@@ -348,7 +350,7 @@
     <!-- ============ FOOTER ============ -->
     <footer class="site-footer">
         <div class="container footer-inner">
-            <a href="#top" class="brand brand-stacked" aria-label="Digital Birbal, back to top">
+            <a href="#top" class="brand" aria-label="Digital Birbal, back to top">
                 <img class="brand-mascot" src="Assets/digital-birbal-mascot.png" alt="" width="280" height="262" loading="lazy">
                 <span class="wordmark" aria-hidden="true"><span class="wm-initial">D</span>igital <span class="wm-initial">B</span>irbal<sup class="wm-tm">TM</sup></span>
             </a>
