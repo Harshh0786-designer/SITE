@@ -73,21 +73,21 @@
        Search
        ========================================================= */
     const SEARCH_INDEX = [
-        { title: 'Website Development', type: 'Service', page: 'home', href: '#service-web',
+        { title: 'Website Development', type: 'Service', url: 'website-development.html',
           keywords: 'website web site design development developer landing page hosting domain maintenance redesign' },
-        { title: 'Meta & Google Ads', type: 'Service', page: 'home', href: '#service-ads',
+        { title: 'Meta & Google Ads', type: 'Service', url: 'meta-google-ads.html',
           keywords: 'meta facebook instagram google ads adwords ppc paid advertising campaigns youtube display retargeting leads sales performance marketing' },
-        { title: 'Social Media Handling', type: 'Service', page: 'home', href: '#service-social',
+        { title: 'Social Media Handling', type: 'Service', url: 'social-media-handling.html',
           keywords: 'social media instagram facebook linkedin content posts reels carousel calendar management community smm captions' },
-        { title: 'SEO Services', type: 'Service', page: 'home', href: '#service-seo',
+        { title: 'SEO Services', type: 'Service', url: 'seo-services.html',
           keywords: 'seo search engine optimisation optimization google ranking rank keywords local business profile gmb backlinks audit traffic' },
-        { title: 'Brand Identity', type: 'Service', page: 'services', href: '#svc-brand-identity',
+        { title: 'Brand Identity', type: 'Service', url: 'brand-identity.html',
           keywords: 'brand branding identity logo design colours colors typography guidelines stationery visiting card' },
-        { title: 'CMS Solutions', type: 'Service', page: 'services', href: '#svc-cms',
+        { title: 'CMS Solutions', type: 'Service', url: 'cms-solutions.html',
           keywords: 'cms content management system wordpress headless update edit website blog' },
-        { title: 'E-commerce Solutions', type: 'Service', page: 'services', href: '#svc-ecommerce',
+        { title: 'E-commerce Solutions', type: 'Service', url: 'ecommerce-solutions.html',
           keywords: 'ecommerce e-commerce online store shop shopify woocommerce payments cart products selling' },
-        { title: 'Mobile App', type: 'Service', page: 'services', href: '#svc-mobile-app',
+        { title: 'Mobile App', type: 'Service', url: 'mobile-app.html',
           keywords: 'mobile app application android ios iphone play store app store development' },
         { title: 'All services', type: 'Page', page: 'services', href: '#all-services',
           keywords: 'all services explore list everything offer offering' },
@@ -212,6 +212,7 @@
         searchInput.blur();
         setSearch(false);
         if (item.action === 'signin') openAuth('signin');
+        else if (item.url) window.location.href = item.url; // service landing page
         else goTo(item.href, item.page);
     };
 
