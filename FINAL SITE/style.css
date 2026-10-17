@@ -882,35 +882,18 @@ svg {
     transform: translateX(4px);
 }
 
-/* Enquire link with the "Explore further" button underneath (SEO card) */
-.service-actions {
+/* "Explore further", centred under the services grid */
+.services-more {
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 16px;
-    margin-top: auto;
-    padding-top: 32px;
+    justify-content: center;
+    margin-top: clamp(32px, 5vw, 48px);
 }
 
-.service-actions .service-link {
-    margin-top: 0;
-    padding-top: 0;
-}
-
-/* "Explore further": white by default, black on hover */
+/* white by default, black on hover */
 .btn-explore:hover {
     background: var(--ink);
     border-color: var(--ink);
     color: var(--white);
-}
-
-/* The card keeps its white background while the button is hovered */
-.service-card:has(.btn-explore:hover) {
-    background: var(--white);
-}
-
-.service-card:has(.btn-explore:hover) .service-icon {
-    transform: none;
 }
 
 /* ---------- Why ---------- */
