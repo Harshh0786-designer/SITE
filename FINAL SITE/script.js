@@ -324,7 +324,7 @@
     });
 
     window.addEventListener('resize', () => {
-        if (!window.matchMedia('(max-width: 960px)').matches) setMenu(false);
+        if (!window.matchMedia('(max-width: 1100px)').matches) setMenu(false);
         if (!isMobile()) search.classList.remove('is-open');
     });
 
