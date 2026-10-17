@@ -6,6 +6,8 @@
     const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const isMobile = () => window.matchMedia('(max-width: 760px)').matches;
+    const PAGES = { home: 'index.html', services: 'services.html' };
+    const currentPage = document.body.dataset.page || 'home';
 
     /* ---------- Header border on scroll ---------- */
     const header = $('.site-header');
@@ -49,12 +51,17 @@
         sections.forEach((s) => spy.observe(s));
     }
 
-    /* ---------- Smooth scroll + highlight helper ---------- */
-    const goTo = (hash) => {
-        const target = $(hash);
-        if (!target) return;
+    /* ---------- Smooth scroll + highlight helper ----------
+       Scrolls to a section on this page, or opens the other page at that section. */
+    const goTo = (hash, page = 'home') => {
+        const target = page === currentPage ? $(hash) : null;
+        if (!target) {
+            window.location.href = PAGES[page] + hash;
+            return;
+        }
         target.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth', block: 'start' });
-        history.replaceState(null, '', hash);
+        try { history.replaceState(null, '', hash); } catch {}
+        window.dispatchEvent(new HashChangeEvent('hashchange')); // lets the carousel open the right slide
         if (target.classList.contains('service-card')) {
             target.classList.remove('is-highlight');
             void target.offsetWidth; // restart the animation
@@ -66,26 +73,36 @@
        Search
        ========================================================= */
     const SEARCH_INDEX = [
-        { title: 'Website Creation', type: 'Service', href: '#service-web',
-          keywords: 'website web site design development landing page ecommerce e-commerce online store shop hosting domain wordpress shopify maintenance redesign' },
-        { title: 'Meta & Google Ads', type: 'Service', href: '#service-ads',
+        { title: 'Website Development', type: 'Service', page: 'home', href: '#service-web',
+          keywords: 'website web site design development developer landing page hosting domain maintenance redesign' },
+        { title: 'Meta & Google Ads', type: 'Service', page: 'home', href: '#service-ads',
           keywords: 'meta facebook instagram google ads adwords ppc paid advertising campaigns youtube display retargeting leads sales performance marketing' },
-        { title: 'Social Media Handling', type: 'Service', href: '#service-social',
+        { title: 'Social Media Handling', type: 'Service', page: 'home', href: '#service-social',
           keywords: 'social media instagram facebook linkedin content posts reels carousel calendar management community smm captions' },
-        { title: 'SEO Services', type: 'Service', href: '#service-seo',
+        { title: 'SEO Services', type: 'Service', page: 'home', href: '#service-seo',
           keywords: 'seo search engine optimisation optimization google ranking rank keywords local business profile gmb backlinks audit traffic' },
-        { title: 'Why one roof', type: 'Section', href: '#why',
+        { title: 'Brand Identity', type: 'Service', page: 'services', href: '#svc-brand-identity',
+          keywords: 'brand branding identity logo design colours colors typography guidelines stationery visiting card' },
+        { title: 'CMS Solutions', type: 'Service', page: 'services', href: '#svc-cms',
+          keywords: 'cms content management system wordpress headless update edit website blog' },
+        { title: 'E-commerce Solutions', type: 'Service', page: 'services', href: '#svc-ecommerce',
+          keywords: 'ecommerce e-commerce online store shop shopify woocommerce payments cart products selling' },
+        { title: 'Mobile App', type: 'Service', page: 'services', href: '#svc-mobile-app',
+          keywords: 'mobile app application android ios iphone play store app store development' },
+        { title: 'All services', type: 'Page', page: 'services', href: '#all-services',
+          keywords: 'all services explore list everything offer offering' },
+        { title: 'Why one roof', type: 'Section', page: 'home', href: '#why',
           keywords: 'why us benefits one team strategy report agency all in one' },
-        { title: 'Our process', type: 'Section', href: '#process',
+        { title: 'Our process', type: 'Section', page: 'home', href: '#process',
           keywords: 'process steps how it works discover plan launch grow onboarding' },
-        { title: 'FAQs', type: 'Section', href: '#faq',
+        { title: 'FAQs', type: 'Section', page: 'home', href: '#faq',
           keywords: 'faq questions help budget pricing price cost fee results ownership small business startup' },
-        { title: 'Contact & free consultation', type: 'Section', href: '#contact',
+        { title: 'Contact & free consultation', type: 'Section', page: 'home', href: '#contact',
           keywords: 'contact enquiry enquire inquiry quote consultation email call talk hire start' },
         { title: 'Sign in to your account', type: 'Account', action: 'signin',
           keywords: 'login log in sign in account profile portal client dashboard' },
     ];
-    const SUGGESTED = SEARCH_INDEX.filter((item) => item.type === 'Service');
+    const SUGGESTED = SEARCH_INDEX.filter((item) => item.type === 'Service').slice(0, 4);
 
     const search = $('#search');
     const searchToggle = $('#search-toggle');
@@ -134,13 +151,13 @@
             empty.setAttribute('role', 'presentation');
             empty.append('No matches. ');
             const link = document.createElement('a');
-            link.href = '#contact';
+            link.href = currentPage === 'home' ? '#contact' : 'index.html#contact';
             link.textContent = 'Ask us directly';
             link.addEventListener('click', (e) => {
                 e.preventDefault();
                 closeResults();
                 setSearch(false);
-                goTo('#contact');
+                goTo('#contact', 'home');
             });
             empty.append(link);
             resultsList.append(empty);
@@ -195,7 +212,7 @@
         searchInput.blur();
         setSearch(false);
         if (item.action === 'signin') openAuth('signin');
-        else goTo(item.href);
+        else goTo(item.href, item.page);
     };
 
     function setSearch(open) {
@@ -404,73 +421,152 @@
        ========================================================= */
     const form = $('#contact-form');
     const status = $('#form-status');
-
-    // "Enquire about …" links pre-select the matching service chip
-    $$('.service-link[data-service]').forEach((link) =>
-        link.addEventListener('click', () => {
-            const box = $$('input[name="services"]', form).find((i) => i.value === link.dataset.service);
+    if (form) {
+        // A service passed from the services page (index.html?service=...#contact) is pre-selected
+        const requested = new URLSearchParams(window.location.search).get('service');
+        if (requested) {
+            const box = $$('input[name="services"]', form).find((i) => i.value === requested);
             if (box) box.checked = true;
-        })
-    );
-
-    form.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const required = $$('[required]', form);
-        let firstInvalid = null;
-        required.forEach((field) => {
-            const valid = field.value.trim() !== '' && field.checkValidity();
-            field.setAttribute('aria-invalid', String(!valid));
-            if (!valid && !firstInvalid) firstInvalid = field;
-        });
-        if (firstInvalid) {
-            status.textContent = 'Please add your name, a valid email address and a short message.';
-            firstInvalid.focus();
-            return;
         }
 
-        const data = new FormData(form);
-        const services = data.getAll('services');
-        const endpoint = form.dataset.endpoint;
-        const submitBtn = $('button[type="submit"]', form);
+        // "Enquire about …" links pre-select the matching service chip
+        $$('.service-link[data-service]').forEach((link) =>
+            link.addEventListener('click', () => {
+                const box = $$('input[name="services"]', form).find((i) => i.value === link.dataset.service);
+                if (box) box.checked = true;
+            })
+        );
 
-        if (endpoint) {
-            submitBtn.disabled = true;
-            status.textContent = 'Sending…';
-            try {
-                const res = await fetch(endpoint, {
-                    method: 'POST',
-                    body: data,
-                    headers: { Accept: 'application/json' },
-                });
-                if (!res.ok) throw new Error(res.statusText);
-                form.reset();
-                required.forEach((f) => f.removeAttribute('aria-invalid'));
-                status.textContent = 'Thank you! Your enquiry has been sent. We will be in touch soon.';
-            } catch {
-                status.textContent = `Something went wrong. Please email us at ${form.dataset.email}.`;
-            } finally {
-                submitBtn.disabled = false;
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const required = $$('[required]', form);
+            let firstInvalid = null;
+            required.forEach((field) => {
+                const valid = field.value.trim() !== '' && field.checkValidity();
+                field.setAttribute('aria-invalid', String(!valid));
+                if (!valid && !firstInvalid) firstInvalid = field;
+            });
+            if (firstInvalid) {
+                status.textContent = 'Please add your name, a valid email address and a short message.';
+                firstInvalid.focus();
+                return;
             }
-            return;
-        }
 
-        const body = [
-            `Name: ${data.get('name')}`,
-            `Email: ${data.get('email')}`,
-            data.get('phone') ? `Phone: ${data.get('phone')}` : '',
-            services.length ? `Services: ${services.join(', ')}` : '',
-            '',
-            data.get('message'),
-        ].filter((line, i, arr) => line !== '' || arr[i - 1] !== '').join('\n');
-        const subject = `New enquiry from ${data.get('name')}`;
-        window.location.href =
-            `mailto:${form.dataset.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-        status.textContent = `Opening your email app… If nothing happens, email us at ${form.dataset.email}.`;
-    });
+            const data = new FormData(form);
+            const services = data.getAll('services');
+            const endpoint = form.dataset.endpoint;
+            const submitBtn = $('button[type="submit"]', form);
 
-    $$('[required]', form).forEach((field) =>
-        field.addEventListener('input', () => field.removeAttribute('aria-invalid'))
-    );
+            if (endpoint) {
+                submitBtn.disabled = true;
+                status.textContent = 'Sending…';
+                try {
+                    const res = await fetch(endpoint, {
+                        method: 'POST',
+                        body: data,
+                        headers: { Accept: 'application/json' },
+                    });
+                    if (!res.ok) throw new Error(res.statusText);
+                    form.reset();
+                    required.forEach((f) => f.removeAttribute('aria-invalid'));
+                    status.textContent = 'Thank you! Your enquiry has been sent. We will be in touch soon.';
+                } catch {
+                    status.textContent = `Something went wrong. Please email us at ${form.dataset.email}.`;
+                } finally {
+                    submitBtn.disabled = false;
+                }
+                return;
+            }
+
+            const body = [
+                `Name: ${data.get('name')}`,
+                `Email: ${data.get('email')}`,
+                data.get('phone') ? `Phone: ${data.get('phone')}` : '',
+                services.length ? `Services: ${services.join(', ')}` : '',
+                '',
+                data.get('message'),
+            ].filter((line, i, arr) => line !== '' || arr[i - 1] !== '').join('\n');
+            const subject = `New enquiry from ${data.get('name')}`;
+            window.location.href =
+                `mailto:${form.dataset.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            status.textContent = `Opening your email app… If nothing happens, email us at ${form.dataset.email}.`;
+        });
+
+        $$('[required]', form).forEach((field) =>
+            field.addEventListener('input', () => field.removeAttribute('aria-invalid'))
+        );
+    }
+
+    /* =========================================================
+       Services carousel (services page): 2x2 cards per slide
+       Arrows, dots, swipe (scroll-snap) and arrow keys.
+       ========================================================= */
+    const track = $('#carousel-track');
+    if (track) {
+        const slides = $$('.carousel-slide', track);
+        const dots = $$('.carousel-dot');
+        const prevBtn = $('#carousel-prev');
+        const nextBtn = $('#carousel-next');
+        const counter = $('#carousel-current');
+        let current = 0;
+
+        const update = (index) => {
+            current = index;
+            slides.forEach((slide, i) => {
+                const on = i === index;
+                slide.inert = !on;
+                slide.setAttribute('aria-hidden', String(!on));
+            });
+            dots.forEach((dot, i) => dot.setAttribute('aria-current', String(i === index)));
+            prevBtn.disabled = index === 0;
+            nextBtn.disabled = index === slides.length - 1;
+            counter.textContent = index + 1;
+        };
+
+        const show = (index, instant = false) => {
+            const i = Math.max(0, Math.min(slides.length - 1, index));
+            track.scrollTo({ left: slides[i].offsetLeft, behavior: instant || reduceMotion ? 'auto' : 'smooth' });
+            update(i);
+        };
+
+        prevBtn.addEventListener('click', () => show(current - 1));
+        nextBtn.addEventListener('click', () => show(current + 1));
+        dots.forEach((dot, i) => dot.addEventListener('click', () => show(i)));
+
+        track.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') { e.preventDefault(); show(current + 1); }
+            if (e.key === 'ArrowLeft') { e.preventDefault(); show(current - 1); }
+        });
+
+        // Keep dots in sync when the visitor swipes
+        let scrollTimer;
+        track.addEventListener('scroll', () => {
+            clearTimeout(scrollTimer);
+            scrollTimer = setTimeout(() => {
+                let nearest = 0;
+                slides.forEach((slide, i) => {
+                    if (Math.abs(slide.offsetLeft - track.scrollLeft) < Math.abs(slides[nearest].offsetLeft - track.scrollLeft)) nearest = i;
+                });
+                if (nearest !== current) update(nearest);
+            }, 80);
+        }, { passive: true });
+
+        window.addEventListener('resize', () => show(current, true));
+
+        // Open on the slide holding a linked service (services.html#svc-...)
+        const openFromHash = () => {
+            const card = window.location.hash && $(window.location.hash);
+            const slide = card && card.closest('.carousel-slide');
+            if (!slide) return false;
+            show(slides.indexOf(slide), true);
+            card.classList.remove('is-highlight');
+            void card.offsetWidth;
+            card.classList.add('is-highlight');
+            return true;
+        };
+        if (!openFromHash()) update(0);
+        window.addEventListener('hashchange', openFromHash);
+    }
 
     /* =========================================================
        Scroll reveal
@@ -495,5 +591,6 @@
     }
 
     /* ---------- Footer year ---------- */
-    $('#year').textContent = new Date().getFullYear();
+    const year = $('#year');
+    if (year) year.textContent = new Date().getFullYear();
 })();
