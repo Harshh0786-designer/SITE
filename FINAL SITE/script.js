@@ -569,6 +569,89 @@
         window.addEventListener('hashchange', openFromHash);
     }
 
+    /* ---------- Footer year ---------- */
+    const year = $('#year');
+    if (year) year.textContent = new Date().getFullYear();
+
+    /* =========================================================
+       Text scramble (home page, every section except Services)
+       Text starts as random characters and decodes into the real
+       words when its section scrolls into view.
+       ========================================================= */
+    const SCRAMBLE_SECTIONS = '.hero, .marquee, #why, #process, #faq, #contact, .site-footer';
+    const SKIP_TEXT = 'svg, script, style, input, textarea, .wordmark, .intro';
+    const CHARS = {
+        upper: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
+        lower: 'abcdefghijklmnopqrstuvwxyz',
+        digit: '0123456789',
+        other: '#%&*+=?/<>',
+    };
+    const pick = (set) => set[Math.floor(Math.random() * set.length)];
+    const randomLike = (ch) => {
+        if (/\s/.test(ch)) return ch; // keep spaces so lines wrap as normal
+        if (/[A-Z]/.test(ch)) return pick(CHARS.upper);
+        if (/[a-z]/.test(ch)) return pick(CHARS.lower);
+        if (/[0-9]/.test(ch)) return pick(CHARS.digit);
+        return pick(CHARS.other);
+    };
+    const jumble = (text) => [...text].map(randomLike).join('');
+
+    const scrambleGroups = new Map(); // section -> [{ node, text }]
+    if (currentPage === 'home' && !reduceMotion && 'IntersectionObserver' in window) {
+        $$(SCRAMBLE_SECTIONS).forEach((section) => {
+            const items = [];
+            const walker = document.createTreeWalker(section, NodeFilter.SHOW_TEXT, {
+                acceptNode: (n) => (n.nodeValue.trim() && !n.parentElement.closest(SKIP_TEXT)
+                    ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT),
+            });
+            while (walker.nextNode()) items.push({ node: walker.currentNode, text: walker.currentNode.nodeValue });
+            items.forEach((item) => { item.node.nodeValue = jumble(item.text); });
+            scrambleGroups.set(section, items);
+        });
+    }
+
+    const decode = (items) => {
+        const start = performance.now();
+        const plans = items.map(({ node, text }) => ({
+            node,
+            text,
+            // each letter settles at its own random moment within ~1.1s
+            settleAt: [...text].map(() => 250 + Math.random() * 850),
+        }));
+        const frame = (now) => {
+            const t = now - start;
+            let busy = false;
+            plans.forEach((plan) => {
+                if (plan.done) return;
+                let out = '';
+                let pending = false;
+                [...plan.text].forEach((ch, i) => {
+                    if (t >= plan.settleAt[i]) out += ch;
+                    else { out += randomLike(ch); pending = true; }
+                });
+                plan.node.nodeValue = out;
+                if (!pending) plan.done = true;
+                else busy = true;
+            });
+            if (busy) requestAnimationFrame(frame);
+        };
+        requestAnimationFrame(frame);
+    };
+
+    let scrambleStarted = false;
+    const startScramble = () => {
+        if (scrambleStarted || !scrambleGroups.size) return;
+        scrambleStarted = true;
+        const io = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (!entry.isIntersecting) return;
+                io.unobserve(entry.target);
+                decode(scrambleGroups.get(entry.target));
+            });
+        }, { threshold: 0, rootMargin: '0px 0px -15% 0px' }); // works for tall sections too
+        scrambleGroups.forEach((_, section) => io.observe(section));
+    };
+
     /* =========================================================
        Scroll reveal
        Waits for the intro (home page) so the hero rises in as it clears.
@@ -579,6 +662,7 @@
         if (revealed) return;
         revealed = true;
         $('#hero-title')?.classList.add('is-in'); // headline rises in
+        startScramble(); // sections decode as they come into view
         if (reduceMotion || !('IntersectionObserver' in window)) {
             revealEls.forEach((el) => el.classList.add('is-visible'));
         } else {
@@ -626,7 +710,4 @@
         startReveal();
     }
 
-    /* ---------- Footer year ---------- */
-    const year = $('#year');
-    if (year) year.textContent = new Date().getFullYear();
 })();
