@@ -574,7 +574,11 @@
        Waits for the intro (home page) so the hero rises in as it clears.
        ========================================================= */
     const revealEls = $$('.reveal');
+    let revealed = false;
     const startReveal = () => {
+        if (revealed) return;
+        revealed = true;
+        $('#hero-title')?.classList.add('is-in'); // headline rises in
         if (reduceMotion || !('IntersectionObserver' in window)) {
             revealEls.forEach((el) => el.classList.add('is-visible'));
         } else {
@@ -606,6 +610,10 @@
             startReveal();
         };
         const skip = () => intro.classList.add('is-skipped');
+        // Start the page's entrance as the intro screen begins to fade
+        intro.addEventListener('animationstart', (e) => {
+            if (e.target === intro) startReveal();
+        });
         intro.addEventListener('animationend', (e) => {
             if (e.target === intro) finish();
         });
