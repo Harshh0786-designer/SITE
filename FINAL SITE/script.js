@@ -574,11 +574,12 @@
     if (year) year.textContent = new Date().getFullYear();
 
     /* =========================================================
-       Text scramble (home page, every section except Services)
+       Text scramble (home page, every section except Services and
+       the scrolling services strip)
        Text starts as random characters and decodes into the real
        words when its section scrolls into view.
        ========================================================= */
-    const SCRAMBLE_SECTIONS = '.hero, .marquee, #why, #process, #faq, #contact, .site-footer';
+    const SCRAMBLE_SECTIONS = '.hero, #why, #process, #faq, #contact, .site-footer';
     const SKIP_TEXT = 'svg, script, style, input, textarea, .wordmark, .intro';
     const CHARS = {
         upper: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
