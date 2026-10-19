@@ -571,24 +571,51 @@
 
     /* =========================================================
        Scroll reveal
+       Waits for the intro (home page) so the hero rises in as it clears.
        ========================================================= */
     const revealEls = $$('.reveal');
-    if (reduceMotion || !('IntersectionObserver' in window)) {
-        revealEls.forEach((el) => el.classList.add('is-visible'));
-    } else {
-        // Stagger siblings slightly
-        revealEls.forEach((el) => {
-            const siblings = [...el.parentElement.children].filter((c) => c.classList.contains('reveal'));
-            el.style.transitionDelay = `${Math.min(siblings.indexOf(el), 5) * 80}ms`;
-        });
-        const io = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
-                if (!entry.isIntersecting) return;
-                entry.target.classList.add('is-visible');
-                io.unobserve(entry.target);
+    const startReveal = () => {
+        if (reduceMotion || !('IntersectionObserver' in window)) {
+            revealEls.forEach((el) => el.classList.add('is-visible'));
+        } else {
+            // Stagger siblings slightly
+            revealEls.forEach((el) => {
+                const siblings = [...el.parentElement.children].filter((c) => c.classList.contains('reveal'));
+                el.style.transitionDelay = `${Math.min(siblings.indexOf(el), 5) * 80}ms`;
             });
-        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-        revealEls.forEach((el) => io.observe(el));
+            const io = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (!entry.isIntersecting) return;
+                    entry.target.classList.add('is-visible');
+                    io.unobserve(entry.target);
+                });
+            }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+            revealEls.forEach((el) => io.observe(el));
+        }
+    };
+
+    /* ---------- Intro animation (home page) ---------- */
+    const intro = $('#intro');
+    if (intro && !reduceMotion) {
+        let done = false;
+        const finish = () => {
+            if (done) return;
+            done = true;
+            intro.remove();
+            document.documentElement.classList.remove('intro-active');
+            startReveal();
+        };
+        const skip = () => intro.classList.add('is-skipped');
+        intro.addEventListener('animationend', (e) => {
+            if (e.target === intro) finish();
+        });
+        intro.addEventListener('click', skip);
+        document.addEventListener('keydown', skip, { once: true });
+        setTimeout(finish, 3200); // safety net if animations don't run
+    } else {
+        intro?.remove();
+        document.documentElement.classList.remove('intro-active');
+        startReveal();
     }
 
     /* ---------- Footer year ---------- */

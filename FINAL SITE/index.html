@@ -21,7 +21,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <script>document.documentElement.classList.add('js');</script>
+    <script>document.documentElement.classList.add('js');if(!matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('intro-active');</script>
 
     <script type="application/ld+json">
     {
@@ -34,6 +34,14 @@
     </script>
 </head>
 <body data-page="home">
+    <!-- Intro: the mascot appears, pops, then the homepage is revealed (plays on every load) -->
+    <div class="intro" id="intro" aria-hidden="true">
+        <div class="intro-stage">
+            <span class="intro-ring"></span>
+            <img class="intro-mascot" src="Assets/digital-birbal-mascot.png" alt="" width="280" height="262">
+            <span class="wordmark intro-wordmark"><span class="wm-initial">D</span>igital <span class="wm-initial">B</span>irbal</span>
+        </div>
+    </div>
     <a class="skip-link" href="#main">Skip to content</a>
 
     <!-- ============ HEADER ============ -->
